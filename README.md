@@ -23,17 +23,19 @@ prompt_a = "tell me a joke in the style of {comedian}"
 prompt_b = "tell me a family friendly joke in the style of {comedian}"
 
 # set test cases with different input variables
-cases = {"comedian": ["chris rock", "ricky gervais", "robin williams"]}
+test_cases = [
+  {"comedian": "chris rock"}, 
+  {"comedian": "ricky gervais"}, 
+  {"comedian": "robin williams"}
+  ]
 
 # generate the responses
-test = thumb.test([prompt_a, prompt_b], cases=cases)
+test = thumb.test([prompt_a, prompt_b], test_cases)
 ```
 
 #### Required
 
 - **prompts**: an array of prompt templates to be tested
-
-When prompts are strings, they will be served as the user message for chat models. If you pass an array, the first message will be the `system` message, and following prompts in the array will be considered `user` and `ai` messages in alternating fashion (i.e. system, user, ai, user, ai, user... and so on). Prompts can be strings or Langchain prompt templates.
 
 #### Optional
 
@@ -41,8 +43,9 @@ When prompts are strings, they will be served as the user message for chat model
 - **runs**: the number of responses to generate per prompt and test case (default: `30`)
 - **model**: a langchain model you want to generate responses for the test (default: `gpt-3.5-turbo`)
 - **cache**: whether to cache the raw responses locally to CSV to avoid re-running (default: `True`)
+- **references**: a model answer to each test case to use as a guide when rating (default: `None`)
 
-If you include variables in your prompt templates (i.e. `{variable}`) you must provide corresponding test cases, otherwise this field is not required.
+If you include variables in your prompt templates (i.e. `{variable}`) you must provide corresponding test cases, otherwise this field is not required. Remember to include a value in your test case for each variable in your template.
 
 If you have 30 test runs with 2 prompt templates and 3 test cases, that's `30 x 2 x 3 = 180` calls to your LLM. Be careful: these can add up quickly!
 
@@ -101,7 +104,7 @@ The convention is for ratings to go from least favorable to most favorable, from
 
 By default the label furthest to the right (at the end of the list) will be set as the success metric, but you can set this with the `success` parameter.
 
-###### Re-Running Evals
+##### Re-Running Evals
 
 You can run the `.evals()` function multiple times on the same test, and the scores will continue to aggregate. This is helpful in case you get interrupted or lose your session. To do so, simply load the prior test results and run the function again.
 
@@ -110,9 +113,63 @@ filename = "thumb_test-abcd1234.csv"
 test = thumb.load(filename)
 test.evals()
 ```
-###### Shareable Links
+##### Shareable Links
 
 Shareable links rely on [Gradio's ability to share](https://www.gradio.app/guides/sharing-your-app) app demos for 72 hours, with the processing happening on your computer (so long as it stays on!). Every response is logged and saved locally on your computer (so long as you didn't set `save=False`), so you can continue to make multiple calls to `.eval()` until you're satisfied you have enough feedback. Each user is asked for a username which is appended to their rating data to join multiple sessions. When sharing is active, the results tab is disabled, and you must load the data with `thumb.load(filename)` in order to see the stats.
+
+##### Prompt Formation
+
+When prompts are strings, they will be served as the user message for chat models. If you pass an array, the first message will be the `system` message, and following prompts in the array will be considered `user` and `ai` messages in alternating fashion (i.e. system, user, ai, user, ai, user... and so on). Prompts can be strings or Langchain prompt templates. You may also pass the prompt as a dictionary, with a `name`, `hypothesis`, `control`, and `pid` (prompt id), to have this displayed in the Gradio web interface and in the exported CSV.
+
+```Python
+# set up a prompt templates for the a/b test
+prompt_a = {
+            "prompt": "tell me a joke", 
+            "name": "simple",
+            "hypothesis":"the simpler the better", 
+            "control": True,
+            "pid": "10001"
+            }
+prompt_b = {
+            "prompt": "tell me a family friendly joke", 
+            "name": "family",
+            "hypothesis":"mentioning family makes jokes less offensive", 
+            "control": False,
+            "pid": "10002"
+            }
+
+# generate the responses
+test = thumb.test([prompt_a, prompt_b])
+```
+
+##### Reference Answers
+
+For more advanced evalution, it's possible to pass a reference answer to each test case, which represents a good quality response. This can be used in either manual evaluation as a guide, or automatic evaluation using an LLM, or embedding distance (the similarity between the response and the reference, lower is better).
+
+```Python
+# set up a prompt templates for the a/b test
+prompt_a = "tell me a joke in the style of {comedian}"
+prompt_b = "tell me a family friendly joke in the style of {comedian}"
+
+# set test cases with different input variables
+test_cases = [
+  {"comedian": "chris rock"}, 
+  {"comedian": "ricky gervais"}, 
+  {"comedian": "robin williams"}
+  ]
+
+# set reference answers for each test case
+references = [
+  "You ever notice how WiFi signals are like relationships? At first, you got all bars. Strong connection. But go into the next room? Suddenly it's 'connection lost.' And just like that, your Netflix and chill turns into buffering and frustration!",
+  "You know, I was at the zoo the other day, and I saw this sign: 'Do not feed the animals.' And I thought, 'Blimey! That's a bit harsh. They must be absolutely starving!' I mean, who's running this place, my old PE teacher? 'No lunch for you, lion, you missed the jump!'",
+  "You know, the universe is a crazy place! If aliens ever land on Earth and ask to meet our leader, we'll probably just show them our Wi-Fi password and say, 'Good luck getting a signal up there!' Ha! The real final frontier is just getting two bars in my living room!"
+  ]
+
+# generate the responses
+test = thumb.test([prompt_a, prompt_b], test_cases, references=references)
+```
+
+When passing references ensure they're in the same order as your test cases. When references are passed they are displayed above the response as a comparison guide for manual rating. They are also used as a guide for automatic rating by LLM, and the embedding distance is calculated as an additional performance metric.
 
 
 ## About Prompt Optimization
