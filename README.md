@@ -183,6 +183,38 @@ prompt_b = "tell me a family friendly joke"
 test = thumb.test([prompt_a, prompt_b], models=["gpt-4", "gpt-3.5-turbo"])
 ```
 
+### Running Web UI locally
+
+Below are the step-by-step instructions for both Mac and Windows users to operate the provided scripts to run the Web UI for `thumb` locally:
+
+#### Instructions for Mac Users:
+
+##### Prerequisites:
+1. Ensure you have Python3 installed. You can verify by typing `python3 --version` in the terminal. If not installed, you can get it from [Python's official website](https://www.python.org/downloads/mac-osx/).
+
+##### Operating the `webui.sh` script:
+1. Open the Terminal.
+2. Navigate to the directory containing the `webui.sh` script using the `cd` command. For example, `cd path/to/directory`.
+3. Make the script executable by running: `chmod +x webui.sh`.
+4. Execute the script: `./webui.sh`.
+5. The script will set up the necessary virtual environment, install required packages, and launch the Gradio app.
+6. Once you're done using the app, close it and the terminal will indicate "Server closed."
+
+#### Instructions for Windows Users:
+
+##### Prerequisites:
+1. Ensure you have Python installed. You can verify by typing `python --version` in the Command Prompt. If not installed, you can get it from [Python's official website](https://www.python.org/downloads/windows/). Make sure to check the box that says "Add Python to PATH" during installation.
+
+##### Operating the `webui.bat` script:
+1. Open Command Prompt (you can press `Windows + R`, type `cmd`, and hit Enter).
+2. Navigate to the directory containing the `webui.bat` script using the `cd` command. For example, `cd path\to\directory`.
+3. Execute the script by typing `webui.bat` and pressing Enter.
+4. The script will set up the necessary virtual environment, install required packages, and launch the Gradio app.
+5. Once you're done using the app, close it, and the Command Prompt will indicate "Server closed."
+
+For both Mac and Windows users, the first time you run these scripts, they'll create a virtual environment and install the necessary libraries. The subsequent runs will use the already created environment unless you delete it.
+
+
 ## About Prompt Optimization
 
 The difference between people just playing around with ChatGPT and those using AI in production is evaluation. LLMs respond non-deterministically, and so it's important to test what results look like when scaled up across a wide range of scenarios. Without an evaluation framework you're left blindly guessing about what's working in your prompts (or not).

@@ -45,3 +45,4 @@
 - upload to gradio spaces for non-technical teams
 - early stopping mechanism once 95% confidence reached
 - support pricing of alternatives to openai (anthropic)
+- image model testing as well as LLMs
