@@ -2,13 +2,13 @@
 import pathlib
 from setuptools import setup, find_packages
 HERE = pathlib.Path(__file__).parent
-VERSION = "0.0.0.4"
+VERSION = "0.1"
 PACKAGE_NAME = "thumb"
 AUTHOR = "Mike Taylor"
 AUTHOR_EMAIL = "mike@saxifrage.xyz"
 URL = "https://github.com/hammer-mt/thumb"
 LICENSE = "MIT"
-DESCRIPTION = "A simple prompt optimization library for OpenAI models built on Langchain and Gradio."
+DESCRIPTION = "A simple prompt optimization library for LLMs built on Langchain and Gradio."
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf8')
 LONG_DESC_TYPE = "text/markdown"
 INSTALL_REQUIRES = [

@@ -23,14 +23,14 @@ prompt_a = "tell me a joke in the style of {comedian}"
 prompt_b = "tell me a family friendly joke in the style of {comedian}"
 
 # set test cases with different input variables
-test_cases = [
+cases = [
   {"comedian": "chris rock"}, 
   {"comedian": "ricky gervais"}, 
   {"comedian": "robin williams"}
   ]
 
 # generate the responses
-test = thumb.test([prompt_a, prompt_b], test_cases)
+test = thumb.test([prompt_a, prompt_b], cases)
 ```
 
 #### Required
@@ -41,9 +41,8 @@ test = thumb.test([prompt_a, prompt_b], test_cases)
 
 - **cases**: a dictionary of variables to input into each prompt template (default: `None`)
 - **runs**: the number of responses to generate per prompt and test case (default: `30`)
-- **model**: a langchain model you want to generate responses for the test (default: `gpt-3.5-turbo`)
+- **models**: a langchain model (or list of models) you want to generate responses from (default: [`gpt-3.5-turbo`])
 - **cache**: whether to cache the raw responses locally to CSV to avoid re-running (default: `True`)
-- **references**: a model answer to each test case to use as a guide when rating (default: `None`)
 
 If you include variables in your prompt templates (i.e. `{variable}`) you must provide corresponding test cases, otherwise this field is not required. Remember to include a value in your test case for each variable in your template.
 
@@ -119,7 +118,7 @@ Shareable links rely on [Gradio's ability to share](https://www.gradio.app/guide
 
 ##### Prompt Formation
 
-When prompts are strings, they will be served as the user message for chat models. If you pass an array, the first message will be the `system` message, and following prompts in the array will be considered `user` and `ai` messages in alternating fashion (i.e. system, user, ai, user, ai, user... and so on). Prompts can be strings or Langchain prompt templates. You may also pass the prompt as a dictionary, with a `name`, `hypothesis`, `control`, and `pid` (prompt id), to have this displayed in the Gradio web interface and in the exported CSV.
+Prompts can be strings or arrays, and they can be Langchain prompt templates, chains or agents. When prompts are strings, they will be served as the user message for chat models. If you pass an array, the first message will be the `system` message, and following prompts in the array will be considered `user` and `ai` messages in alternating fashion (i.e. system, user, ai, user, ai, user... and so on). You may also pass the prompt as a dictionary, with a `name`, `hypothesis`, `control`, and `pid` (prompt id), to have this displayed in the Gradio web interface and in the exported CSV.
 
 ```Python
 # set up a prompt templates for the a/b test
@@ -152,7 +151,7 @@ prompt_a = "tell me a joke in the style of {comedian}"
 prompt_b = "tell me a family friendly joke in the style of {comedian}"
 
 # set test cases with different input variables
-test_cases = [
+cases = [
   {"comedian": "chris rock"}, 
   {"comedian": "ricky gervais"}, 
   {"comedian": "robin williams"}
@@ -166,11 +165,23 @@ references = [
   ]
 
 # generate the responses
-test = thumb.test([prompt_a, prompt_b], test_cases, references=references)
+test = thumb.test([prompt_a, prompt_b], cases, references=references)
 ```
 
-When passing references ensure they're in the same order as your test cases. When references are passed they are displayed above the response as a comparison guide for manual rating. They are also used as a guide for automatic rating by LLM, and the embedding distance is calculated as an additional performance metric.
+When passing references ensure they're in the same order as your test cases. When references are passed they are displayed above the response as a comparison guide for manual rating. They are also used as a guide for automatic rating by LLM, and the embedding distance is calculated as an additional performance metric. You can also pass a unique id with each test case (`cid`) and the same id with a reference, to associate them in any order.
 
+##### Model Testing
+
+You can pass multiple models in an array to the test parameter, in order to split test each prompt against each model. Models can be a string that refers to an OpenAI model, or a Langchain LLM or Chat model.
+
+```Python
+# set up a prompt templates for the a/b test
+prompt_a = "tell me a joke"
+prompt_b = "tell me a family friendly joke"
+
+# generate the responses
+test = thumb.test([prompt_a, prompt_b], models=["gpt-4", "gpt-3.5-turbo"])
+```
 
 ## About Prompt Optimization
 

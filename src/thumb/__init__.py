@@ -1,1 +1,1 @@
-from .main import test
+from .core import Thumb
