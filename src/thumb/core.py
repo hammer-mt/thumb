@@ -1,5 +1,6 @@
 
 import os
+import csv
 import random
 from uuid import uuid4
 from dotenv import load_dotenv
@@ -8,19 +9,31 @@ load_dotenv()
 
 from langchain.callbacks.manager import tracing_v2_enabled
 
-from .utils import hash_id
-from .generate import generate_single
+from .generate import create_calls, generate_single
 
-class Test:
+def test(*args, **kwargs):
+    thumb = ThumbTest()
+    return thumb.test(*args, **kwargs)
 
-    def __init__(self, tid, responses):
-        self.tid = tid
-        self.responses = responses
+def load(file_path):
+    filename = file_path.split('/')[-1]
+    tid = filename.replace(".csv", "").split("-")[-1]
+
+    # load the csv to get the data
+    data = []
+    with open(file_path, 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            data.append(row)
+
+    return ThumbTest(tid, data)
 
 
-class Thumb:
+class ThumbTest:
     
-    def __init__(self):
+    def __init__(self, tid=None, data=None):
+        self.tid = tid or uuid4().hex[0:8]
+        self.data = data or []
         self.langchain_api_key = os.environ.get("LANGCHAIN_API_KEY", None)
 
     def test(self, 
@@ -34,35 +47,26 @@ class Thumb:
         tid = uuid4().hex[0:8]
 
         # loop through to create the calls
-        calls = []
-
-        for template in prompts:
-            pid = f"pid_{hash_id(template)}"
-            for case in cases:
-                cid = f"cid_{hash_id(case)}"
-                formatted_prompt = template.format(**case)
-                for model in models:
-                    for _ in range(runs):
-                        calls.append({
-                            "pid": pid,
-                            "cid": cid,
-                            "prompt": formatted_prompt,
-                            "template": template,
-                            "model": model
-                        })
+        calls = create_calls(prompts, cases, models, runs)
+        print(f"Created {len(calls)} calls for test {tid}")
+        print(calls)
 
         # randomize the calls
-        calls = random.shuffle(calls)
+        random.shuffle(calls)
+        print(f"Randomized calls for test {tid}")
+        print(calls)
+
+        # set up the test instance
+        test_instance = Test(tid=tid, calls=calls)
 
         # generate responses
-        responses = self._generate(calls)
-
-        # set up the test object
-        test_instance = Test(tid=tid, responses=responses)
+        test_instance.generate(tracing=self.langchain_api_key is not None, 
+                               cache=cache)
         
         return test_instance
 
     def _generate(self, calls):
+
         responses = []
         counter = 1
         for call in calls:
