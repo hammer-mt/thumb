@@ -42,10 +42,10 @@ class ThumbTest:
         if tid:
             self.tid = tid
             self._load_data()
-            print(f"ThumbTest loaded with tid: {self.tid}")
+            print(f"ThumbTest {self.tid}")
         else:
             self.tid = uuid4().hex[0:8]
-            print(f"ThumbTest initialized with tid: {self.tid}")
+            print(f"ThumbTest {self.tid}")
 
     def add_prompts(self, prompts):
         for prompt in prompts:
@@ -194,7 +194,7 @@ class ThumbTest:
                             'cid': cid,
                             'model': model,
                             'idx': idx,
-                            'response': response.content,
+                            'response': response["content"],
                         }
                         
                         # Add the response data to the list of responses
@@ -212,42 +212,75 @@ class ThumbTest:
         # Update the response based on the provided index
         self.data[pid][cid][model][idx]['feedback'] = value
 
+    def stats(self):
+        # Create a list to hold the scores
+        scores = []
+        
+        # Loop through the prompts
+        for pid in self.data.keys():
+            # Loop through the cases
+            for cid in self.data[pid].keys():
+                # Loop through the models
+                for model in self.data[pid][cid].keys():
+                    # Loop through the responses
+                    for idx, response in self.data[pid][cid][model].items():
+                        # if the response has no feedback, skip it
+                        if response['feedback'] is None:
+                            continue
+                        # Add the feedback to the list of scores
+                        scores.append(response['feedback'])
+        
+        # Calculate the average score
+        score = sum(scores) / len(scores)
+        
+        return score
+
     def evaluate(self):
         prepped_data = self._prep_for_eval()
         data_len = len(prepped_data)
         labels = ["👎", "👍"]
         label_widgets = [widgets.Button(description=label) for label in labels]
 
-        response_box = widgets.Output()
+        response_box = widgets.Label()
         progress_bar = widgets.IntProgress(min=0, max=data_len, description="Progress:")
 
-        def on_button_clicked(b):
-            with response_box:
-                response_box.clear_output()
-                pid, cid, model, idx, response_content = update_response()
-                self._receive_feedback(b, pid, cid, model, idx)
-                progress_bar.value = len(prepped_data)
-
-                # show response content in the output widget
-                response_box.value = response_content
-
         def update_response():
-            # get the next response
+            nonlocal prepped_data
+            if not prepped_data:
+                response_box.value = "Evaluation complete! 🎉"
+                progress_bar.value = data_len
+                # cache the feedback
+                self._save_data()
+                return
+            next_response = prepped_data[0]["response"]
+            progress_value = data_len - len(prepped_data)
+
+            response_box.value = next_response
+            progress_bar.value = progress_value
+
+        def on_button_clicked(b):
+            nonlocal prepped_data
+            if not prepped_data:
+                response_box.value = "Evaluation complete! 🎉"
+                progress_bar.value = data_len
+                return
+
             response = prepped_data.pop(0)
             pid = response['pid']
             cid = response['cid']
             model = response['model']
             idx = response['idx']
-            response_content = response['response']
 
-            return pid, cid, model, idx, response_content
+            self._receive_feedback(b, pid, cid, model, idx)
+            update_response()
 
         # add on_click to buttons
         for label_widget in label_widgets:
             label_widget.on_click(on_button_clicked)
-        
+
         label_widget = widgets.HBox(label_widgets)
-        output_widget = widgets.Output()
-        display(progress_bar, label_widget, output_widget)
+        update_response()
+        display(response_box, label_widget, progress_bar)
+        
 
 

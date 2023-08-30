@@ -18,11 +18,13 @@ def get_responses(prompt, test_case, model, runs, tid, pid, cid):
     responses = []
     print(f"Running {pid} for {cid} with {model}:")
     with tracing_v2_enabled(project_name=f"ThumbTest-{tid}", tags=[pid, cid]):
+
         for i in range(runs):
             try:
                 print(f"{i+1}/{runs}")
-                response = chat(formatted_prompt).content
-                responses.append(response)
+                response_content = chat(formatted_prompt).content
+
+                responses.append(response_content)
             except Exception as e:
                 responses.append(str(e))
 
