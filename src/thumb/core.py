@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 from .llm import get_responses
 from .utils import hash_id
 
@@ -42,10 +43,12 @@ class ThumbTest:
         if tid:
             self.tid = tid
             self._load_data()
-            print(f"ThumbTest {self.tid}")
         else:
             self.tid = uuid4().hex[0:8]
-            print(f"ThumbTest {self.tid}")
+
+        os.environ["LANGCHAIN_TRACING_V2"] = "true"
+        os.environ["LANGCHAIN_PROJECT"] = f"ThumbTest: {self.tid}"
+        os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
 
     def add_prompts(self, prompts):
         for prompt in prompts:
@@ -104,13 +107,10 @@ class ThumbTest:
                             self.data[pid][cid][model] = {}
                         
                         # Add the responses to the dictionary
-                        for idx, response_content in enumerate(responses):
-                            response_dict = {
-                                'content': response_content,
-                                'feedback': None  # No feedback yet
-                            }
+                        for idx, response in enumerate(responses):
+                            response["feedback"] = None
                             loc = len(self.data[pid][cid][model].keys()) + idx
-                            self.data[pid][cid][model][loc] = response_dict
+                            self.data[pid][cid][model][loc] = response
 
                         self._save_data()
 
@@ -142,7 +142,6 @@ class ThumbTest:
             # Write the JSON to the file
             with open(file_path, 'w') as file:
                 file.write(data_json)
-                print(f"Data saved to {file_path}")
         except Exception as e:
             print(f"Caching failed due to: {e}")
 
@@ -194,7 +193,7 @@ class ThumbTest:
                             'cid': cid,
                             'model': model,
                             'idx': idx,
-                            'response': response["content"],
+                            'content': response["content"],
                         }
                         
                         # Add the response data to the list of responses
@@ -213,11 +212,17 @@ class ThumbTest:
         self.data[pid][cid][model][idx]['feedback'] = value
 
     def stats(self):
-        # Create a list to hold the scores
-        scores = []
+        # Create a list to hold the scores by prompt
+        scores = {}
         
         # Loop through the prompts
         for pid in self.data.keys():
+            # Add the prompt to the dictionary
+            prompt = self.prompts[pid]
+            scores[pid] = {
+                'prompt': prompt,
+                'feedback': [],
+            }
             # Loop through the cases
             for cid in self.data[pid].keys():
                 # Loop through the models
@@ -228,12 +233,13 @@ class ThumbTest:
                         if response['feedback'] is None:
                             continue
                         # Add the feedback to the list of scores
-                        scores.append(response['feedback'])
+                        scores[pid]['feedback'].append(response['feedback'])
         
         # Calculate the average score
-        score = sum(scores) / len(scores)
+        for pid in scores.keys():
+            scores[pid]['score'] = sum(scores[pid]['feedback']) / len(scores[pid]['feedback'])
         
-        return score
+        return scores
 
     def evaluate(self):
         prepped_data = self._prep_for_eval()
@@ -241,18 +247,22 @@ class ThumbTest:
         labels = ["👎", "👍"]
         label_widgets = [widgets.Button(description=label) for label in labels]
 
-        response_box = widgets.Label()
+        test_id = widgets.Label(value=f"ThumbTest: {self.tid}")
+        response_box = widgets.HTML()
         progress_bar = widgets.IntProgress(min=0, max=data_len, description="Progress:")
 
         def update_response():
             nonlocal prepped_data
             if not prepped_data:
-                response_box.value = "Evaluation complete! 🎉"
+                scores = self.stats()
+                stats = "".join([f"<p>'{score['prompt']}': {score['score']}</p>" for score in scores.values()])
+                response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}"
                 progress_bar.value = data_len
                 # cache the feedback
                 self._save_data()
                 return
-            next_response = prepped_data[0]["response"]
+            
+            next_response = prepped_data[0]["content"]
             progress_value = data_len - len(prepped_data)
 
             response_box.value = next_response
@@ -261,8 +271,6 @@ class ThumbTest:
         def on_button_clicked(b):
             nonlocal prepped_data
             if not prepped_data:
-                response_box.value = "Evaluation complete! 🎉"
-                progress_bar.value = data_len
                 return
 
             response = prepped_data.pop(0)
@@ -280,7 +288,7 @@ class ThumbTest:
 
         label_widget = widgets.HBox(label_widgets)
         update_response()
-        display(response_box, label_widget, progress_bar)
+        display(response_box, label_widget, progress_bar, test_id)
         
 
 
