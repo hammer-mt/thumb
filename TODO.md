@@ -1,20 +1,5 @@
 ## Active Tasks
 
-### test function
-- catch langchain api key and set up tracing
-- handle the setup of prompt templates
-- handle the setup of test cases
-- handle the setup of the models
-- create permutations of each prompt and test case and model combo
-- run the models in a loop or async
-- handle caching of each response
-- handle prompts being strings or arrays
-- handle prompts being langchain templates, chains, agents
-- handle additional metadata passed with prompt
-- create unique id hash for each prompt template (pid), test case (cid), run (rid), and test (tid)
-- unpack dictionary as args to format prompt `result = prompt_template.format(**params)`
-- handle reference answers for test cases
-
 ### evals function
 - spin up gradio user interface
 - shuffle responses and loop through
@@ -35,9 +20,6 @@
 - tiktoken to calculate token usage
 - openai price estimate based on tokens 
 
-### load function
-- load an existing model
-
 
 ## Ideas Roadmap
 - support other user interfaces (ipython, streamlit)
@@ -48,3 +30,9 @@
 - image model testing as well as LLMs
 - add async to the calls
 - move tags to metadata not tracing
+- merging two tests together
+- handle prompts being strings or arrays
+- handle non chat models
+- handle non openai models
+- handle prompts being langchain templates, chains, agents
+- handle reference answers for test cases

@@ -17,6 +17,8 @@ def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"]):
     thumb.add_cases(cases)
     thumb.add_models(models)
     thumb.add_runs(runs)
+    thumb.generate()
+    thumb.evaluate()
 
     return thumb
 
@@ -44,21 +46,13 @@ class ThumbTest:
             self.tid = uuid4().hex[0:8]
             print(f"ThumbTest initialized with tid: {self.tid}")
 
-        
-
     def add_prompts(self, prompts):
-        updated_prompts = []
         for prompt in prompts:
             pid = f"pid-{hash_id(prompt)}"
             if pid not in self.prompts.keys():
                 self.prompts[pid] = prompt
-                updated_prompts.append(pid)
-        
-        if len(updated_prompts) > 0:
-            self._generate()
 
     def add_cases(self, cases):
-        updated_cases = []
         for case in cases:
             cid = f"cid-{hash_id(json.dumps(case))}"
             if cid not in self.cases.keys():
@@ -66,20 +60,11 @@ class ThumbTest:
                 if "base" in self.cases.keys():
                     del self.cases["base"]
                 self.cases[cid] = case
-                updated_cases.append(cid)
-        
-        if len(updated_cases) > 0:
-            self._generate()
 
     def add_models(self, models):
-        updated_models = []
         for model in models:
             if model not in self.models:
                 self.models.append(model)
-                updated_models.append(model)
-        
-        if len(updated_models) > 0:
-            self._generate()
 
     def add_runs(self, runs):
         # check if runs is an int
@@ -90,13 +75,12 @@ class ThumbTest:
             raise ValueError("runs must be greater than 0")
 
         self.runs += runs
-        self._generate()
 
-    def _generate(self):
+    def generate(self):
         for pid in self.prompts.keys():
             for cid in self.cases.keys():
-                for model in self.models:
-                    runs_completed = self.responses.get(pid, {}).get(cid, {}).get(model, 0)
+                for model in self.models: 
+                    runs_completed = len(self.responses.get(pid, {}).get(cid, {}).get(model, []))
                     if runs_completed < self.runs:
                         # Process this combination
                         runs = self.runs - runs_completed
@@ -134,7 +118,8 @@ class ThumbTest:
             'responses': self.responses,
             'prompts': self.prompts,
             'cases': self.cases,
-            'models': self.models
+            'models': self.models,
+            'runs': self.runs,
         }
         
         # Convert the dictionary to JSON
@@ -178,10 +163,9 @@ class ThumbTest:
         self.prompts = data.get('prompts', {})
         self.cases = data.get('cases', {})
         self.models = data.get('models', [])
-
-        print(data)
+        self.runs = data.get('runs', 0)
     
-    def evals(labels=None):
+    def evaluate(labels=None):
         labels = labels or ["👎", "👍"]
         return labels
 
