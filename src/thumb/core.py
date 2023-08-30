@@ -222,6 +222,7 @@ class ThumbTest:
             scores[pid] = {
                 'prompt': prompt,
                 'feedback': [],
+                'tokens': [],
             }
             # Loop through the cases
             for cid in self.data[pid].keys():
@@ -229,15 +230,17 @@ class ThumbTest:
                 for model in self.data[pid][cid].keys():
                     # Loop through the responses
                     for idx, response in self.data[pid][cid][model].items():
-                        # if the response has no feedback, skip it
-                        if response['feedback'] is None:
-                            continue
+
                         # Add the feedback to the list of scores
                         scores[pid]['feedback'].append(response['feedback'])
+
+                        # Add the tokens to the total
+                        scores[pid]['tokens'].append(response['tokens']) 
         
         # Calculate the average score
         for pid in scores.keys():
-            scores[pid]['score'] = sum(scores[pid]['feedback']) / len(scores[pid]['feedback'])
+            scores[pid]['avg_score'] = sum(scores[pid]['feedback']) / len(scores[pid]['feedback'])
+            scores[pid]['avg_tokens'] = sum(scores[pid]['tokens']) / len(scores[pid]['tokens'])
         
         return scores
 
@@ -255,7 +258,7 @@ class ThumbTest:
             nonlocal prepped_data
             if not prepped_data:
                 scores = self.stats()
-                stats = "".join([f"<p>'{score['prompt']}': {score['score']}</p>" for score in scores.values()])
+                stats = "".join([f"<p>'{score['prompt']}' <ul><li>Avg. Score: {score['avg_score']}</li><li>Avg. Tokens: {score['avg_tokens']}</li></ul></p>" for score in scores.values()])
                 response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}"
                 progress_bar.value = data_len
                 # cache the feedback
