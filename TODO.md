@@ -46,3 +46,5 @@
 - early stopping mechanism once 95% confidence reached
 - support pricing of alternatives to openai (anthropic)
 - image model testing as well as LLMs
+- add async to the calls
+- move tags to metadata not tracing

@@ -1,6 +1,6 @@
 # thumb
 
-A simple prompt optimization library for LLMs built on Langchain and Gradio.
+A simple prompt testing library for LLMs built on Langchain and Gradio.
 
 ## Quick start
 
@@ -42,7 +42,7 @@ test = thumb.test([prompt_a, prompt_b], cases)
 - **cases**: a dictionary of variables to input into each prompt template (default: `None`)
 - **runs**: the number of responses to generate per prompt and test case (default: `30`)
 - **models**: a langchain model (or list of models) you want to generate responses from (default: [`gpt-3.5-turbo`])
-- **cache**: whether to cache the raw responses locally to CSV to avoid re-running (default: `True`)
+- **cache**: whether to cache the raw responses locally to JSON to avoid re-running (default: `True`)
 
 If you include variables in your prompt templates (i.e. `{variable}`) you must provide corresponding test cases, otherwise this field is not required. Remember to include a value in your test case for each variable in your template.
 
