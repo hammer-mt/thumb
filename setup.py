@@ -8,12 +8,14 @@ AUTHOR = "Mike Taylor"
 AUTHOR_EMAIL = "mike@saxifrage.xyz"
 URL = "https://github.com/hammer-mt/thumb"
 LICENSE = "MIT"
-DESCRIPTION = "A simple prompt testing library for LLMs built on Langchain and Gradio."
+DESCRIPTION = "A simple prompt testing library for LLMs."
 LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf8')
 LONG_DESC_TYPE = "text/markdown"
 INSTALL_REQUIRES = [
     "gradio",
     "langchain",
+    "ipython",
+    "ipywidgets",
 ]
 setup(name=PACKAGE_NAME,
     version=VERSION,

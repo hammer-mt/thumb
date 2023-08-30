@@ -1,9 +1,12 @@
 
 import os
+import random
 import csv
 import json
 from collections import defaultdict
 from uuid import uuid4
+import ipywidgets as widgets
+from IPython.display import display
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -27,11 +30,9 @@ def load(tid):
 
 class ThumbTest:
     
-    def __init__(self, tid=None, cache=True):
-        self.cache = cache
-        self.langchain_api_key = os.environ.get("LANGCHAIN_API_KEY", None)
+    def __init__(self, tid=None):
 
-        self.responses = defaultdict(dict)
+        self.data = defaultdict(dict)
 
         self.prompts = {}
         self.cases = {"base": None}
@@ -80,34 +81,38 @@ class ThumbTest:
         for pid in self.prompts.keys():
             for cid in self.cases.keys():
                 for model in self.models: 
-                    runs_completed = len(self.responses.get(pid, {}).get(cid, {}).get(model, []))
+                    runs_completed = len(self.data.get(pid, {}).get(cid, {}).get(model, {}).keys())
                     if runs_completed < self.runs:
                         # Process this combination
                         runs = self.runs - runs_completed
                         prompt = self.prompts[pid]
                         
-                        case = self.cases[cid]
-                        # tracing enabled if langchain api key is set
-                        tracing = self.langchain_api_key is not None
+                        test_case = self.cases[cid]
                         
-                        responses = get_responses(prompt, case, model, runs, self.tid, pid, cid, tracing)
+                        responses = get_responses(prompt, test_case, model, runs, self.tid, pid, cid)
 
                         # Ensure pid is in the dictionary
-                        if pid not in self.responses:
-                            self.responses[pid] = {}
+                        if pid not in self.data:
+                            self.data[pid] = {}
 
                         # Ensure cid is in the dictionary associated with pid
-                        if cid not in self.responses[pid]:
-                            self.responses[pid][cid] = {}
+                        if cid not in self.data[pid]:
+                            self.data[pid][cid] = {}
 
                         # If the model is not in the dict, add it
-                        if model not in self.responses[pid][cid]:
-                            self.responses[pid][cid][model] = responses
-                        else:
-                            self.responses[pid][cid][model] += responses
+                        if model not in self.data[pid][cid]:
+                            self.data[pid][cid][model] = {}
+                        
+                        # Add the responses to the dictionary
+                        for idx, response_content in enumerate(responses):
+                            response_dict = {
+                                'content': response_content,
+                                'feedback': None  # No feedback yet
+                            }
+                            loc = len(self.data[pid][cid][model].keys()) + idx
+                            self.data[pid][cid][model][loc] = response_dict
 
-                        if self.cache:
-                            self._save_data()
+                        self._save_data()
 
     def _save_data(self):
         """
@@ -115,7 +120,7 @@ class ThumbTest:
         """
         # Create a dictionary to hold the relevant data
         data = {
-            'responses': self.responses,
+            'data': self.data,
             'prompts': self.prompts,
             'cases': self.cases,
             'models': self.models,
@@ -159,14 +164,90 @@ class ThumbTest:
             data = json.load(file)
         
         # Update the instance variables with the loaded data
-        self.responses = data.get('responses', {})
+        self.data = data.get('data', {})
         self.prompts = data.get('prompts', {})
         self.cases = data.get('cases', {})
         self.models = data.get('models', [])
         self.runs = data.get('runs', 0)
+
+    def _prep_for_eval(self):
+        """
+        Prepare the responses for evaluation.
+        """
+        # Create a list to hold the responses
+        responses = []
+        
+        # Loop through the prompts
+        for pid in self.data.keys():
+            # Loop through the cases
+            for cid in self.data[pid].keys():
+                # Loop through the models
+                for model in self.data[pid][cid].keys():
+                    # Loop through the responses
+                    for idx, response in self.data[pid][cid][model].items():
+                        # if the response has feedback, skip it
+                        if response['feedback'] is not None:
+                            continue
+                        # Create a dictionary to hold the response data
+                        response_data = {
+                            'pid': pid,
+                            'cid': cid,
+                            'model': model,
+                            'idx': idx,
+                            'response': response.content,
+                        }
+                        
+                        # Add the response data to the list of responses
+                        responses.append(response_data)
+        
+        # shuffle the order of the responses
+        random.shuffle(responses)
+
+        return responses
     
-    def evaluate(labels=None):
-        labels = labels or ["👎", "👍"]
-        return labels
+    def _receive_feedback(self, label, pid, cid, model, idx):
+        # convert thumbs up / down to 1 / 0
+        value = 1 if label.description == "👍" else 0
+
+        # Update the response based on the provided index
+        self.data[pid][cid][model][idx]['feedback'] = value
+
+    def evaluate(self):
+        prepped_data = self._prep_for_eval()
+        data_len = len(prepped_data)
+        labels = ["👎", "👍"]
+        label_widgets = [widgets.Button(description=label) for label in labels]
+
+        response_box = widgets.Output()
+        progress_bar = widgets.IntProgress(min=0, max=data_len, description="Progress:")
+
+        def on_button_clicked(b):
+            with response_box:
+                response_box.clear_output()
+                pid, cid, model, idx, response_content = update_response()
+                self._receive_feedback(b, pid, cid, model, idx)
+                progress_bar.value = len(prepped_data)
+
+                # show response content in the output widget
+                response_box.value = response_content
+
+        def update_response():
+            # get the next response
+            response = prepped_data.pop(0)
+            pid = response['pid']
+            cid = response['cid']
+            model = response['model']
+            idx = response['idx']
+            response_content = response['response']
+
+            return pid, cid, model, idx, response_content
+
+        # add on_click to buttons
+        for label_widget in label_widgets:
+            label_widget.on_click(on_button_clicked)
+        
+        label_widget = widgets.HBox(label_widgets)
+        output_widget = widgets.Output()
+        display(progress_bar, label_widget, output_widget)
 
 
