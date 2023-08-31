@@ -53,9 +53,13 @@ Langchain tracing to [LangSmith](https://smith.langchain.com/) is automatically 
 
 When you run a `thumb` test in jupyter notebook, a simple ipython user interface spins up, and you are given a URL to visit to rate each response. Each combination of prompt template and test case is displayed in a random order for blind rating (you don't see which prompt template, just the response) so you do not bias the results. 
 
+![image](/img/thumbs.png)
+
 Once all responses have been rated, the following performance statistics are calculated broken down by prompt template and test case:
-- `score` amount of positive feedback as a percentage of all runs
-- `tokens`: how many tokens were used across the prompt and response
+- `avg_score` amount of positive feedback as a percentage of all runs
+- `avg_tokens`: how many tokens were used across the prompt and response
+
+![image](/img/results.png)
 
 
 ## About Prompt Optimization

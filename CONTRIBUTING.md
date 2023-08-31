@@ -37,7 +37,7 @@ Follow these steps below to get the package working locally:
 git clone https://github.com/your-username/thumb.git
 
 # Or using SSH
-git clone git@github.com:your-username/hommmer.git
+git clone git@github.com:your-username/thumb.git
 ```
 
 2. Add the original repository as a remote called `upstream`
@@ -123,9 +123,8 @@ This is more a note to self, because I keep forgetting.
 3. update the version number in `setup.py`
 4. `python setup.py sdist bdist_wheel`
 5. delete old versions in the `dist` folder
-6. `twine check dist/*`
-7. `twine upload --repository-url https://test.pypi.org/legacy/dist/*` (optional)
-8. `Twine upload dist/*`
+6. `python -m twine check dist/*`
+7. `python -m twine upload dist/*`
 
 Resources:
 
