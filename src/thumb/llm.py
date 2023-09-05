@@ -6,10 +6,12 @@ from langchain.callbacks import get_openai_callback
 def format_chat_prompt(prompt, case):
     human_template = HumanMessagePromptTemplate.from_template(prompt)
     chat_prompt_template = ChatPromptTemplate.from_messages([human_template])
-    formatted_prompt = chat_prompt_template.format_prompt(**case)
-    final_prompt = formatted_prompt.to_messages()
+    if case:
+        formatted_prompt = chat_prompt_template.format_prompt(**case)
+    else:
+        formatted_prompt = chat_prompt_template.format_prompt()
     
-    return final_prompt
+    return formatted_prompt.to_messages()
 
 def get_responses(prompt, test_case, model, runs, tid, pid, cid):
     chat = ChatOpenAI(model=model)

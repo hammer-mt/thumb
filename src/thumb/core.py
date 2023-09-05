@@ -15,6 +15,8 @@ load_dotenv()
 from .llm import get_responses
 from .utils import hash_id
 
+DIR_PATH = "thumb/.cache"
+
 def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"]):
     thumb = ThumbTest()
     thumb.add_prompts(prompts)
@@ -23,6 +25,7 @@ def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"]):
     thumb.add_runs(runs)
     thumb.generate()
     thumb.evaluate()
+    thumb.export_to_csv()
 
     return thumb
 
@@ -36,7 +39,7 @@ class ThumbTest:
         self.data = defaultdict(dict)
 
         self.prompts = {}
-        self.cases = {"base": None}
+        self.cases = {"base-case": None}
         self.models = []
         self.runs = 0
 
@@ -57,13 +60,14 @@ class ThumbTest:
                 self.prompts[pid] = prompt
 
     def add_cases(self, cases):
-        for case in cases:
-            cid = f"cid-{hash_id(json.dumps(case))}"
-            if cid not in self.cases.keys():
-                # if base still in cases, remove it
-                if "base" in self.cases.keys():
-                    del self.cases["base"]
-                self.cases[cid] = case
+        if cases is not None:
+            for case in cases:
+                cid = f"cid-{hash_id(json.dumps(case))}"
+                if cid not in self.cases.keys():
+                    # if base still in cases, remove it
+                    if "base-case" in self.cases.keys():
+                        del self.cases["base-case"]
+                    self.cases[cid] = case
 
     def add_models(self, models):
         for model in models:
@@ -131,13 +135,12 @@ class ThumbTest:
         data_json = json.dumps(data, indent=4)
         
         # Define the directory and file path
-        dir_path = "thumb/data"
-        file_path = os.path.join(dir_path, f"{self.tid}.json")
+        file_path = os.path.join(DIR_PATH, f"{self.tid}.json")
         
         try:
             # Check if directory exists, if not create it
-            if not os.path.exists(dir_path):
-                os.makedirs(dir_path)
+            if not os.path.exists(DIR_PATH):
+                os.makedirs(DIR_PATH)
             
             # Write the JSON to the file
             with open(file_path, 'w') as file:
@@ -151,7 +154,7 @@ class ThumbTest:
         Load responses, prompts, cases, and models from a json file.
         """
         # Define the path for the JSON file using the tid value
-        file_path = os.path.join("thumb/data", f"{self.tid}.json")
+        file_path = os.path.join(DIR_PATH, f"{self.tid}.json")
         
         # Check if the file exists
         if not os.path.exists(file_path):
@@ -293,5 +296,37 @@ class ThumbTest:
         update_response()
         display(response_box, label_widget, progress_bar, test_id)
         
+    def export_to_csv(self, filename=None):
+        if not filename:
+            filename = f"ThumbTest-{self.tid}.csv"
+        
+        # Flattening the data for CSV export
+        flattened_data = []
+
+        for pid, pid_data in self.data.items():
+            prompt = self.prompts.get(pid, None)
+
+            for cid, cid_data in pid_data.items():
+                case = self.cases.get(cid, None)
+                case = json.dumps(case)
+
+                for model, model_data in cid_data.items():
+                    for _, details in model_data.items():
+                        content = details.get('content', None)
+                        tokens = details.get('tokens', None)
+                        cost = details.get('cost', None)
+                        feedback = details.get('feedback', None)
+
+                        flattened_data.append([pid, prompt, cid, case, model, content, tokens, cost, feedback])
+
+        # Write to CSV
+        with open(filename, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            # Writing header
+            writer.writerow(["PID", "Prompt", "CID", "Case", "Model", "Content", "Tokens", "Cost", "Feedback"])
+            # Writing data
+            writer.writerows(flattened_data)
+        
+        return filename
 
 

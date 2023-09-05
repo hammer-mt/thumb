@@ -14,10 +14,39 @@ A simple prompt testing library for LLMs.
 import os
 import thumb
 
-# Set the environment variables (get your API key: https://platform.openai.com/account/api-keys)
+# Set your API key: https://platform.openai.com/account/api-keys
 os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY_HERE"
-os.environ["LANGCHAIN_API_KEY"] = "YOUR_API_KEY_HERE" # optional: for langsmith tracing
 
+# set up a prompt templates for the a/b test
+prompt_a = "tell me a joke"
+prompt_b = "tell me a family friendly joke"
+
+# generate the responses
+test = thumb.test([prompt_a, prompt_b])
+```
+
+### 3. Rate the responses
+
+In Jupyter Notebooks a simple user interface is displayed for blind rating responses (you don't see which prompt generated the response).
+
+![image](/img/thumb.png)
+
+Once all responses have been rated, the following performance statistics are calculated broken down by prompt template:
+- `avg_score` amount of positive feedback as a percentage of all runs
+- `avg_tokens`: how many tokens were used across the prompt and response
+
+A simple report is displayed in the notebook, and the full data is saved to a CSV file `thumb/ThumbTest-{TestID}.csv`.
+
+![image](/img/eval.png)
+
+
+## Functionality
+
+### Set up test cases
+
+Test cases are when you want to test a prompt template with different input variables. For example, if you want to test a prompt template that includes a variable for a comedian's name, you can set up test cases for different comedians.
+
+```Python
 # set up a prompt templates for the a/b test
 prompt_a = "tell me a joke in the style of {comedian}"
 prompt_b = "tell me a family friendly joke in the style of {comedian}"
@@ -33,9 +62,11 @@ cases = [
 test = thumb.test([prompt_a, prompt_b], cases)
 ```
 
+Every test case will be run against every prompt template, so in this example you'll get 6 runs (3 test cases x 2 prompt templates). Every test case must include a value for each variable in the prompt template.
+
 #### Required
 
-- **prompts**: an array of prompt templates to be tested
+- **prompts**: an array of prompts (strings) to be tested
 
 #### Optional
 
@@ -43,23 +74,9 @@ test = thumb.test([prompt_a, prompt_b], cases)
 - **runs**: the number of responses to generate per prompt and test case (default: `10`)
 - **models**: a list of OpenAI models you want to generate responses from (default: [`gpt-3.5-turbo`])
 
-If you include variables in your prompt templates (i.e. `{variable}`) you must provide corresponding test cases, otherwise this field is not required. Remember to include a value in your test case for each variable in your template.
-
 If you have 10 test runs with 2 prompt templates and 3 test cases, that's `10 x 2 x 3 = 60` calls to your LLM. Be careful: these can add up quickly!
 
 Langchain tracing to [LangSmith](https://smith.langchain.com/) is automatically enabled if the `LANGCHAIN_API_KEY` is set as an environment variable (optional).
-
-### 3. Rate the responses
-
-When you run a `thumb` test in jupyter notebook, a simple ipython user interface spins up, and you are given a URL to visit to rate each response. Each combination of prompt template and test case is displayed in a random order for blind rating (you don't see which prompt template, just the response) so you do not bias the results. 
-
-![image](/img/thumbs.png)
-
-Once all responses have been rated, the following performance statistics are calculated broken down by prompt template and test case:
-- `avg_score` amount of positive feedback as a percentage of all runs
-- `avg_tokens`: how many tokens were used across the prompt and response
-
-![image](/img/results.png)
 
 
 ## About Prompt Optimization
