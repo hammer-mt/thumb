@@ -155,3 +155,4 @@ cython_debug/
 
 # for my personal use in development
 dev/
+thumb_env/
