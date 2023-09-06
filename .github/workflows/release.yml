@@ -12,4 +12,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+  pypi-publish:
+    name: upload release to PyPI
+    runs-on: ubuntu-latest
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+    steps:
+      # retrieve your distributions here
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
     # No additional tasks. This is a basic setup.
