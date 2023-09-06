@@ -15,7 +15,7 @@ if [ -f "requirements.txt" ]; then
     pip install -r requirements.txt
 else
     echo "requirements.txt not found. Installing default libraries..."
-    pip install gradio langchain python-dotenv
+    pip install gradio langchain ipython ipywidgets
     echo "Exporting installed libraries to requirements.txt..."
     pip freeze > requirements.txt
 fi

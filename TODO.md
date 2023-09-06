@@ -22,6 +22,8 @@
 - early stopping mechanism once 95% confidence reached
 - calculate the embedding distance between the reference and the response
 - move the thumbs to the right hand side
+- train a reward model to predict thumbs
+- ranking instead of thumbs
 
 ### stats
 - calculate the confidence with bayesian stats
