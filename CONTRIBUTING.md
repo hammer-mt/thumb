@@ -124,7 +124,8 @@ This is more a note to self, because I keep forgetting.
 4. `python setup.py sdist bdist_wheel`
 5. delete old versions in the `dist` folder
 6. `python -m twine check dist/*`
-7. `python -m twine upload dist/*`
+7. `git commit -m "release v0.2"`
+7. `git tag v0.2` and `git push origin v0.2`
 
 Resources:
 

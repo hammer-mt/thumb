@@ -118,12 +118,8 @@ class ThumbTest:
                         
                         # Add the responses to the dictionary
                         for idx, response in enumerate(responses):
-                            print(f"Adding response {idx + 1} of {runs} for {pid} {cid} {model}")
                             response["feedback"] = None
-                            print("idx", idx)
-                            print("len", len(self.data[pid][cid][model].keys()))
                             loc = len(self.data[pid][cid][model].keys()) + 1
-                            print(f"Adding response at index {loc}")
                             self.data[pid][cid][model][loc] = response
 
                         self._save_data()
