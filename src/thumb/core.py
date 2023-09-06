@@ -44,9 +44,10 @@ class ThumbTest:
         else:
             self.tid = uuid4().hex[0:8]
 
-        os.environ["LANGCHAIN_TRACING_V2"] = "true"
-        os.environ["LANGCHAIN_PROJECT"] = f"ThumbTest: {self.tid}"
-        os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
+        if os.environ.get("LANGCHAIN_API_KEY", None):
+            os.environ["LANGCHAIN_TRACING_V2"] = "true"
+            os.environ["LANGCHAIN_PROJECT"] = f"ThumbTest: {self.tid}"
+            os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
 
     def __str__(self):
         combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
