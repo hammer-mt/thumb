@@ -2,7 +2,7 @@
 import pathlib
 from setuptools import setup, find_packages
 HERE = pathlib.Path(__file__).parent
-VERSION = "0.2.2.4"
+VERSION = "0.2.2.5"
 PACKAGE_NAME = "thumb"
 AUTHOR = "Mike Taylor"
 AUTHOR_EMAIL = "mike@saxifrage.xyz"
@@ -16,6 +16,7 @@ INSTALL_REQUIRES = [
     "langchain",
     "ipython",
     "ipywidgets",
+    "openai",
 ]
 setup(name=PACKAGE_NAME,
     version=VERSION,
