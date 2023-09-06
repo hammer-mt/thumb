@@ -1,14 +1,18 @@
-## Active Tasks
+## TODOs
 
 ### test
 - add async to the calls
 - move tags to metadata not tracing
 - merging two tests together
 - handle prompts being strings or arrays
+- move models to having unique ids instead of calling by name
 - handle non chat models
 - handle non openai models
 - handle prompts being langchain templates, chains, agents
 - handle reference answers for test cases
+- calculate number of tests and display
+- add a cancel button to stop the tests
+- add a confirmation before running tests
 
 ### evals
 - set custom criteria for ratings
@@ -17,6 +21,7 @@
 - handle custom labels instead of thumbs
 - early stopping mechanism once 95% confidence reached
 - calculate the embedding distance between the reference and the response
+- move the thumbs to the right hand side
 
 ### stats
 - calculate the confidence with bayesian stats
@@ -25,6 +30,7 @@
 - support pricing of alternatives to openai (anthropic)
 - set the success metric
 - set the control prompt / model
+- add latency to the stats
 
 ## interface
 - spin up gradio user interface
@@ -35,4 +41,6 @@
 
 ## other ideas
 - full testing suite to spot breaking changes
+- types and errors when the format is wrong
 - image model testing as well as LLMs
+- generate new prompts, test cases with GPT-4
