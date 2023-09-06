@@ -131,3 +131,4 @@ Resources:
 - [Using TestPyPi](https://packaging.python.org/guides/using-testpypi/)
 - [Building a Python Package and Publishing on PyPi (The Python Package Index)](https://www.section.io/engineering-education/building-a-python-package-and-publishing-on-pypi/)
 - [Packaging Python Projects](https://packaging.python.org/tutorials/packaging-projects/)
+- [Publishing package distribution releases using GitHub Actions CI/CD workflows](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/)
