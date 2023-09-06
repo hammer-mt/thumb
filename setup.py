@@ -15,7 +15,7 @@ INSTALL_REQUIRES = [
     "gradio",
     "langchain",
     "ipython",
-    "ipywidgets"
+    "ipywidgets",
 ]
 setup(name=PACKAGE_NAME,
     version=VERSION,
