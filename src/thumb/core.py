@@ -7,11 +7,6 @@ from collections import defaultdict
 from uuid import uuid4
 import ipywidgets as widgets
 from IPython.display import display
-from dotenv import load_dotenv
-
-load_dotenv()
-
-
 from .llm import get_responses
 from .utils import hash_id
 
