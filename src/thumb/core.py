@@ -328,14 +328,17 @@ class ThumbTest:
                         tokens = details.get('tokens', None)
                         cost = details.get('cost', None)
                         feedback = details.get('feedback', None)
+                        latency = details.get('latency', None)
+                        prompt_tokens = details.get('prompt_tokens', None)
+                        completion_tokens = details.get('completion_tokens', None)
 
-                        flattened_data.append([pid, prompt, cid, case, model, content, tokens, cost, feedback])
+                        flattened_data.append([pid, prompt, cid, case, model, content, tokens, prompt_tokens, completion_tokens, cost, latency, feedback])
 
         # Write to CSV
         with open(filename, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             # Writing header
-            writer.writerow(["PID", "Prompt", "CID", "Case", "Model", "Content", "Tokens", "Cost", "Feedback"])
+            writer.writerow(["PID", "Prompt", "CID", "Case", "Model", "Content", "Tokens", "Prompt Tokens", "Completion Tokens", "Cost", "Latency", "Feedback"])
             # Writing data
             writer.writerows(flattened_data)
         

@@ -13,6 +13,7 @@
 - calculate number of tests and display
 - add a cancel button to stop the tests
 - add a confirmation before running tests
+- add a unique run id and model id
 
 ### evals
 - set custom criteria for ratings
@@ -24,6 +25,7 @@
 - move the thumbs to the right hand side
 - train a reward model to predict thumbs
 - ranking instead of thumbs
+- pass a custom eval function
 
 ### stats
 - calculate the confidence with bayesian stats

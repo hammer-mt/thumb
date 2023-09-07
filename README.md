@@ -75,10 +75,8 @@ prompt_b = "tell me a family friendly joke about {subject} in the style of {come
 cases = [
   {"subject": "joe biden", "comedian": "chris rock"}, 
   {"subject": "joe biden", "comedian": "ricky gervais"}, 
-  {"subject": "joe biden", "comedian": "robin williams"},
   {"subject": "donald trump", "comedian": "chris rock"}, 
   {"subject": "donald trump", "comedian": "ricky gervais"}, 
-  {"subject": "donald trump", "comedian": "robin williams"},
   ]
 
 # generate the responses
@@ -171,10 +169,9 @@ test.export_to_csv()
 ```
 Every run for each combination of prompt and case is stored in the object (and cache), and therefore calling `test.generate()` again will not generate any new responses if more prompts, cases, or runs aren't added. Similarly, calling `test.evaluate()` again will not re-rate the responses you have already rated, and will simply redisplay the results if the test has ended.
 
+## Thumb Testing 👍🧪
 
-## About Prompt Testing
-
-The difference between people just playing around with ChatGPT and those using AI in production is evaluation. LLMs respond non-deterministically, and so it's important to test what results look like when scaled up across a wide range of scenarios. Without an evaluation framework you're left blindly guessing about what's working in your prompts (or not).
+The difference between people just playing around with ChatGPT and those [using AI in production](https://huyenchip.com/2023/04/11/llm-engineering.html) is evaluation. LLMs respond non-deterministically, and so it's important to test what results look like when scaled up across a wide range of scenarios. Without an evaluation framework you're left blindly guessing about what's working in your prompts (or not).
 
 Serious [prompt engineers](https://www.saxifrage.xyz/post/prompt-engineering) are testing and learning which inputs lead to useful or desired outputs, reliably and at scale. This process is called [prompt optimization](https://www.saxifrage.xyz/post/prompt-optimization), and it looks like this:
 
@@ -183,7 +180,7 @@ Serious [prompt engineers](https://www.saxifrage.xyz/post/prompt-engineering) ar
 3. Testing – Generate responses for your different prompts against multiple test cases.
 4. Analysis – Evaluate the performance of your prompts and use them to inform the next test.
 
-Thumb testing fills the gap between large scale professional evaluation mechanisms, and blindly prompting through trial and error. If you are transitioning a prompt into a production environment, using `thumb` to test your prompt can help you catch edge cases, and get early user or team feedback on the results.
+Thumb testing fills the gap between large scale professional evaluation mechanisms, and [blindly prompting](https://mitchellh.com/writing/prompt-engineering-vs-blind-prompting) through trial and error. If you are transitioning a prompt into a production environment, using `thumb` to test your prompt can help you catch edge cases, and get early user or team feedback on the results.
 
 ## Contributors
 
