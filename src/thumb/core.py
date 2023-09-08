@@ -7,20 +7,26 @@ from collections import defaultdict
 from uuid import uuid4
 import ipywidgets as widgets
 from IPython.display import display
-from .llm import get_responses
+import asyncio
+
+from .llm import get_responses, async_get_responses
 from .utils import hash_id
 
 DIR_PATH = "thumb/.cache"
 
-def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"]):
+def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=False):
     thumb = ThumbTest()
     thumb.add_prompts(prompts)
     thumb.add_cases(cases)
     thumb.add_models(models)
     thumb.add_runs(runs)
-    thumb.generate()
-    thumb.evaluate()
-    thumb.export_to_csv()
+    if async_generate:
+        print("Running async_generate")
+        asyncio.run(thumb.async_generate())
+    else:
+        thumb.generate()
+        thumb.evaluate()
+        thumb.export_to_csv()
 
     return thumb
 
@@ -99,6 +105,40 @@ class ThumbTest:
                         test_case = self.cases[cid]
                         
                         responses = get_responses(prompt, test_case, model, runs, pid, cid)
+
+                        # Ensure pid is in the dictionary
+                        if pid not in self.data:
+                            self.data[pid] = {}
+
+                        # Ensure cid is in the dictionary associated with pid
+                        if cid not in self.data[pid]:
+                            self.data[pid][cid] = {}
+
+                        # If the model is not in the dict, add it
+                        if model not in self.data[pid][cid]:
+                            self.data[pid][cid][model] = {}
+                        
+                        # Add the responses to the dictionary
+                        for idx, response in enumerate(responses):
+                            response["feedback"] = None
+                            loc = len(self.data[pid][cid][model].keys()) + 1
+                            self.data[pid][cid][model][loc] = response
+
+                        self._save_data()
+
+    async def async_generate(self):
+        for pid in self.prompts.keys():
+            for cid in self.cases.keys():
+                for model in self.models: 
+                    runs_completed = len(self.data.get(pid, {}).get(cid, {}).get(model, {}).keys())
+                    if runs_completed < self.runs:
+                        # Process this combination
+                        runs = self.runs - runs_completed
+                        prompt = self.prompts[pid]
+                        
+                        test_case = self.cases[cid]
+                        
+                        responses = await async_get_responses(prompt, test_case, model, runs, pid, cid)
 
                         # Ensure pid is in the dictionary
                         if pid not in self.data:
