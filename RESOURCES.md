@@ -54,6 +54,7 @@
 - [The Power of Scale for Parameter-Efficient Prompt Tuning](https://arxiv.org/abs/2104.08691) - 
 - [How Many Data Points is a Prompt Worth?](https://arxiv.org/abs/2103.08493) - shows you need a few hundred to thousands of data points for fine-tuning to beat prompt engineering.
 - [The Power of Scale for Parameter-Efficient Prompt Tuning](https://arxiv.org/abs/2104.08691) - automatic tuning of prompts based on a goal.
+- [Large Language Models as Optimizers](https://arxiv.org/abs/2309.03409) - claims that LLMs are better prompt engineers than people.
 
 
 ## Collections of Prompts
