@@ -93,16 +93,22 @@ async def async_generate(chat, formatted_prompt, tags=[]):
     finally:
         return response_data
 
-async def async_get_responses(prompt, test_case, model, runs, pid, cid):
-    chat = ChatOpenAI(model=model)
-    formatted_prompt = format_chat_prompt(prompt, test_case)
-
+async def async_get_responses(batch):
     tasks = []
+    
+    for item in batch:
+        prompt = item['prompt']
+        test_case = item['test_case']
+        model = item['model']
+        pid = item['pid']
+        cid = item['cid']
 
-    for _ in tqdm(range(runs)):
+        chat = ChatOpenAI(model=model)
+        formatted_prompt = format_chat_prompt(prompt, test_case)
+        
         task = async_generate(chat, formatted_prompt, tags=[f"pid_{pid}", f"cid_{cid}"])
         tasks.append(task)
 
     responses = await asyncio.gather(*tasks)
-
     return responses
+

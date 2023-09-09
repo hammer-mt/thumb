@@ -99,7 +99,7 @@ class ThumbTest:
 
     def generate(self):
         combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
-        print(f"{len(self.prompts)} prompts x {len(self.cases) - 1} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
+        print(f"{len(self.prompts)} prompts x {len(self.cases)} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
 
         for pid in self.prompts.keys():
             for cid in self.cases.keys():
@@ -134,42 +134,69 @@ class ThumbTest:
 
                         self._save_data()
 
-    async def async_generate(self):
-        combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
-        print(f"{len(self.prompts)} prompts x {len(self.cases) - 1} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
+    def _collect_required_runs(self):
+        """
+        Collects and returns all the required runs for the prompts, cases, and models.
+        """
+        required_runs = []
 
         for pid in self.prompts.keys():
             for cid in self.cases.keys():
-                for model in self.models: 
+                for model in self.models:
                     runs_completed = len(self.data.get(pid, {}).get(cid, {}).get(model, {}).keys())
                     if runs_completed < self.runs:
-                        # Process this combination
-                        runs = self.runs - runs_completed
-                        prompt = self.prompts[pid]
-                        
-                        test_case = self.cases[cid]
-                        
-                        responses = await async_get_responses(prompt, test_case, model, runs, pid, cid)
+                        runs_to_do = self.runs - runs_completed
 
-                        # Ensure pid is in the dictionary
-                        if pid not in self.data:
-                            self.data[pid] = {}
+                        # Add a new item for each individual run that hasn't been completed yet
+                        for _ in range(runs_to_do):
+                            required_runs.append({
+                                'pid': pid,
+                                'cid': cid,
+                                'model': model,
+                                'prompt': self.prompts[pid],
+                                'test_case': self.cases[cid]
+                            })
+        return required_runs
 
-                        # Ensure cid is in the dictionary associated with pid
-                        if cid not in self.data[pid]:
-                            self.data[pid][cid] = {}
 
-                        # If the model is not in the dict, add it
-                        if model not in self.data[pid][cid]:
-                            self.data[pid][cid][model] = {}
-                        
-                        # Add the responses to the dictionary
-                        for response in responses:
-                            response["feedback"] = None
-                            rid = uuid4().hex[0:8]
-                            self.data[pid][cid][model][rid] = response
 
-                        self._save_data()
+    async def async_generate(self, batch_size=30):
+        combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
+        print(f"{len(self.prompts)} prompts x {len(self.cases)} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
+
+        # Create a list to collect needed runs
+        required_runs = self._collect_required_runs()
+        
+        # Process the required runs in batches determined by batch_size
+        for i in range(0, len(required_runs), batch_size):
+            batch = required_runs[i:i+batch_size]
+            
+            batch_responses = await async_get_responses(batch)
+
+            for idx, response in enumerate(batch_responses):
+                print("idx", idx)
+                print("response", response)
+                print("batch", batch)
+                pid, cid, model = batch[idx]['pid'], batch[idx]['cid'], batch[idx]['model']
+
+                # Ensure pid is in the dictionary
+                if pid not in self.data:
+                    self.data[pid] = {}
+
+                # Ensure cid is in the dictionary associated with pid
+                if cid not in self.data[pid]:
+                    self.data[pid][cid] = {}
+
+                # If the model is not in the dict, add it
+                if model not in self.data[pid][cid]:
+                    self.data[pid][cid][model] = {}
+
+                # Add the response to the dictionary
+                response["feedback"] = None
+                rid = uuid4().hex[0:8]
+                self.data[pid][cid][model][rid] = response
+
+            self._save_data()
 
     def _save_data(self):
         """
