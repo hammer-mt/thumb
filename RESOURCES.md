@@ -33,6 +33,7 @@
 - [RAGAS](https://github.com/explodinggradients/ragas) - Evaluation framework for your Retrieval Augmented Generation (RAG) pipelines
 - [HumanLoop](https://humanloop.com/) ($) - collaborative prompt and ml ops workspace.
 - [OpenAI Evals](https://github.com/openai/evals) - evaluation framework for models and prompts.
+- [Prompt Layer](https://promptlayer.com/) ($) - a tool for visually managing prompt templates and tracking usage.
 
 ## LLM Monitoring & Logging Tools
 - [LangSmith](https://smith.langchain.com/) - the Langchain tracing and monitoring tool.

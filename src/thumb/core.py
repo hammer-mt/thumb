@@ -14,19 +14,19 @@ from .utils import hash_id
 
 DIR_PATH = "thumb/.cache"
 
-def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=False):
+def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=True):
     thumb = ThumbTest()
     thumb.add_prompts(prompts)
     thumb.add_cases(cases)
     thumb.add_models(models)
     thumb.add_runs(runs)
     if async_generate:
-        print("Running async_generate")
         asyncio.run(thumb.async_generate())
     else:
         thumb.generate()
-        thumb.evaluate()
-        thumb.export_to_csv()
+
+    thumb.evaluate()
+    thumb.export_to_csv()
 
     return thumb
 
@@ -63,14 +63,19 @@ class ThumbTest:
     
     def add_prompts(self, prompts):
         for prompt in prompts:
-            pid = f"pid-{hash_id(prompt)}"
+            # if the prompt is a string, convert it to a list
+            if isinstance(prompt, str):
+                prompt = [prompt]
+            
+            msg_string = "\n".join(prompt)
+            pid = f"{hash_id(msg_string)}"
             if pid not in self.prompts.keys():
                 self.prompts[pid] = prompt
 
     def add_cases(self, cases):
         if cases is not None:
             for case in cases:
-                cid = f"cid-{hash_id(json.dumps(case))}"
+                cid = f"{hash_id(json.dumps(case))}"
                 if cid not in self.cases.keys():
                     # if base still in cases, remove it
                     if "base-case" in self.cases.keys():
@@ -93,6 +98,9 @@ class ThumbTest:
         self.runs += runs
 
     def generate(self):
+        combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
+        print(f"{len(self.prompts)} prompts x {len(self.cases) - 1} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
+
         for pid in self.prompts.keys():
             for cid in self.cases.keys():
                 for model in self.models: 
@@ -119,14 +127,17 @@ class ThumbTest:
                             self.data[pid][cid][model] = {}
                         
                         # Add the responses to the dictionary
-                        for idx, response in enumerate(responses):
+                        for response in responses:
                             response["feedback"] = None
-                            loc = len(self.data[pid][cid][model].keys()) + 1
-                            self.data[pid][cid][model][loc] = response
+                            rid = uuid4().hex[0:8]
+                            self.data[pid][cid][model][rid] = response
 
                         self._save_data()
 
     async def async_generate(self):
+        combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
+        print(f"{len(self.prompts)} prompts x {len(self.cases) - 1} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
+
         for pid in self.prompts.keys():
             for cid in self.cases.keys():
                 for model in self.models: 
@@ -153,10 +164,10 @@ class ThumbTest:
                             self.data[pid][cid][model] = {}
                         
                         # Add the responses to the dictionary
-                        for idx, response in enumerate(responses):
+                        for response in responses:
                             response["feedback"] = None
-                            loc = len(self.data[pid][cid][model].keys()) + 1
-                            self.data[pid][cid][model][loc] = response
+                            rid = uuid4().hex[0:8]
+                            self.data[pid][cid][model][rid] = response
 
                         self._save_data()
 
@@ -228,7 +239,7 @@ class ThumbTest:
                 # Loop through the models
                 for model in self.data[pid][cid].keys():
                     # Loop through the responses
-                    for idx, response in self.data[pid][cid][model].items():
+                    for rid, response in self.data[pid][cid][model].items():
                         # if the response has feedback, skip it
                         if response['feedback'] is not None:
                             continue
@@ -237,7 +248,7 @@ class ThumbTest:
                             'pid': pid,
                             'cid': cid,
                             'model': model,
-                            'idx': idx,
+                            'rid': rid,
                             'content': response["content"],
                         }
                         
@@ -249,12 +260,12 @@ class ThumbTest:
 
         return responses
     
-    def _receive_feedback(self, label, pid, cid, model, idx):
+    def _receive_feedback(self, label, pid, cid, model, rid):
         # convert thumbs up / down to 1 / 0
         value = 1 if label.description == "👍" else 0
 
         # Update the response based on the provided index
-        self.data[pid][cid][model][idx]['feedback'] = value
+        self.data[pid][cid][model][rid]['feedback'] = value
 
     def stats(self):
         # Create a list to hold the scores by prompt
@@ -310,7 +321,7 @@ class ThumbTest:
             nonlocal prepped_data
             if not prepped_data:
                 scores = self.stats()
-                stats = "".join([f"<p><i>'{score['prompt']}'</i><ul><li><b>Avg. Score: {score['avg_score']*100:0.2f}%</b></li><li>Avg. Tokens: {score['avg_tokens']:0.2f}</li><li>Avg. Cost: ${score['avg_cost']:0.5f}</li></ul></p>" for score in scores.values()])
+                stats = "".join([f"<p><i>'{score['prompt']}'</i><ul><li><b>Avg. Score: {score['avg_score']*100:0.2f}%</b></li><li>Avg. Tokens: {score['avg_tokens']:0.2f}</li><li>Avg. Cost: ${score['avg_cost']:0.7f}</li></ul></p>" for score in scores.values()])
                 response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}"
                 # Update children of main_box to exclude the label_widget
                 main_box.children = [response_box, test_id]
@@ -333,9 +344,9 @@ class ThumbTest:
             pid = response['pid']
             cid = response['cid']
             model = response['model']
-            idx = response['idx']
+            rid = response['rid']
 
-            self._receive_feedback(b, pid, cid, model, idx)
+            self._receive_feedback(b, pid, cid, model, rid)
             update_response()
 
         # add on_click to buttons
@@ -363,7 +374,7 @@ class ThumbTest:
                 case = json.dumps(case)
 
                 for model, model_data in cid_data.items():
-                    for _, details in model_data.items():
+                    for rid, details in model_data.items():
                         content = details.get('content', None)
                         tokens = details.get('tokens', None)
                         cost = details.get('cost', None)
@@ -372,13 +383,13 @@ class ThumbTest:
                         prompt_tokens = details.get('prompt_tokens', None)
                         completion_tokens = details.get('completion_tokens', None)
 
-                        flattened_data.append([pid, prompt, cid, case, model, content, tokens, prompt_tokens, completion_tokens, cost, latency, feedback])
+                        flattened_data.append([pid, prompt, cid, case, model, rid, content, tokens, prompt_tokens, completion_tokens, cost, latency, feedback])
 
         # Write to CSV
         with open(filename, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             # Writing header
-            writer.writerow(["PID", "Prompt", "CID", "Case", "Model", "Content", "Tokens", "Prompt Tokens", "Completion Tokens", "Cost", "Latency", "Feedback"])
+            writer.writerow(["PID", "Prompt", "CID", "Case", "Model", "RID", "Content", "Tokens", "Prompt Tokens", "Completion Tokens", "Cost", "Latency", "Feedback"])
             # Writing data
             writer.writerows(flattened_data)
         
