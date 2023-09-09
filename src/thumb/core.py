@@ -6,7 +6,7 @@ import json
 from collections import defaultdict
 from uuid import uuid4
 import ipywidgets as widgets
-from IPython.display import display
+from IPython.display import display, clear_output
 import asyncio
 
 from .llm import get_responses, async_get_responses
@@ -321,7 +321,7 @@ class ThumbTest:
             nonlocal prepped_data
             if not prepped_data:
                 scores = self.stats()
-                stats = "".join([f"<p><i>'{score['prompt']}'</i><ul><li><b>Avg. Score: {score['avg_score']*100:0.2f}%</b></li><li>Avg. Tokens: {score['avg_tokens']:0.2f}</li><li>Avg. Cost: ${score['avg_cost']:0.7f}</li></ul></p>" for score in scores.values()])
+                stats = "".join([f"<p><i>'{json.dumps(score['prompt'])}'</i><ul><li><b>Avg. Score: {score['avg_score']*100:0.2f}%</b></li><li>Avg. Tokens: {score['avg_tokens']:0.2f}</li><li>Avg. Cost: ${score['avg_cost']:0.7f}</li></ul></p>" for score in scores.values()])
                 response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}"
                 # Update children of main_box to exclude the label_widget
                 main_box.children = [response_box, test_id]
@@ -354,8 +354,11 @@ class ThumbTest:
             label_widget.on_click(on_button_clicked)
 
         label_box = widgets.HBox(label_widgets)
-        main_box.children = [response_box, label_box, progress_bar, test_id]
-        
+        main_box.children = [label_box, progress_bar, response_box, test_id]
+
+
+        clear_output(wait=True)
+
         update_response()
         display(main_box)
         

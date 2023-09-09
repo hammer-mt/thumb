@@ -1,10 +1,8 @@
 ## TODOs
 
 ### on deck
-- handle error with displaying message based prompts in interface
 - add to readme details on async and message based prompts
 - add a test name and display to the interface
-- move the thumbs to the top so always in same spot
 - refactor the interface to show results in a table not a list
 - add a name for each prompt and display to the interface
 - load data from csv not just json
