@@ -3,8 +3,6 @@
 ## Active tasks
 
 ### on deck
-- refactor the interface to show results in a table not a list
-- load data from csv not just json - check cache first then this
 - generate new prompt variations for an existing test
 - generate new test cases for an existing test
 - spin up gradio user interface

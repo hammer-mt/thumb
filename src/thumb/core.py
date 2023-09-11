@@ -454,8 +454,65 @@ class ThumbTest:
         def update_response():
             nonlocal prepped_data
             if not prepped_data:
-                scores = self.stats()
-                stats = "".join([f"<p><i>'{json.dumps(score['prompt'])}'</i><ul><li><b>Avg. Score: {score['avg_score']*100:0.2f}%</b></li><li>Avg. Tokens: {score['avg_tokens']:0.2f}</li><li>Avg. Cost: ${score['avg_cost']:0.7f}</li></ul></p>" for score in scores.values()])
+                stats = ""
+                
+                # TODO abstract this out into a function
+                flattened_data = []
+                for pid, pid_data in self.data.items():
+                    prompt = self.prompts.get(pid, None)
+
+                    for cid, cid_data in pid_data.items():
+                        case = self.cases.get(cid, None)
+                        case = json.dumps(case)
+
+                        for model, model_data in cid_data.items():
+                            for rid, details in model_data.items():
+                                content = details.get('content', None)
+                                tokens = details.get('tokens', None)
+                                cost = details.get('cost', None)
+                                feedback = details.get('feedback', None)
+                                latency = details.get('latency', None)
+                                prompt_tokens = details.get('prompt_tokens', None)
+                                completion_tokens = details.get('completion_tokens', None)
+
+                                flattened_data.append([pid, prompt, cid, case, model, rid, content, tokens, prompt_tokens, completion_tokens, cost, latency, feedback])
+
+                df = pd.DataFrame(data=flattened_data, columns=["PID", "Prompt", "CID", "Case", "Model", "RID", "Content", "Tokens", "Prompt Tokens", "Completion Tokens", "Cost", "Latency", "Feedback"])
+                
+                stats_df = df.groupby(['PID', 'CID', 'Model']).agg(
+                                calls=('PID', 'size'),
+                                feedback=('Feedback', 'sum'),
+                                score=('Feedback', 'mean'),
+                                tokens=('Tokens', 'mean'),
+                                cost=('Cost', 'mean'),
+                                latency=('Latency', 'mean'),
+                                ).reset_index()
+
+                full_stats_df = stats_df.pivot_table(index=['PID', 'CID', 'Model'],
+                                                      values=['calls', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
+                                                      aggfunc='first')
+                
+                pid_stats_df = stats_df.pivot_table(index=['PID'],
+                                                      values=['calls', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
+                                                      aggfunc='first').reset_index()
+
+                cid_stats_df = stats_df.pivot_table(index=['CID'],
+                                                      values=['calls', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
+                                                      aggfunc='first').reset_index()
+                
+                model_stats_df = stats_df.pivot_table(index=['Model'],
+                                                      values=['calls', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
+                                                      aggfunc='first').reset_index()
+
+                pid_table_output = pid_stats_df.to_html()
+                cid_table_output = cid_stats_df.to_html()
+                model_table_output = model_stats_df.to_html()
+                full_table_output = full_stats_df.to_html()
+                stats += f"<br>{pid_table_output}"
+                stats += f"<br>{cid_table_output}"
+                stats += f"<br>{model_table_output}"
+                stats += f"<br>{full_table_output}"
+
                 response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}"
                 # Update children of main_box to exclude the label_widget
                 main_box.children = [response_box, test_id]
