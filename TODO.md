@@ -27,6 +27,12 @@
     - handle the case where the model is a chain
     - handle the case where the model is an agent
     - handle the case where the model is a model object
+- add a test description
+- add a prompt description
+- add a test case description
+- add a test case name
+- add the ability to change filepath for caching
+- switch caching on/off or set batch size
 
 ### evals
 - set custom criteria for ratings

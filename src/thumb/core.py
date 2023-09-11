@@ -8,6 +8,7 @@ from uuid import uuid4
 import ipywidgets as widgets
 from IPython.display import display, clear_output
 import asyncio
+import pandas as pd
 
 from .llm import get_responses, async_get_responses
 from .utils import hash_id
@@ -31,11 +32,15 @@ def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=
     return thumb
 
 def load(tid):
-    return ThumbTest(tid)
+    # check if the tid is a file path
+    if os.path.exists(tid):
+        return ThumbTest(file_path=tid)
+    else:
+        return ThumbTest(tid)
 
 class ThumbTest:
     
-    def __init__(self, tid=None):
+    def __init__(self, tid=None, file_path=None):
 
         self.data = defaultdict(dict)
 
@@ -45,8 +50,17 @@ class ThumbTest:
         self.runs = 0
 
         if tid:
+            # get just the tid from the file path if its a filepath
+            if "/" in tid:
+                tid = tid.split("/")[-1].split(".")[0]
+            elif "." in tid:
+                tid = tid.split(".")[0]   
+            
             self.tid = tid
             self._load_data()
+        elif file_path:
+            self.tid = file_path.split("/")[-1].split(".")[0]
+            self._load_data(file_path)
         else:
             self.tid = uuid4().hex[0:8]
 
@@ -229,22 +243,115 @@ class ThumbTest:
             print(f"Caching failed due to: {e}")
 
 
-    def _load_data(self):
+    def _load_data(self, file_path=None):
         """
         Load responses, prompts, cases, and models from a json file.
         """
-        # Define the path for the JSON file using the tid value
-        file_path = os.path.join(DIR_PATH, f"{self.tid}.json")
+        if file_path:
+            # check the file exists
+            if not os.path.exists(file_path):
+                raise FileNotFoundError(f"No file found at {file_path}")
+            else:
+                 # Define the path for the file using the tid value
+                json_file_path = os.path.join(DIR_PATH, f"{self.tid}.json")
+                csv_file_path = f"{self.tid}.csv"
+
+                # check whether the file is a json file
+                if file_path.split(".")[-1] == "json":
+                    self._read_from_json(json_file_path)
+
+                # check whether the file is a csv file
+                elif file_path.split(".")[-1] == "csv":
+                    self._read_from_csv(csv_file_path)
+                else:
+                    raise TypeError(f"File must be a JSON or CSV file.")
+        else:
+            # Check if the JSON file exists
+            if os.path.exists(json_file_path):
+                self._read_from_json(json_file_path)
+            
+            # Check if the CSV file exists
+            elif os.path.exists(csv_file_path):
+                self._read_from_csv(csv_file_path)
+
+            else:
+                raise FileNotFoundError(f"No data found for tid: {self.tid}")
         
-        # Check if the file exists
-        if not os.path.exists(file_path):
-            print(f"No data found for tid: {self.tid}")
-            return
+    def _read_from_csv(self, csv_file_path):
+        # Load the CSV file into a DataFrame
+        csv_df = pd.read_csv(csv_file_path)
         
-        # Read the JSON from the file
-        with open(file_path, 'r') as file:
+        def compute_runs(data_dict):
+            runs = []
+            for pid_content in data_dict.values():
+                for cid_content in pid_content.values():
+                    for model_content in cid_content.values():
+                        runs.append(len(model_content))
+            return max(runs) if runs else 0
+
+        # Extract unique values for prompts, cases, models
+        prompts = csv_df.drop_duplicates(subset=['PID'])[['PID', 'Prompt']].set_index('PID').to_dict()['Prompt']
+        cases = csv_df.drop_duplicates(subset=['CID'])[['CID', 'Case']].set_index('CID').to_dict()['Case']
+        models = csv_df['Model'].unique().tolist()
+        
+        # Adjust prompts based on their type (list or string)
+        for pid, prompt_str in prompts.items():
+            try:
+                prompts[pid] = eval(prompt_str)
+                # Convert single strings wrapped in a list to just strings
+                if isinstance(prompts[pid], list) and len(prompts[pid]) == 1:
+                    prompts[pid] = prompts[pid][0]
+            except:
+                pass
+        
+        # Convert cases' string to dictionary format
+        for cid, case_str in cases.items():
+            cases[cid] = json.loads(case_str)
+        
+        # Construct the data dictionary
+        data = {}
+        for _, row in csv_df.iterrows():
+            pid = row['PID']
+            cid = row['CID']
+            model = row['Model']
+            rid = row['RID']
+            
+            # Initialize nested dictionaries if not present
+            if pid not in data:
+                data[pid] = {}
+            if cid not in data[pid]:
+                data[pid][cid] = {}
+            if model not in data[pid][cid]:
+                data[pid][cid][model] = {}
+            
+            # Handle NaN feedback values
+            feedback_value = int(row['Feedback']) if not pd.isna(row['Feedback']) else None
+            
+            # Add the details under the RID
+            data[pid][cid][model][rid] = {
+                'content': row['Content'],
+                'tokens': row['Tokens'],
+                'cost': row['Cost'],
+                'prompt_tokens': row['Prompt Tokens'],
+                'completion_tokens': row['Completion Tokens'],
+                'latency': row['Latency'],
+                'feedback': feedback_value
+            }
+        
+        # Compute the runs value
+        runs_value = compute_runs(data)
+        
+        # Combine all parts to form the final structure
+        self.data = data
+        self.prompts = prompts
+        self.cases = cases
+        self.models = models
+        self.runs = runs_value
+
+    def _read_from_json(self, json_file_path):
+        with open(json_file_path, 'r') as file:
             data = json.load(file)
-        
+            
         # Update the instance variables with the loaded data
         self.data = data.get('data', {})
         self.prompts = data.get('prompts', {})
