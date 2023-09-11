@@ -513,6 +513,14 @@ class ThumbTest:
                 stats += f"<br>{model_table_output}"
                 stats += f"<br>{full_table_output}"
 
+                # add the prompt and case key to the end of the stats
+                stats += f"<br><br><b>Prompts</b>:<br>"
+                for pid, prompt in self.prompts.items():
+                    stats += f"{pid}: {prompt}<br>"
+                stats += f"<br><b>Cases</b>:<br>"
+                for cid, case in self.cases.items():
+                    stats += f"{cid}: {case}<br>"
+
                 response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}"
                 # Update children of main_box to exclude the label_widget
                 main_box.children = [response_box, test_id]
