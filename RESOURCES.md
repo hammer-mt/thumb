@@ -34,6 +34,7 @@
 - [HumanLoop](https://humanloop.com/) ($) - collaborative prompt and ml ops workspace.
 - [OpenAI Evals](https://github.com/openai/evals) - evaluation framework for models and prompts.
 - [Prompt Layer](https://promptlayer.com/) ($) - a tool for visually managing prompt templates and tracking usage.
+- [Promptfoo](https://github.com/promptfoo/promptfoo) - a tool for testing and evaluating LLM output quality.
 
 ## LLM Monitoring & Logging Tools
 - [LangSmith](https://smith.langchain.com/) - the Langchain tracing and monitoring tool.
