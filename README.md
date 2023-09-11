@@ -27,7 +27,7 @@ test = thumb.test([prompt_a, prompt_b])
 
 ### 3. Rate the responses
 
-In Jupyter Notebooks a simple user interface is displayed for blind rating responses (you don't see which prompt generated the response).
+Each prompt is run 10 times asynchronously by default, which is around 9x faster than running them sequentially. In Jupyter Notebooks a simple user interface is displayed for blind rating responses (you don't see which prompt generated the response).
 
 ![image](/img/thumb.png)
 
@@ -62,7 +62,7 @@ cases = [
 test = thumb.test([prompt_a, prompt_b], cases)
 ```
 
-Every test case will be run against every prompt template, so in this example you'll get 6 runs (3 test cases x 2 prompt templates). Every test case must include a value for each variable in the prompt template.
+Every test case will be run against every prompt template, so in this example you'll get 6 combinations (3 test cases x 2 prompt templates), which will each run 10 times (60 total calls to OpenAI). Every test case must include a value for each variable in the prompt template.
 
 Prompts may have multiple variables in each test case. For example, if you want to test a prompt template that includes a variable for a comedian's name and a joke topic, you can set up test cases for different comedians and topics.
 
@@ -83,7 +83,7 @@ cases = [
 test = thumb.test([prompt_a, prompt_b], cases)
 ```
 
-Every case is tested against every prompt, in order to get a fair comparison of the performance of each prompt given the same input data.
+Every case is tested against every prompt, in order to get a fair comparison of the performance of each prompt given the same input data. With 4 test cases and 2 prompts, you'll get 8 combinations (4 test cases x 2 prompt templates), which will each run 10 times (80 total calls to OpenAI).
 
 ### Model testing
 
@@ -94,6 +94,46 @@ prompt_b = "tell me a family friendly joke"
 
 # generate the responses
 test = thumb.test([prompt_a, prompt_b], models=["gpt-4", "gpt-3.5-turbo"])
+```
+
+This will run each prompt against each model, in order to get a fair comparison of the performance of each prompt given the same input data. With 2 prompts and 2 models, you'll get 4 combinations (2 prompts x 2 models), which will each run 10 times (40 total calls to OpenAI).
+
+### System messages
+
+```Python
+# set up a prompt templates for the a/b test
+system_message = "You are the comedian {comedian}"
+
+prompt_a = [system_message, "tell me a funny joke about {subject}"]
+prompt_b = [system_message, "tell me a hillarious joke {subject}"]
+
+cases = [{"subject": "joe biden", "comedian": "chris rock"}, 
+         {"subject": "donald trump", "comedian": "chris rock"}]
+
+# generate the responses
+test = thumb.test([prompt_a, prompt_b], cases)
+```
+
+Prompts can be a string or an array of strings. If the prompt is an array, the first string is used as a system message, and the rest of the prompts alternate between Human and Assistant messages (`[system, human, ai, human, ai, ...]`). This is useful for testing prompts that include a system message, or that are using pre-warming (inserting prior messages into the chat to guide the AI towards desired behavior).
+
+```Python
+# set up a prompt templates for the a/b test
+system_message = "You are the comedian {comedian}"
+
+prompt_a = [system_message, # system
+            "tell me a funny joke about {subject}", # human
+            "Sorry, as an AI language model, I am not capable of humor", # assistant
+            "That's fine just try your best"] # human
+prompt_b = [system_message, # system
+            "tell me a hillarious joke about {subject}", # human
+            "Sorry, as an AI language model, I am not capable of humor", # assistant
+            "That's fine just try your best"] # human
+
+cases = [{"subject": "joe biden", "comedian": "chris rock"}, 
+         {"subject": "donald trump", "comedian": "chris rock"}]
+
+# generate the responses
+test = thumb.test([prompt_a, prompt_b], cases)
 ```
 
 ### Parameters
@@ -109,8 +149,9 @@ The `thumb.test` function takes the following parameters:
 - **cases**: a dictionary of variables to input into each prompt template (default: `None`)
 - **runs**: the number of responses to generate per prompt and test case (default: `10`)
 - **models**: a list of OpenAI models you want to generate responses from (default: [`gpt-3.5-turbo`])
+- **async_generate**: a boolean that denotes whether to run async or sequentially (default: `True`)
 
-If you have 10 test runs with 2 prompt templates and 3 test cases, that's `10 x 2 x 3 = 60` calls to your LLM. Be careful: these can add up quickly!
+If you have 10 test runs with 2 prompt templates and 3 test cases, that's `10 x 2 x 3 = 60` calls to OpenAI. Be careful: particularly with GPT-4 the costs can add up quickly!
 
 Langchain tracing to [LangSmith](https://smith.langchain.com/) is automatically enabled if the `LANGCHAIN_API_KEY` is set as an environment variable (optional).
 

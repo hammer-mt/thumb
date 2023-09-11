@@ -1,17 +1,24 @@
-## TODOs
+# TODOs
+
+## Active tasks
 
 ### on deck
-- add to readme details on async and message based prompts
-- add a test name and display to the interface
 - refactor the interface to show results in a table not a list
-- add a name for each prompt and display to the interface
-- load data from csv not just json
+- load data from csv not just json - check cache first then this
+- generate new prompt variations for an existing test
+- generate new test cases for an existing test
 - spin up gradio user interface
-- generate new prompt variations
+
+### bugs / feedback
+- I struggled with some more prompts containing a { } (notably JSON outputs)
+- There wasn’t the ability to test prompts with functions
+
+## Ideas by area
 
 ### test
+- add a test name and display to the interface
+- add a name for each prompt and display to the interface
 - ability to merge two tests together
-- make the full test call stack async not just runs
 - handle reference answers for test cases
 - handle prompts being langchain templates, chains, agents
     - handle non-openai chat models
@@ -23,7 +30,8 @@
 
 ### evals
 - set custom criteria for ratings
-- automatic rating model with GPT-4
+- automatic rating model with GPT-4 based on criteria
+- automatic ranking model with GPT-4 based on criteria
 - integrate with langchain's eval criteria
 - handle custom labels instead of thumbs
 - early stopping mechanism once 95% confidence reached
@@ -32,6 +40,7 @@
 - pass your own custom eval function
 - add a user id to evaluation
 - add ability to redo or clear evals
+- set JSON parsing or an output parser as eval
 
 ### stats
 - calculate the confidence with bayesian stats
