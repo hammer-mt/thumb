@@ -136,6 +136,12 @@ cases = [{"subject": "joe biden", "comedian": "chris rock"},
 test = thumb.test([prompt_a, prompt_b], cases)
 ```
 
+### Evaluation report
+
+When the test completes, you get a full evaluation report, broken down by PID, CID, and model, as well as an overall report broken down by all combinations. If you only test one model or one case, these breakdowns will be dropped. The report shows a key at the bottom to see which ID corresponds to which prompt or case.
+
+![image](/img/report.png)
+
 ### Parameters
 
 The `thumb.test` function takes the following parameters:

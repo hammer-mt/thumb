@@ -8,6 +8,7 @@
 - spin up gradio user interface
 
 ### bugs / feedback
+- not all the cases are being shown in the key at the end
 - I struggled with some more prompts containing a { } (notably JSON outputs)
 - There wasn’t the ability to test prompts with functions
 
@@ -15,6 +16,7 @@
 
 ### test
 - add a test name and display to the interface
+
 - add a name for each prompt and display to the interface
 - ability to merge two tests together
 - handle reference answers for test cases

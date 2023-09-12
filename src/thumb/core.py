@@ -9,6 +9,7 @@ import ipywidgets as widgets
 from IPython.display import display, clear_output
 import asyncio
 import pandas as pd
+import datetime
 
 from .llm import get_responses, async_get_responses
 from .utils import hash_id
@@ -188,9 +189,6 @@ class ThumbTest:
             batch_responses = await async_get_responses(batch)
 
             for idx, response in enumerate(batch_responses):
-                print("idx", idx)
-                print("response", response)
-                print("batch", batch)
                 pid, cid, model = batch[idx]['pid'], batch[idx]['cid'], batch[idx]['model']
 
                 # Ensure pid is in the dictionary
@@ -480,7 +478,7 @@ class ThumbTest:
                 df = pd.DataFrame(data=flattened_data, columns=["PID", "Prompt", "CID", "Case", "Model", "RID", "Content", "Tokens", "Prompt Tokens", "Completion Tokens", "Cost", "Latency", "Feedback"])
                 
                 stats_df = df.groupby(['PID', 'CID', 'Model']).agg(
-                                calls=('PID', 'size'),
+                                runs=('PID', 'size'),
                                 feedback=('Feedback', 'sum'),
                                 score=('Feedback', 'mean'),
                                 tokens=('Tokens', 'mean'),
@@ -489,39 +487,66 @@ class ThumbTest:
                                 ).reset_index()
 
                 full_stats_df = stats_df.pivot_table(index=['PID', 'CID', 'Model'],
-                                                      values=['calls', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
+                                                      values=['runs', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
                                                       aggfunc='first')
                 
                 pid_stats_df = stats_df.pivot_table(index=['PID'],
-                                                      values=['calls', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
+                                                      values=['runs', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
                                                       aggfunc='first').reset_index()
 
                 cid_stats_df = stats_df.pivot_table(index=['CID'],
-                                                      values=['calls', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
+                                                      values=['runs', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
                                                       aggfunc='first').reset_index()
                 
                 model_stats_df = stats_df.pivot_table(index=['Model'],
-                                                      values=['calls', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
+                                                      values=['runs', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
                                                       aggfunc='first').reset_index()
 
+                # always show pid table
                 pid_table_output = pid_stats_df.to_html()
-                cid_table_output = cid_stats_df.to_html()
-                model_table_output = model_stats_df.to_html()
-                full_table_output = full_stats_df.to_html()
                 stats += f"<br>{pid_table_output}"
-                stats += f"<br>{cid_table_output}"
-                stats += f"<br>{model_table_output}"
-                stats += f"<br>{full_table_output}"
 
+                # - don't show the CID breakdown if base case
+                if len(self.cases) == 1:
+                    # Reset the multi-index to columns
+                    full_stats_df_reset = full_stats_df.reset_index()
+
+                    # Set the index again without 'CID'
+                    full_stats_df = full_stats_df_reset.set_index(['PID', 'Model'])
+
+                else:
+                    cid_table_output = cid_stats_df.to_html()
+                    stats += f"<br>{cid_table_output}"
+
+                # - don't show the model breakdown if only one model
+                if len(self.models) == 1:
+                    # Reset the multi-index to columns
+                    full_stats_df_reset = full_stats_df.reset_index()
+
+                    # Set the index again without 'CID'
+                    full_stats_df = full_stats_df_reset.set_index(['PID', 'CID'])
+
+                else:
+                    model_table_output = model_stats_df.to_html()
+                    stats += f"<br>{model_table_output}"
+                
+                # only show full stats if there's more than one model or more than one case
+                if len(self.models) > 1 or len(self.cases) > 1:
+                    full_table_output = full_stats_df.to_html()
+                    stats += f"<br>{full_table_output}"
+                
                 # add the prompt and case key to the end of the stats
                 stats += f"<br><br><b>Prompts</b>:<br>"
                 for pid, prompt in self.prompts.items():
                     stats += f"{pid}: {prompt}<br>"
-                stats += f"<br><b>Cases</b>:<br>"
-                for cid, case in self.cases.items():
-                    stats += f"{cid}: {case}<br>"
 
-                response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}"
+                # if there are cases, add them to the stats
+                if len(self.cases) > 1:
+                    for cid, case in self.cases.items():
+                        stats += f"<br><b>Cases</b>:<br>"
+                        stats += f"{cid}: {case}<br>"
+
+                response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}<br>"
                 # Update children of main_box to exclude the label_widget
                 main_box.children = [response_box, test_id]
                 # cache the feedback
@@ -562,8 +587,15 @@ class ThumbTest:
         display(main_box)
         
     def export_to_csv(self, filename=None):
+        # set today's date for folder name
+        today = datetime.date.today().strftime("%Y-%m-%d")
+        # create the folder if it doesn't exist
+        if not os.path.exists(today):
+            os.makedirs(today)
+
+        # set the filename
         if not filename:
-            filename = f"ThumbTest-{self.tid}.csv"
+            filename = f"{today}/ThumbTest-{self.tid}.csv"
         
         # Flattening the data for CSV export
         flattened_data = []
