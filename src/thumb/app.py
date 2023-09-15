@@ -14,6 +14,5 @@ with gr.Blocks() as demo:
             fn=lambda x: x, inputs=[response], outputs=[], api_name="thumbs_up"
         )
 
-
 if __name__ == "__main__":
     demo.launch()

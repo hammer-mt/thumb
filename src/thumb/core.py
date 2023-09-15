@@ -1,24 +1,26 @@
+import asyncio
+import csv
+import datetime
+import json
 import os
 import random
-import csv
-import json
 from collections import defaultdict
-from uuid import uuid4
-import ipywidgets as widgets
 from itertools import product
-from IPython.display import display, clear_output
-import asyncio
-import pandas as pd
-import datetime
-from typing import List, Union, Any
+from typing import Any, Dict, List, Union
+from uuid import uuid4
 
-from .llm import get_responses, async_get_responses
-from .utils import hash_id
+import ipywidgets as widgets
+import pandas as pd
+from IPython.display import clear_output, display
+
+from thumb.errors import PromptNotFoundError, VaryingCasesLengthError
+from thumb.llm import async_get_responses, get_responses
+from thumb.utils import hash_id
 
 DIR_PATH = "thumb/.cache"
 
 
-def load(tid):
+def load(tid: str):
     """
     Create an instance of the ThumbTest class using the provided tid.
 
@@ -55,7 +57,13 @@ def load(tid):
         return ThumbTest(tid)
 
 
-def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=True):
+def test(
+    prompts: List[Union[str, List[str]]],
+    cases: Union[Dict[str, str], None] = None,
+    runs: int = 10,
+    models: List[str] = ["gpt-3.5-turbo"],
+    async_generate: bool = True,
+):
     """
     Conducts evaluation tests on the OpenAI API using the ThumbTest class.
 
@@ -152,9 +160,15 @@ class ThumbTest:
             return f"ThumbTest: {self.tid}\n\nPrompts: {len(self.prompts)}\nCases: {len(self.cases) - 1}\nModels: {len(self.models)}\nRuns: {self.runs}\n\n{len(self.prompts)} x {len(self.cases) - 1} x {len(self.models)} x {self.runs} = {combinations}"
         return f"ThumbTest: {self.tid}\n\nPrompts: {len(self.prompts)}\nCases: {len(self.cases)}\nModels: {len(self.models)}\nRuns: {self.runs}\n\n{len(self.prompts)} x {len(self.cases)} x {len(self.models)} x {self.runs} = {combinations}"
 
-    def add_prompts(self, prompts: Union[List[str], str]) -> None:
+    def add_prompts(self, prompts: List[Union[str, List[str]]] = []) -> None:
+        # If the list is empty:
+        if not prompts:
+            raise PromptNotFoundError(
+                "No prompts provided. You must provide at least one prompt."
+            )
+
         for prompt in prompts:
-            # if the prompt is a string, convert it to a list
+            # If the prompt is a string, convert it to a list:
             if isinstance(prompt, str):
                 prompt = [prompt]
 
@@ -164,6 +178,16 @@ class ThumbTest:
                 self.prompts[pid] = prompt
 
     def add_cases(self, cases: Union[List[dict], None] = None) -> None:
+        # Check that each case has the same number of variables:
+        num_vars = None
+        for case in cases:
+            if num_vars is None:
+                num_vars = len(case)
+            elif len(case) != num_vars:
+                raise VaryingCasesLengthError(
+                    "All cases must have the same number of variables for each iteration. For example, if one case has 2 variables, all cases must have 2 variables."
+                )
+
         if cases is not None:
             for case in cases:
                 cid = f"{hash_id(json.dumps(case))}"
@@ -220,10 +244,9 @@ class ThumbTest:
                     prompt, test_case, model, runs_needed, pid, cid
                 )
 
-                # Dictionary structure initialization using setdefault
+                # Setting defaults:
                 self.data.setdefault(pid, {}).setdefault(cid, {}).setdefault(model, {})
 
-                # Add the responses to the dictionary
                 for response in responses:
                     response["feedback"] = None
                     rid = uuid4().hex[:8]
@@ -460,21 +483,28 @@ class ThumbTest:
         Prepare the responses for evaluation.
         """
         responses = []
-        for pid, cid, model in product(
-            self.data.keys(), self.data[pid].keys(), self.data[pid][cid].keys()
-        ):
-            for rid, response in self.data[pid][cid][model].items():
-                # if the response has feedback, skip it:
-                if response["feedback"] is not None:
-                    continue
-                response_data = {
-                    "pid": pid,
-                    "cid": cid,
-                    "model": model,
-                    "rid": rid,
-                    "content": response["content"],
-                }
-                responses.append(response_data)
+
+        # Loop through the prompts:
+        for pid in self.data.keys():
+            # Loop through the cases:
+            for cid in self.data[pid].keys():
+                # Loop through the models
+                for model in self.data[pid][cid].keys():
+                    # Loop through the responses
+                    for rid, response in self.data[pid][cid][model].items():
+                        # If the response has feedback, skip it:
+                        if response["feedback"] is not None:
+                            continue
+                        response_data = {
+                            "pid": pid,
+                            "cid": cid,
+                            "model": model,
+                            "rid": rid,
+                            "content": response["content"],
+                        }
+
+                        # Add the response data to the list of responses:
+                        responses.append(response_data)
 
         # Shuffle the order of the responses:
         random.shuffle(responses)

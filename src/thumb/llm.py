@@ -1,24 +1,30 @@
 import asyncio
+import time
+from typing import Any, List, Union
+
+from langchain.callbacks.openai_info import (
+    MODEL_COST_PER_1K_TOKENS,
+    get_openai_token_cost_for_model,
+    standardize_model_name,
+)
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import (
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
     AIMessagePromptTemplate,
     ChatPromptTemplate,
+    HumanMessagePromptTemplate,
+    SystemMessagePromptTemplate,
 )
 from langchain.schema import BaseMessage
 from tqdm.auto import tqdm
-import time
-from langchain.callbacks.openai_info import (
-    standardize_model_name,
-    MODEL_COST_PER_1K_TOKENS,
-    get_openai_token_cost_for_model,
-)
-from typing import List, Any
 
 
-def format_chat_prompt(messages, test_case):
+def format_chat_prompt(
+    messages: [List[str], None], test_case: Union[str, None]
+) -> List[BaseMessage]:
     message_templates = []
+
+    if (messages is None) or (len(messages) == 0):
+        raise ValueError("messages must be a non-empty list of strings")
 
     # if there is only one messages in the array, make it a HumanMessage
     if isinstance(messages, list) and len(messages) == 1:
@@ -46,7 +52,7 @@ def format_chat_prompt(messages, test_case):
     return formatted_prompt.to_messages()
 
 
-def estimate_openai_cost(prompt_tokens, completion_tokens, model_name):
+def estimate_openai_cost(prompt_tokens: int, completion_tokens: int, model_name: str):
     total_cost = 0
     model_name = standardize_model_name(model_name)
     if model_name in MODEL_COST_PER_1K_TOKENS:
@@ -58,7 +64,7 @@ def estimate_openai_cost(prompt_tokens, completion_tokens, model_name):
     return total_cost
 
 
-def get_responses(prompt, test_case, model, runs, pid, cid):
+def get_responses(prompt: str, test_case: str, model, runs: int, pid: str, cid: str):
     chat = ChatOpenAI(model=model)
     formatted_prompt = format_chat_prompt(prompt, test_case)
 
@@ -78,7 +84,7 @@ def get_responses(prompt, test_case, model, runs, pid, cid):
     return responses
 
 
-def parse_generate_response(resp):
+def parse_generate_response(resp: Any):
     response_content = resp.generations[0][0].text
     token_usage = resp.llm_output["token_usage"]
     model_name = resp.llm_output["model_name"]
