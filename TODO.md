@@ -4,6 +4,7 @@
 
 ### On deck:
 
+- add on pytest to github actions workflow for release
 - generate new prompt variations for an existing test
 - generate new test cases for an existing test
 - spin up gradio user interface
