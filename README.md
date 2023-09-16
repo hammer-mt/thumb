@@ -1,4 +1,4 @@
-# thumb
+# Thumb
 
 A simple prompt testing library for LLMs.
 
@@ -32,6 +32,7 @@ Each prompt is run 10 times asynchronously by default, which is around 9x faster
 ![image](/img/thumb.png)
 
 Once all responses have been rated, the following performance statistics are calculated broken down by prompt template:
+
 - `avg_score` amount of positive feedback as a percentage of all runs
 - `avg_tokens`: how many tokens were used across the prompt and response
 - `avg_cost`: an estimate of how much the prompt cost to run on average
@@ -53,8 +54,8 @@ prompt_b = "tell me a family friendly joke in the style of {comedian}"
 
 # set test cases with different input variables
 cases = [
-  {"comedian": "chris rock"}, 
-  {"comedian": "ricky gervais"}, 
+  {"comedian": "chris rock"},
+  {"comedian": "ricky gervais"},
   {"comedian": "robin williams"}
   ]
 
@@ -73,10 +74,10 @@ prompt_b = "tell me a family friendly joke about {subject} in the style of {come
 
 # set test cases with different input variables
 cases = [
-  {"subject": "joe biden", "comedian": "chris rock"}, 
-  {"subject": "joe biden", "comedian": "ricky gervais"}, 
-  {"subject": "donald trump", "comedian": "chris rock"}, 
-  {"subject": "donald trump", "comedian": "ricky gervais"}, 
+  {"subject": "joe biden", "comedian": "chris rock"},
+  {"subject": "joe biden", "comedian": "ricky gervais"},
+  {"subject": "donald trump", "comedian": "chris rock"},
+  {"subject": "donald trump", "comedian": "ricky gervais"},
   ]
 
 # generate the responses
@@ -107,7 +108,7 @@ system_message = "You are the comedian {comedian}"
 prompt_a = [system_message, "tell me a funny joke about {subject}"]
 prompt_b = [system_message, "tell me a hillarious joke {subject}"]
 
-cases = [{"subject": "joe biden", "comedian": "chris rock"}, 
+cases = [{"subject": "joe biden", "comedian": "chris rock"},
          {"subject": "donald trump", "comedian": "chris rock"}]
 
 # generate the responses
@@ -129,7 +130,7 @@ prompt_b = [system_message, # system
             "Sorry, as an AI language model, I am not capable of humor", # assistant
             "That's fine just try your best"] # human
 
-cases = [{"subject": "joe biden", "comedian": "chris rock"}, 
+cases = [{"subject": "joe biden", "comedian": "chris rock"},
          {"subject": "donald trump", "comedian": "chris rock"}]
 
 # generate the responses
@@ -214,6 +215,7 @@ test.evaluate()
 # export the test data for analysis
 test.export_to_csv()
 ```
+
 Every run for each combination of prompt and case is stored in the object (and cache), and therefore calling `test.generate()` again will not generate any new responses if more prompts, cases, or runs aren't added. Similarly, calling `test.evaluate()` again will not re-rate the responses you have already rated, and will simply redisplay the results if the test has ended.
 
 ## Thumb Testing 👍🧪
@@ -239,7 +241,7 @@ These people are building `thumb` for fun in their spare time. 👍
 <table>
   <tr>
     <td align="center"><a href="https://twitter.com/hammer_mt"><img src="https://avatars.githubusercontent.com/u/5264596?s=96&v=4" width="100px;" alt=""/><br /><sub><b>hammer-mt</b></sub></a><br /><a href="https://github.com/hammer-mt/thumb/commits?author=hammer-mt" title="Code">💻</a></td>
-    
+     <td align="center"><a href="https://twitter.com/jamesaphoenix12"><img src="https://avatars.githubusercontent.com/u/17482746?v=4" width="100px;" alt=""/><br /><sub><b>James Phoenix</b></sub></a><br /><a href="https://github.com/jamesaphoenix" title="Code">💻</a></td>
   </tr>
 </table>
 
