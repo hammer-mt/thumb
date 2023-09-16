@@ -1,0 +1,15 @@
+[tool.black]
+line-length = 88  # Example: set max line length to 88 characters
+include = '\.pyi?$'
+exclude = '''
+(
+    \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)
+'''

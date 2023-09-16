@@ -1,16 +1,16 @@
-name: Basic Release Workflow
+name: Thumb Python Package Release
 
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   pypi-publish:
     name: upload release to PyPI
     runs-on: ubuntu-latest
     permissions:
-      # IMPORTANT: this permission is mandatory for trusted publishing
+      # IMPORTANT: this permission is mandatory for trusted publishing:
       id-token: write
     steps:
       - name: Check out code
@@ -26,13 +26,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install build twine
 
-      # Build the package to generate the distributions (sdist and wheel)
+      # Build the package to generate the distributions (sdist and wheel):
       - name: Build the package
         run: python -m build .
 
-      # Now your distributions are in the 'dist' directory
-
+      # Now your distributions are in the 'dist' directory:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-
-    # No additional tasks. This is a basic setup.

@@ -1,6 +1,7 @@
 """The setup script."""
 import pathlib
 from setuptools import setup, find_packages
+
 HERE = pathlib.Path(__file__).parent
 VERSION = "0.2.5"
 PACKAGE_NAME = "thumb"
@@ -9,7 +10,7 @@ AUTHOR_EMAIL = "mike@saxifrage.xyz"
 URL = "https://github.com/hammer-mt/thumb"
 LICENSE = "MIT"
 DESCRIPTION = "A simple prompt testing library for LLMs."
-LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf8')
+LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding="utf8")
 LONG_DESC_TYPE = "text/markdown"
 INSTALL_REQUIRES = [
     "gradio",
@@ -18,7 +19,8 @@ INSTALL_REQUIRES = [
     "ipywidgets",
     "openai",
 ]
-setup(name=PACKAGE_NAME,
+setup(
+    name=PACKAGE_NAME,
     version=VERSION,
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
@@ -29,5 +31,5 @@ setup(name=PACKAGE_NAME,
     url=URL,
     install_requires=INSTALL_REQUIRES,
     package_dir={"": "src"},
-    packages=find_packages(where="src")
-    )
+    packages=find_packages(where="src"),
+)
