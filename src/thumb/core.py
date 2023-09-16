@@ -59,7 +59,7 @@ def load(tid: str):
 
 def test(
     prompts: List[Union[str, List[str]]],
-    cases: Union[Dict[str, str], None] = None,
+    cases: Union[Dict[str, str], None] = [],
     runs: int = 10,
     models: List[str] = ["gpt-3.5-turbo"],
     async_generate: bool = True,
@@ -69,7 +69,7 @@ def test(
 
     Args:
         prompts (List[str] or str): The prompts to be used in the evaluation test.
-        cases (List[dict] or None): The test cases to be used in the evaluation test. Defaults to None.
+        cases (List[dict]): The test cases to be used in the evaluation test. Defaults to None.
         runs (int): The number of runs for each combination of prompts, cases, and models.
         models (List[str]): The models to be used in the evaluation test.
         async_generate (bool): Whether to generate responses asynchronously or not.
@@ -98,7 +98,7 @@ class ThumbTest:
 
     Example Usage:
         thumb = ThumbTest()
-        thumb.add_prompts(["What is the capital of France?", "Who is the current president of the United States?"])
+        thumb.add_prompts(["What is the capital of {country}?", "Who is the current president of {country}?"])
         thumb.add_cases([{"country": "France"}, {"country": "United States"}])
         thumb.add_models(["gpt-3.5-turbo"])
         thumb.add_runs(10)
@@ -177,8 +177,10 @@ class ThumbTest:
             if pid not in self.prompts.keys():
                 self.prompts[pid] = prompt
 
-    def add_cases(self, cases: Union[List[dict], None] = None) -> None:
-        # Check that each case has the same number of variables:
+    def add_cases(self, cases: Union[List[dict], list] = []) -> None:
+        if not cases:
+            return
+
         num_vars = None
         for case in cases:
             if num_vars is None:
@@ -188,14 +190,13 @@ class ThumbTest:
                     "All cases must have the same number of variables for each iteration. For example, if one case has 2 variables, all cases must have 2 variables."
                 )
 
-        if cases is not None:
-            for case in cases:
-                cid = f"{hash_id(json.dumps(case))}"
-                if cid not in self.cases.keys():
-                    # if base still in cases, remove it
-                    if "base-case" in self.cases.keys():
-                        del self.cases["base-case"]
-                    self.cases[cid] = case
+        for case in cases:
+            cid = f"{hash_id(json.dumps(case))}"
+            if cid not in self.cases.keys():
+                # if base still in cases, remove it
+                if "base-case" in self.cases.keys():
+                    del self.cases["base-case"]
+                self.cases[cid] = case
 
     def add_models(self, models: List[str]) -> None:
         for model in models:
@@ -232,6 +233,7 @@ class ThumbTest:
         for pid, cid, model in product(
             self.prompts.keys(), self.cases.keys(), self.models
         ):
+            print(cid)
             runs_completed = len(self.data.get(pid, {}).get(cid, {}).get(model, {}))
 
             if runs_completed < self.runs:

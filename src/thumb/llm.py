@@ -26,12 +26,12 @@ def format_chat_prompt(
     if (messages is None) or (len(messages) == 0):
         raise ValueError("messages must be a non-empty list of strings")
 
-    # if there is only one messages in the array, make it a HumanMessage
+    # if there is only one messages in the array, make it a HumanMessage:
     if isinstance(messages, list) and len(messages) == 1:
         human_template = HumanMessagePromptTemplate.from_template(messages[0])
         message_templates.append(human_template)
 
-    # if there are multiple messages, the first is a SystemMessage and the rest alternate between HumanMessage and AIMessage
+    # if there are multiple messages, the first is a SystemMessage and the rest alternate between HumanMessage and AIMessage:
     elif isinstance(messages, list) and len(messages) > 1:
         system_template = SystemMessagePromptTemplate.from_template(messages[0])
         message_templates.append(system_template)

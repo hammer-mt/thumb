@@ -76,7 +76,9 @@ python -m venv venv
 # Install from the cloned repo:
 %pip install -e your/local/path
 ```
+
 Alternatively if working from a Jupyter Notebook, you can set the module to auto-reload on every saved change to your local package.
+
 ```
 %load_ext autoreload
 %autoreload 2
@@ -125,7 +127,7 @@ This is more a note to self, because I keep forgetting.
 5. delete old versions in the `dist` folder
 6. `python -m twine check dist/*`
 7. `git commit -m "release v0.2"`
-7. `git tag v0.2` and `git push origin v0.2`
+8. `git tag v0.2` and `git push origin v0.2`
 
 Resources:
 
