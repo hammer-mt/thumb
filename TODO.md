@@ -3,8 +3,11 @@
 ## Active tasks
 
 ### on deck
+- find a way to show a variable in the interface (i.e. show the patient message when testing a therapy bot so you can properly rate it)
 - generate new prompt variations for an existing test
 - generate new test cases for an existing test
+- set custom evaluation criteria for ratings (multiply against prompts, cases, models)
+- automatic rating model with GPT-4 based on criteria
 - spin up gradio user interface
 
 ### bugs / feedback
@@ -16,7 +19,6 @@
 
 ### test
 - add a test name and display to the interface
-
 - add a name for each prompt and display to the interface
 - ability to merge two tests together
 - handle reference answers for test cases
@@ -35,8 +37,6 @@
 - switch caching on/off or set batch size
 
 ### evals
-- set custom criteria for ratings
-- automatic rating model with GPT-4 based on criteria
 - automatic ranking model with GPT-4 based on criteria
 - integrate with langchain's eval criteria
 - handle custom labels instead of thumbs
@@ -47,6 +47,8 @@
 - add a user id to evaluation
 - add ability to redo or clear evals
 - set JSON parsing or an output parser as eval
+- go back and change a rating
+- automatically mark an answer wrong if it contains specific words (auto-fail)
 
 ### stats
 - calculate the confidence with bayesian stats

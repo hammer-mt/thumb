@@ -14,10 +14,10 @@ import datetime
 from .llm import get_responses, async_get_responses
 from .utils import hash_id
 
-DIR_PATH = "thumb/.cache"
+DIR_PATH = "thumb-tests/.cache"
 
-def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=True):
-    thumb = ThumbTest()
+def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=True, show_cases=False):
+    thumb = ThumbTest(show_cases=show_cases)
     thumb.add_prompts(prompts)
     thumb.add_cases(cases)
     thumb.add_models(models)
@@ -28,7 +28,6 @@ def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=
         thumb.generate()
 
     thumb.evaluate()
-    thumb.export_to_csv()
 
     return thumb
 
@@ -41,7 +40,7 @@ def load(tid):
 
 class ThumbTest:
     
-    def __init__(self, tid=None, file_path=None):
+    def __init__(self, tid=None, file_path=None, show_cases=False):
 
         self.data = defaultdict(dict)
 
@@ -69,6 +68,8 @@ class ThumbTest:
             os.environ["LANGCHAIN_TRACING_V2"] = "true"
             os.environ["LANGCHAIN_PROJECT"] = f"ThumbTest: {self.tid}"
             os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
+
+        self.show_cases = show_cases
 
     def __str__(self):
         combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
@@ -447,11 +448,13 @@ class ThumbTest:
 
         test_id = widgets.Label(value=f"ThumbTest: {self.tid}")
         response_box = widgets.HTML()
+        case_box = widgets.HTML()
         progress_bar = widgets.IntProgress(min=0, max=data_len, description="Progress:")
 
         def update_response():
             nonlocal prepped_data
             if not prepped_data:
+                self.export_to_csv()
                 stats = ""
                 
                 # TODO abstract this out into a function
@@ -488,19 +491,47 @@ class ThumbTest:
 
                 full_stats_df = stats_df.pivot_table(index=['PID', 'CID', 'Model'],
                                                       values=['runs', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
-                                                      aggfunc='first')
+                                                      aggfunc={
+                                                        'runs': 'sum',
+                                                        'tokens': 'mean',
+                                                        'cost': 'mean',
+                                                        'latency': 'mean',
+                                                        'feedback': 'sum',
+                                                        'score': 'mean'
+                                                    })
                 
                 pid_stats_df = stats_df.pivot_table(index=['PID'],
                                                       values=['runs', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
-                                                      aggfunc='first').reset_index()
+                                                      aggfunc={
+                                                        'runs': 'sum',
+                                                        'tokens': 'mean',
+                                                        'cost': 'mean',
+                                                        'latency': 'mean',
+                                                        'feedback': 'sum',
+                                                        'score': 'mean'
+                                                    }).reset_index()
 
                 cid_stats_df = stats_df.pivot_table(index=['CID'],
                                                       values=['runs', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
-                                                      aggfunc='first').reset_index()
+                                                      aggfunc={
+                                                        'runs': 'sum',
+                                                        'tokens': 'mean',
+                                                        'cost': 'mean',
+                                                        'latency': 'mean',
+                                                        'feedback': 'sum',
+                                                        'score': 'mean'
+                                                    }).reset_index()
                 
                 model_stats_df = stats_df.pivot_table(index=['Model'],
                                                       values=['runs', 'tokens', 'cost', 'latency', 'feedback', 'score'], 
-                                                      aggfunc='first').reset_index()
+                                                      aggfunc={
+                                                        'runs': 'sum',
+                                                        'tokens': 'mean',
+                                                        'cost': 'mean',
+                                                        'latency': 'mean',
+                                                        'feedback': 'sum',
+                                                        'score': 'mean'
+                                                    }).reset_index()
 
                 # always show pid table
                 pid_table_output = pid_stats_df.to_html()
@@ -554,9 +585,14 @@ class ThumbTest:
                 return
             
             next_response = prepped_data[0]["content"]
+            case = self.cases.get(prepped_data[0]['cid'], None)
             progress_value = data_len - len(prepped_data)
 
             response_box.value = next_response
+            # show each value in the case if show_cases is True in html
+            if self.show_cases:
+                case_html = "<br>".join([f"<b>{key}</b>: {value}" for key, value in case.items()])
+                case_box.value = case_html
             progress_bar.value = progress_value
 
         def on_button_clicked(b):
@@ -578,8 +614,12 @@ class ThumbTest:
             label_widget.on_click(on_button_clicked)
 
         label_box = widgets.HBox(label_widgets)
-        main_box.children = [label_box, progress_bar, response_box, test_id]
-
+        html_br = widgets.HTML("<br>")
+        
+        if self.show_cases:
+            main_box.children = [progress_bar, html_br, label_box, case_box, response_box, test_id]
+        else:
+            main_box.children = [progress_bar, html_br, label_box, response_box, test_id]
 
         clear_output(wait=True)
 
@@ -587,15 +627,15 @@ class ThumbTest:
         display(main_box)
         
     def export_to_csv(self, filename=None):
-        # set today's date for folder name
-        today = datetime.date.today().strftime("%Y-%m-%d")
-        # create the folder if it doesn't exist
-        if not os.path.exists(today):
-            os.makedirs(today)
 
         # set the filename
         if not filename:
-            filename = f"{today}/ThumbTest-{self.tid}.csv"
+            # set today's date for folder name
+            today = datetime.date.today().strftime("%Y-%m-%d")
+            # create the folder if it doesn't exist
+            if not os.path.exists(f"thumb-tests/{today}/"):
+                os.makedirs(f"thumb-tests/{today}/")
+            filename = f"thumb-tests/{today}/ThumbTest-{self.tid}.csv"
         
         # Flattening the data for CSV export
         flattened_data = []
