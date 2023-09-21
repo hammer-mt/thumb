@@ -5,7 +5,7 @@ import time
 from langchain.callbacks.openai_info import standardize_model_name, MODEL_COST_PER_1K_TOKENS, get_openai_token_cost_for_model
 import asyncio
 
-def format_chat_prompt(messages, test_case):
+def format_chat_prompt(messages, test_case=None):
     message_templates = []
     
     # if there is only one messages in the array, make it a HumanMessage
@@ -81,7 +81,7 @@ def parse_generate_response(resp):
     }
     return response_data
 
-async def async_generate(chat, formatted_prompt, tags=[]):
+async def async_generate(chat, formatted_prompt, temperature=None, tags=[]):
     try:
         start_time = time.time()
         resp = await chat.agenerate([formatted_prompt], tags=tags)
@@ -91,22 +91,40 @@ async def async_generate(chat, formatted_prompt, tags=[]):
     except Exception as e:
         response_data = {"content": str(e)}
     finally:
+        if temperature is not None:
+            response_data["temperature"] = temperature
         return response_data
 
 async def async_get_responses(batch):
     tasks = []
     
     for item in batch:
-        prompt = item['prompt']
-        test_case = item['test_case']
-        model = item['model']
-        pid = item['pid']
-        cid = item['cid']
-
-        chat = ChatOpenAI(model=model)
-        formatted_prompt = format_chat_prompt(prompt, test_case)
+        prompt = item.get('prompt', None)
+        test_case = item.get('test_case', None)
+        model = item.get('model', 'gpt-3.5-turbo')
         
-        task = async_generate(chat, formatted_prompt, tags=[f"pid_{pid}", f"cid_{cid}"])
+        pid = item.get('pid', None)
+        cid = item.get('cid', None)
+
+        temperature = item.get('temperature', None)
+
+        if temperature:
+            chat = ChatOpenAI(model=model, temperature=temperature)
+        else:
+            chat = ChatOpenAI(model=model)
+
+        formatted_prompt = format_chat_prompt(prompt, test_case)
+
+        if pid or cid:
+            tags = []
+            if pid:
+                tags.append(f"pid_{pid}")
+            if cid:
+                tags.append(f"cid_{cid}")
+            task = async_generate(chat, formatted_prompt, temperature, tags=tags)
+        else:
+            task = async_generate(chat, formatted_prompt, temperature)
+
         tasks.append(task)
 
     responses = await asyncio.gather(*tasks)

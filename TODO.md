@@ -3,7 +3,6 @@
 ## Active tasks
 
 ### on deck
-- find a way to show a variable in the interface (i.e. show the patient message when testing a therapy bot so you can properly rate it)
 - generate new prompt variations for an existing test
 - generate new test cases for an existing test
 - set custom evaluation criteria for ratings (multiply against prompts, cases, models)
@@ -49,6 +48,7 @@
 - set JSON parsing or an output parser as eval
 - go back and change a rating
 - automatically mark an answer wrong if it contains specific words (auto-fail)
+- elo ranking like in gpt-engineer
 
 ### stats
 - calculate the confidence with bayesian stats
@@ -64,9 +64,6 @@
     - show number of calls needed
     - add a cancel button to stop tests
     - add a progress bar (or print tqdm)
-
-## generate
-- generate test cases for prompts
 
 ## other ideas
 - full testing suite to spot breaking changes
