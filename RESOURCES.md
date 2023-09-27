@@ -21,6 +21,7 @@ Here is a list of helpful resources and tools we found while building `thumb`, o
 - [The Complete Prompt Engineering for AI Bootcamp (2023)](https://www.udemy.com/course/prompt-engineering-for-ai/) ($) - a comprehensive course on prompt engineering based on the five principles of prompting.
 - [Working with feedback](https://docs.smith.langchain.com/evaluation/capturing-feedback) - Langchain's documentation on evaluators is helpful.
 - [Prompt Engineering Guide](https://www.promptingguide.ai/techniques/ape) - talks about Automatic Prompt Engineer (APE) and a number of other techniques.
+- [Prompt engineering for Claude's long context window](https://www.anthropic.com/index/prompting-long-context) - how to test RAG architecture and retrieval with long context windwows.
 
 ## Prompt Testing & Optimization Tools
 - [Prompts Royale](https://promptsroyale.com/) - a browser-based interface for generating prompts and testing them head-to-head.

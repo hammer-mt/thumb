@@ -69,4 +69,5 @@
 - full testing suite to spot breaking changes
 - types and errors when the format is wrong
 - image model testing as well as LLMs
+- implement poor man's RLHF (insert thumbs up examples into prompt + optimize prompt)
 
