@@ -22,6 +22,8 @@ Here is a list of helpful resources and tools we found while building `thumb`, o
 - [Working with feedback](https://docs.smith.langchain.com/evaluation/capturing-feedback) - Langchain's documentation on evaluators is helpful.
 - [Prompt Engineering Guide](https://www.promptingguide.ai/techniques/ape) - talks about Automatic Prompt Engineer (APE) and a number of other techniques.
 - [Prompt engineering for Claude's long context window](https://www.anthropic.com/index/prompting-long-context) - how to test RAG architecture and retrieval with long context windwows.
+- [Exploring zephyr-7b-alpha Through the Lens of Evaluation Driven Development](https://levelup.gitconnected.com/exploring-zephyr-7b-alpha-through-the-lens-of-evaluation-driven-development-faf69e9d9ec7) – a good example of how to use evaluation driven development to test a new model.
+- [Evaluation Driven Development, the Swiss Army Knife for RAG Pipelines](https://levelup.gitconnected.com/evaluation-driven-development-the-swiss-army-knife-for-rag-pipelines-dba24218d47e) – a big push in the general movement towards Eval-Driven Development.
 
 ## Prompt Testing & Optimization Tools
 - [Prompts Royale](https://promptsroyale.com/) - a browser-based interface for generating prompts and testing them head-to-head.
@@ -42,6 +44,8 @@ Here is a list of helpful resources and tools we found while building `thumb`, o
 - [Weights & Biases](https://wandb.ai/site/) ($) - a general purpose ML monitoring tool.
 - [Portkey](https://portkey.ai/) ($) - Logging and tracing of prompt chains.
 - [Freeplay](https://freeplay.ai/blog/introducing-freeplay-prompt-engineering-tools-for-product-teams) ($) - Prompt engineering, testing & evaluation tools for product teams.
+- [SpaCy Annotator](https://github.com/ieriii/spacy-annotator) - an open source tool for annotating text data.
+- [LLama Index Evaluation)[https://gpt-index.readthedocs.io/en/v0.7.2/how_to/evaluation/evaluation.html] – Evaluation library for LLMs.
 
 ## Prompt Engineering Papers
 - [Large Language Models Are Human-Level Prompt Engineers](https://arxiv.org/abs/2211.01910) - shows that AI models are good at writing prompts for themselves (meta prompting).
@@ -60,6 +64,7 @@ Here is a list of helpful resources and tools we found while building `thumb`, o
 - [The Power of Scale for Parameter-Efficient Prompt Tuning](https://arxiv.org/abs/2104.08691) - automatic tuning of prompts based on a goal.
 - [Large Language Models as Optimizers](https://arxiv.org/abs/2309.03409) - claims that LLMs are better prompt engineers than people.
 - [SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis](https://arxiv.org/abs/2307.01952) - a good example of how to evaluate image models.
+- [Can large language models provide useful feedback on research papers? A large-scale empirical analysis.](https://arxiv.org/pdf/2310.01783.pdf) - shows that human peer reviewers agree with GPT-4 as much as they agree with each other.
 
 
 ## Collections of Prompts

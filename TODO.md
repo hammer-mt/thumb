@@ -49,6 +49,7 @@
 - go back and change a rating
 - automatically mark an answer wrong if it contains specific words (auto-fail)
 - elo ranking like in gpt-engineer
+- add bleu and rouge to evals
 
 ### stats
 - calculate the confidence with bayesian stats
