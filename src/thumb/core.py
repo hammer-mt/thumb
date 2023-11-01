@@ -8,6 +8,8 @@ from uuid import uuid4
 import ipywidgets as widgets
 from IPython.display import display, clear_output
 import asyncio
+import nest_asyncio
+
 import pandas as pd
 import datetime
 
@@ -16,8 +18,11 @@ from .utils import hash_id
 
 DIR_PATH = "thumb-tests/.cache"
 
-def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=True, show_cases=False):
-    thumb = ThumbTest(show_cases=show_cases)
+# solves a problem with event loop in asyncio in jupyter notebooks
+nest_asyncio.apply()
+
+def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=True, show_cases=False, verbose=False):
+    thumb = ThumbTest(show_cases=show_cases, verbose=verbose)
     thumb.add_prompts(prompts)
     thumb.add_cases(cases)
     thumb.add_models(models)
@@ -40,7 +45,9 @@ def load(tid):
 
 class ThumbTest:
     
-    def __init__(self, tid=None, file_path=None, show_cases=False):
+    def __init__(self, tid=None, file_path=None, show_cases=False, verbose=False):
+
+        self.verbose = verbose
 
         self.data = defaultdict(dict)
 
@@ -58,11 +65,14 @@ class ThumbTest:
             
             self.tid = tid
             self._load_data()
+            if self.verbose: print(f"Loaded ThumbTest: {self.tid}")
         elif file_path:
             self.tid = file_path.split("/")[-1].split(".")[0]
             self._load_data(file_path)
+            if self.verbose: print(f"Loaded ThumbTest: {self.tid}")
         else:
             self.tid = uuid4().hex[0:8]
+            if self.verbose: print(f"Created ThumbTest: {self.tid}")
 
         if os.environ.get("LANGCHAIN_API_KEY", None):
             os.environ["LANGCHAIN_TRACING_V2"] = "true"
@@ -87,6 +97,7 @@ class ThumbTest:
             pid = f"{hash_id(msg_string)}"
             if pid not in self.prompts.keys():
                 self.prompts[pid] = prompt
+                if self.verbose: print(f"Added prompt: {pid}: {prompt}")
 
     def add_cases(self, cases):
         if cases is not None:
@@ -97,11 +108,13 @@ class ThumbTest:
                     if "base-case" in self.cases.keys():
                         del self.cases["base-case"]
                     self.cases[cid] = case
+                    if self.verbose: print(f"Added case: {cid}: {case}")
 
     def add_models(self, models):
         for model in models:
             if model not in self.models:
                 self.models.append(model)
+                if self.verbose: print(f"Added model: {model}")
 
     def add_runs(self, runs):
         # check if runs is an int
@@ -112,10 +125,11 @@ class ThumbTest:
             raise ValueError("runs must be greater than 0")
 
         self.runs += runs
+        if self.verbose: print(f"Added {runs} runs. Total runs: {self.runs}")
 
     def generate(self):
         combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
-        print(f"{len(self.prompts)} prompts x {len(self.cases)} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
+        if self.verbose: print(f"{len(self.prompts)} prompts x {len(self.cases)} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
 
         for pid in self.prompts.keys():
             for cid in self.cases.keys():
@@ -174,11 +188,9 @@ class ThumbTest:
                             })
         return required_runs
 
-
-
     async def async_generate(self, batch_size=30):
         combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
-        print(f"{len(self.prompts)} prompts x {len(self.cases)} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
+        if self.verbose: print(f"{len(self.prompts)} prompts x {len(self.cases)} cases x {len(self.models)} x runs {self.runs} = {combinations} calls to the OpenAI API")
 
         # Create a list to collect needed runs
         required_runs = self._collect_required_runs()
