@@ -11,24 +11,31 @@ def format_chat_prompt(messages, test_case=None):
     
     # if there is only one messages in the array, make it a HumanMessage
     if isinstance(messages, list) and len(messages) == 1:
-        human_template = HumanMessage(content=messages[0])
+        human_template = HumanMessagePromptTemplate.from_template(messages[0])
+
         message_templates.append(human_template)
     
     # if there are multiple messages, the first is a SystemMessage and the rest alternate between HumanMessage and AIMessage
     elif isinstance(messages, list) and len(messages) > 1:
-        system_template = SystemMessage(content=messages[0])
+        system_template = SystemMessagePromptTemplate.from_template(messages[0])
         message_templates.append(system_template)
         for i, prompt in enumerate(messages[1:]):
             if i % 2 == 0:
-                human_template = HumanMessage(content=prompt)
+                human_template = HumanMessagePromptTemplate.from_template(prompt)
                 message_templates.append(human_template)
             else:
-                ai_template = AIMessage(content=prompt)
+                ai_template = AIMessagePromptTemplate.from_template(prompt)
                 message_templates.append(ai_template)
+
+    # it's a string, so make it a HumanMessage
+    else:
+        human_template = HumanMessagePromptTemplate.from_template(messages)
+        message_templates.append(human_template)
             
     chat_prompt_template = ChatPromptTemplate.from_messages(message_templates)
     if test_case:
         formatted_prompt = chat_prompt_template.format_prompt(**test_case)
+        print(formatted_prompt)
     else:
         formatted_prompt = chat_prompt_template.format_prompt()
     

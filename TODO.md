@@ -73,4 +73,6 @@
 - implement poor man's RLHF (insert thumbs up examples into prompt + optimize prompt)
 - add output parser functions, for example to extract a value from a JSON response
 - add the ability to use chains of prompts rather than just one prompt
+- allow some variables to not be used in the prompt with HumanMessage etc
+- fix the part where it swaps out JSON for {{ }}
 

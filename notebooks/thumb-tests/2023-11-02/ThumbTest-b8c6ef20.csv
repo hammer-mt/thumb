@@ -1,0 +1,90 @@
+PID,Prompt,CID,Case,Model,RID,Content,Tokens,Prompt Tokens,Completion Tokens,Cost,Latency,Feedback
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,9acdb8f2,"Sure! Here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,0.9669239521026611,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,577814af,"Sure, here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,1.0175199508666992,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,74171254,"Sure, here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,1.0311200618743896,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,74c9bdd1,"Sure, here's a joke for you: 
+Why don't scientists trust atoms? 
+Because they make up everything!",35,11,24,6.45e-05,1.0246920585632324,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,e0310353,"Sure, here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,1.0479998588562012,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,7f444804,"Sure, here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,1.0734448432922363,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,cb253b2d,"Sure, here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,0.9581639766693115,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,80a55161,"Sure, here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,1.0394971370697021,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,427c77b6,"Sure, here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,1.1045591831207275,0
+537254f2,['tell me a joke'],base-case,null,gpt-3.5-turbo,7f12db1b,"Sure, here's a classic one for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",34,11,23,6.25e-05,1.1985108852386475,0
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,efa04474,"Why don't scientists trust atoms?
+
+Because they make up everything!",26,13,13,4.5499999999999995e-05,0.7934169769287109,1
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,59e333f6,"Sure, here's a family-friendly joke for you: 
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",38,13,25,6.950000000000001e-05,2.045165777206421,0
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,92ac54aa,"Why don't scientists trust atoms?
+
+Because they make up everything!",26,13,13,4.5499999999999995e-05,0.737663984298706,1
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,6591ff7d,"Sure! Here's a family-friendly joke:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",35,13,22,6.35e-05,1.0326910018920898,0
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,8a36d158,"Why don't skeletons fight each other?
+
+They don't have the guts!",28,13,15,4.95e-05,0.8876612186431885,1
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,b859f1e6,"Sure, here's a family-friendly joke for you:
+
+Why did the scarecrow win an award?
+Because he was outstanding in his field!",41,13,28,7.549999999999999e-05,1.197995662689209,0
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,b191b563,"Why don't scientists trust atoms?
+
+Because they make up everything!",26,13,13,4.5499999999999995e-05,0.7203869819641113,1
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,45ab07cc,"Sure, here's a family-friendly joke for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",37,13,24,6.75e-05,1.0987038612365723,0
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,2851adaa,"Sure, here's a family-friendly joke for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",37,13,24,6.75e-05,0.7268881797790527,0
+c1a1be08,['tell me a family friendly joke'],base-case,null,gpt-3.5-turbo,225fc02f,"Sure, here's a family-friendly joke for you:
+
+Why don't scientists trust atoms?
+
+Because they make up everything!",37,13,24,6.75e-05,1.0277440547943115,0
