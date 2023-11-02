@@ -1,0 +1,140 @@
+PID,Prompt,CID,Case,Model,RID,Content,Tokens,Prompt Tokens,Completion Tokens,Cost,Latency,Feedback
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,45dbc056,"Alright, here's a joke about Joe Biden in the style of Dave Chappelle:
+
+So, we all know Joe Biden, right? Ol' Uncle Joe. He's like that one grandpa who always has a story to tell, but you're never quite sure if it's real or just something he made up in his head.
+
+I mean, remember when he said he used to go toe-to-toe with Cornpop, the baddest dude in the whole town? I can just imagine him now, standing there with his aviators on, ready to rumble. But listen, Joe, if you're gonna go toe-to-toe with someone named Cornpop, you better make sure you got some butter and salt with you, 'cause that's the only way you're gonna make it out alive!
+
+And let's not forget Joe's famous gaffes. I mean, this man can't catch a break. He's like that one friend who always accidentally says the wrong thing at the worst possible time. But hey, we all make mistakes, right? I mean, I once accidentally gave my girlfriend a pickle instead of a ring. Needless to say, that relationship didn't last very long.
+
+But you know what? Despite all the jokes, there's something endearing about ol' Joe. He's like that lovable, slightly confused uncle at the family reunion who everyone secretly hopes will start dancing. You never know what you're gonna get with him, but you can't help but smile and shake your head in disbelief.
+
+So, here's to you, Joe Biden. Keep making us laugh, keep keeping us guessing, and most importantly, keep being you. We need a little bit of that in our crazy world.",375,24,351,0.0007379999999999999,6.759297132492065,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,fca28e4e,"Alright, here's a joke about Joe Biden in the style of Dave Chappelle:
+
+""Man, have y'all seen Joe Biden? That man is so smooth, he could charm the pants off a snake! I mean, this dude has been in politics longer than some of y'all have been alive. He's like the Michael Jordan of politics, but instead of dunking, he's been shaking hands and kissing babies since the dawn of time. And let's not forget his famous one-liners, like when he said, 'You know, the thing.' I mean, come on, Joe, what's 'the thing'? We all know you've forgotten more than most of us will ever know, but let's keep it together, man! But hey, he's doing his best, and we gotta respect that. I just hope he doesn't accidentally launch a nuke thinking it's his TV remote, you know what I'm saying?""",216,24,192,0.00042,4.052451133728027,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,0cb70507,"Ladies and gentlemen, let me tell you a joke about good ol' Joe Biden, in the style of Dave Chappelle:
+
+""Ya'll remember when Joe Biden was doing that whole 'No Malarkey' campaign, right? I mean, c'mon Joe, 'No Malarkey'? That's like me saying, 'No jokes, just seriousness'! Can you imagine? Dave Chappelle, no jokes? That's like Joe Biden, no gaffes! It just ain't gonna happen, folks! But hey, at least he's keeping things entertaining, right?""
+
+Now, remember, folks, it's all in good fun! And that's how Dave Chappelle would probably spin a joke about Joe Biden.",175,24,151,0.00033800000000000003,3.0653531551361084,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,cd7aa9ab,"""Hey, have you heard about Joe Biden's latest campaign strategy? He's planning to challenge Trump to a freestyle rap battle! Yeah, apparently Joe's been practicing his rhymes in the basement for months. He even came up with a killer line: 'I'm not just a Joe, I'm the whole damn Biden show!' Now, I don't know about you, but I can't wait to see him drop those bars like he's dropping those poll numbers!""",120,24,96,0.000228,2.286332845687866,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,64cc3256,"Alright, here's a joke about Joe Biden in the style of Dave Chappelle:
+
+""So, I was watching Joe Biden give a speech the other day, and I gotta say, it was like watching a grandpa who just discovered the internet. He had that confused look on his face, squinting at the teleprompter like he was trying to catch a mosquito with his eyes. I mean, the man was all over the place, making promises left and right, like a used car salesman on a caffeine overdose. You know, I don't know if he's trying to win votes or audition for a one-man show, but either way, it's entertaining as hell. Joe Biden, the human embodiment of 'bless his heart.'""",175,24,151,0.00033800000000000003,3.273989200592041,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,c959f39a,"Alright, here's a joke in the style of Dave Chappelle:
+
+""You know, I saw Joe Biden on TV the other day, and man, that guy is like a walking time machine. Seriously, he's got that old school charm, like he stepped right out of the '70s. I mean, he's so old school, he probably still has a cassette player in his car. And I bet he's got a whole collection of those mixtapes, labeled 'Biden's Greatest Hits'! But let's be real, if Joe Biden were a mixtape, he'd probably be all mellow, with a lot of slow jams. You know, perfect for those late-night drives in his shiny convertible, cruising at a solid 35 miles per hour. Ain't no rush, Joe's just enjoying the smooth ride, taking his sweet time. That's Joe Biden for you, folks, the living embodiment of a cassette tape in a digital world!""",221,24,197,0.00043000000000000004,3.945772886276245,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,031e5a01,"Alright, alright, let's see what we can do here. Keep in mind, this is all in good fun, folks, so don't take it too seriously. Here goes:
+
+So, Joe Biden walks into a bar, right? And the bartender says, ""Hey Joe, what can I get you?"" Joe looks at him and says, ""I'll have a whiskey, straight up. Just like my campaign promises.""
+
+The bartender chuckles and asks, ""You mean bold and strong?"" Joe smirks and replies, ""Nah, more like they disappear after a few sips.""
+
+Now, hold on, don't go cancelling me just yet! We're just having a laugh here. Remember, it's all love and jokes, folks!",177,24,153,0.000342,3.032755136489868,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,86f1657c,"""Have you heard about Joe Biden's secret weapon against insomnia? It's called a 'Biden Speech'! Man, I swear, with that soothing voice of his, he could lull anyone to sleep faster than a lullaby. I mean, forget counting sheep, just put on a Biden speech, and you'll be counting Zzz's in no time!""",99,24,75,0.000186,1.941032886505127,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,5c8d54f6,"Alright, here's a joke in the style of Dave Chappelle:
+
+""So, Joe Biden walks into a bar, right? And the bartender looks at him and says, 'Hey Joe, what can I get you?' And Joe says, 'Make it a double shot of espresso, I need to stay awake for this one!' 
+
+Now, Joe starts chatting with the bartender, and they're talking about politics. The bartender goes, 'Joe, why don't you tell me one of your famous gaffes?' 
+
+And Joe thinks for a moment and says, 'Well, there was this one time I was giving a speech and I accidentally said, 'We hold these truths to be self-evident. All men and women are created equal, you know, the thing!''
+
+Now, the bartender bursts into laughter and says, 'Oh Joe, you never fail to entertain us! But seriously, you gotta be careful with those gaffes, man. You might end up in a sketch on Saturday Night Live!'""
+
+Remember, this is just a lighthearted joke, and it's all in good fun.",254,24,230,0.000496,4.325386047363281,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,4180cc1f,"""I saw Joe Biden jogging the other day, and I gotta say, he was moving slower than a sleepy sloth on Ambien. I mean, I haven't seen someone take that long to cover a mile since Congress trying to pass a bill! It's like he's training for the presidential race in slow motion. But hey, at least he's doing his part to keep the Secret Service on their toes – they've never had to maintain such a leisurely pace before!""",120,24,96,0.000228,2.6695942878723145,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,d1e3e4e0,"""Have you heard about Donald Trump's latest business venture? He's opening a new hotel called 'The Trumple Tower.' It's got everything you'd expect - gold-plated toilets, over-the-top decor, and a receptionist who insists on being paid in 'alternative facts.' Oh, and the best part? The elevators only go up, never down. It's a metaphor for his presidency!""",107,24,83,0.00020200000000000003,2.099172830581665,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,11d57ee9,"""Ya know, folks, I gotta say, Donald Trump is like that one guy at a party who just won't stop talking about himself. It's like he's hosting his own personal reality show, 'The Ego Factor.' But I gotta give it to him, he's got confidence like no other. I mean, the man thinks he could solve global warming just by staring at the sun with that hair of his. It's like his comb-over is the ultimate source of renewable energy! I tell ya, if Trump ever becomes a stand-up comedian, his catchphrase would be 'You're fired!' But hey, at least he's consistent, always keeping us entertained with his tweets. It's like he's got a direct hotline to the caps lock button. So, all I can say is, let's just hope he never tries his hand at a career in diplomacy. Can you imagine him trying to negotiate with North Korea? 'Kim Jong-un, you're fired!' Yeah, that'll go over real smooth. But hey, love him or hate him, you can't deny that Donald Trump is the gift that keeps on giving material for comedians like me. And for that, I gotta say, thank you, Mr. President!""",276,24,252,0.00054,5.111736059188843,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,f64badcf,"Alright, I'll give it a shot. Keep in mind, this is just a playful joke and not meant to offend anyone:
+
+""So, you know Donald Trump, right? Man, that guy is like a reality TV show that just won't end. I mean, he's like that one uncle at Thanksgiving who always says the most outrageous things just to get a reaction. 
+
+You know what I'm talking about. He's like, 'Hey, did you hear? I'm gonna build a wall!' And everyone's like, 'Uh, Uncle Don, we're just trying to pass the mashed potatoes here.'
+
+But you gotta hand it to him, the man knows how to make an entrance. I swear, every time he walks into a room, it's like he's auditioning for his own show. It's like 'The Apprentice: Presidential Edition.' 
+
+And let's not forget about his Twitter game. I mean, this man tweets more than a teenage girl on prom night. He's just like, 'I'm gonna tweet at 3 a.m. and drop some truth bombs!' It's like he's running his own late-night comedy show, except it's called 'Insomniac with The Donald.'
+
+But hey, love him or hate him, you can't deny one thing. Donald Trump has definitely made politics a lot more interesting. It's like he's turned the White House into the real-life version of 'The Truman Show.' I half expect to see hidden cameras everywhere, just waiting for him to say something wild.
+
+So, whether you're a fan or not, you gotta admit, with Donald Trump, you never know what's gonna happen next. It's like he's playing a game of 'Presidential Bingo,' and we're all just waiting to see what square he's gonna fill next. It's like, 'Congratulations, Mr. President, you just won another term... of entertainment!'""
+
+Remember, comedy is subjective and meant to be light-hearted. Let's all enjoy a good laugh!",435,24,411,0.0008579999999999999,8.452598094940186,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,76a519ae,"""Yo, have you heard this one? Alright, so Donald Trump walks into a bar, right? And the bartender, this cool dude, goes, 'Hey, Donald, what can I get you?' Trump looks him dead in the eye and says, 'I'll take a White Russian, but hold the Russian.' The bartender just bursts out laughing and says, 'Man, you never fail to bring your own punchlines to the party!' And that, my friends, is how Trump single-handedly made bartending great again!""",132,24,108,0.000252,2.35892915725708,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,85ea0270,"""I saw Donald Trump the other day, and I gotta say, he's like the weather in New England. You never know what you're gonna get! One minute he'll be tweeting about policy, the next he's arguing with a squirrel on his lawn. I mean, it's like he's got a reality TV show going on in his head. 'The Real Housewives of the White House' or something. But hey, at least he keeps comedians like me in business!""",122,24,98,0.00023200000000000003,2.2853920459747314,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,50684e50,"Alright, alright, alright. So, Donald Trump walks into a bar, right? And the bartender looks at him and says, ""Sorry, sir, we don't serve your kind here.""
+
+And Trump, being Trump, he says, ""Excuse me? Do you know who I am? I'm Donald J. Trump, the 45th President of the United States!""
+
+To which the bartender replies, ""Oh, my bad, I didn't recognize you without your Twitter account.""
+
+Now, I ain't saying I'm a comedian, but you gotta admit, that's some Chappelle-style humor right there.",150,24,126,0.000288,2.8732738494873047,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,1dbd0f8c,"Alright, here's a joke about Donald Trump in the style of Dave Chappelle:
+
+""So, you know, I was watching the news the other day, and they were talking about Donald Trump's hair. They said, 'Why does it always look like a tiny creature is trying to escape from his scalp?' I mean, I don't know what's going on up there, but it's like his hair is playing a game of hide and seek, and the rest of us are just trying to find out where it went! It's like his hair is saying, 'You can't fire me, I quit!' I mean, come on, man, if you're gonna run the country, at least let your hair run wild in the right direction!""",177,24,153,0.000342,3.3907079696655273,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,3a1c2e49,"""Have you heard about Donald Trump's secret talent? The man can tweet faster than a hummingbird flaps its wings! I mean, it's like he's got a keyboard permanently attached to his tiny hands. He's like the Picasso of 280 characters. And you know what they say about his tweets, right? If you don't like 'em, just wait five minutes, 'cause he'll delete it and write something even more outrageous. It's like a never-ending comedy show, courtesy of the Commander-in-Tweet himself!""",133,24,109,0.000254,2.264092206954956,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,5b76420d,"""Alright, alright, alright, let me tell y'all a joke about my man Donald Trump. So, you know, Trump walks into a bar, and the bartender looks at him and says, 'Hey, why the long face?' And Trump responds, 'Well, I just found out my secret service code name is Covfefe.' Ba-dum-tss!""",99,24,75,0.000186,1.8780553340911865,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,32365642,"""Alright, alright, let me tell you something about Donald Trump, man. This guy is like a walking reality show. Remember when he said he had all the best words? Well, turns out he also has all the best tweets! I mean, this man tweets more than a teenage girl going through a breakup, it's insane! And you know what's even crazier? He's got this hair that defies gravity. I mean, it's like his hair is running for president too! It's like, 'Vote for me, I can stand up straighter than Trump!' But hey, you gotta give it to the guy, he's got confidence. He'll walk into a room like he's the best thing since sliced bread. It's like, 'Excuse me, sir, but bread doesn't file for bankruptcy four times!' But hey, who am I to judge? I just hope he doesn't start hosting his own show called 'The Presidential Apprentice.' We've had enough reality TV, man!""",231,24,207,0.00045,4.4332497119903564,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,cd199c60,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to ""rise"" above his opponents... and also reach the microphone at the right height.",58,26,32,0.000103,1.291675090789795,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,27cd2ff6,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to climb his way to the top, but he forgot he was already at the top of the ticket!",61,26,35,0.000109,0.9192402362823486,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,fcd938a4,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to ""rise"" above the competition!",48,26,22,8.3e-05,0.9232800006866455,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,9daa0698,"Why did Joe Biden bring a ladder to the debate?
+
+Because he was ready to climb his way to the top, just like he climbed all those stairs!",57,26,31,0.000101,0.9400229454040527,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,8cc5e3d7,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to reach new heights in his speeches, but ended up just going off on a tangent!",58,26,32,0.000103,0.8990371227264404,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,dd58f9eb,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to reach new heights, just like his approval ratings!",51,26,25,8.9e-05,1.9919769763946533,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,990e3952,"Why did Joe Biden bring a ladder to the White House?
+
+Because he heard the ceiling had a glass ceiling, and he's always ready to shatter it!",58,26,32,0.000103,0.9991891384124756,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,2d06c7df,"Why did Joe Biden always carry a can of spray paint?
+
+Because he wanted to ""Biden"" his time, just in case he needed to touch up any White House walls!",62,26,36,0.000111,1.112480878829956,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,2d8e6fa7,"Why did Joe Biden become a baker?
+
+Because he wanted to bring some ""dough"" to the White House!",49,26,23,8.5e-05,0.7503910064697266,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],ce8b5bc5,"{""subject"": ""joe biden"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,4d07839a,"Why did Joe Biden bring a ladder to the White House?
+
+Because he wanted to reach new ""Harris-toric"" heights!",52,26,26,9.099999999999999e-05,0.8157260417938232,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,e0416114,"Why did Donald Trump become a chef?
+Because he loves to grill the competition and make America grate again!
+
+Note: This joke is intended to be light-hearted and family-friendly, in the style of Dave Chappelle's comedic approach.",73,26,47,0.000133,135.44967603683472,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,5f6c0bc5,"Why did Donald Trump bring a ladder to the White House?
+
+Because he heard there were ""alternative facts"" on higher shelves!",51,26,25,8.9e-05,0.902550220489502,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,4ab2b3c0,"Why did Donald Trump bring a ladder to the debate?
+
+Because he wanted to ""climb"" to the top of the polls!",52,26,26,9.099999999999999e-05,0.9076762199401855,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,b5a32c44,"Why did Donald Trump bring a ladder to the White House?
+
+Because he wanted to ""trump"" his predecessors' accomplishments by reaching new heights!",55,26,29,9.7e-05,0.9566419124603271,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,7e93fa8f,"Why did Donald Trump bring a ladder to the debate?
+
+Because he wanted to climb up in the polls!",47,26,21,8.1e-05,0.7058990001678467,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,927cd38e,"Why did Donald Trump take up gardening?
+
+Because he wanted to ""Make America Grape Again!"" 🍇",47,26,21,8.1e-05,0.8861560821533203,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,35c2bcd0,"Why did Donald Trump bring a ladder to his rally?
+
+Because he wanted to ""Trump-et"" his success from a higher level!",52,26,26,9.099999999999999e-05,0.877249002456665,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,76c9737c,"Why did Donald Trump bring a ladder to the White House?
+
+Because he heard there was a ""higher office"" he could climb to!",53,26,27,9.3e-05,0.7451210021972656,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,f61daf6c,"Why did Donald Trump bring a ladder to the White House?
+
+Because he heard there were ""higher ratings"" on the roof!",51,26,25,8.9e-05,0.8235862255096436,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],be545b7b,"{""subject"": ""donald trump"", ""comedian"": ""dave chappelle""}",gpt-3.5-turbo,77380055,"Why did Donald Trump bring a ladder to the White House?
+
+Because he heard the ceiling had ""alternative facts"" and wanted to get a higher perspective!",56,26,30,9.9e-05,0.9737536907196045,1

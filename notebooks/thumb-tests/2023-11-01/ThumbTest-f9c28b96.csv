@@ -1,0 +1,299 @@
+PID,Prompt,CID,Case,Model,RID,Content,Tokens,Prompt Tokens,Completion Tokens,Cost,Latency,Feedback
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,78e35ae1,"Why did Joe Biden become a comedian?
+
+Because he thought being the President was just too much of a punchline!",45,22,23,7.9e-05,0.7615468502044678,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,029eb6c3,"Alright, here's a joke about Joe Biden in the style of Chris Rock:
+
+""Let me tell you about Joe Biden, man. This guy's been in politics longer than I've been telling jokes – and that's saying something! I mean, he's been around so long, you'd think he's got more experience than the guy who invented the wheel.
+
+But here's the thing, Joe's got more 'oops' moments than a clumsy toddler at a pottery class. One minute, he's giving a speech, and the next, he's like, 'Wait, what office am I running for again?' I swear, he's got more slips than a banana peel factory.
+
+And don't get me started on his famous 'Biden-isms.' It's like he's got his own dictionary, but it's missing half the words. I mean, who needs complete sentences when you can just string a bunch of random words together? It's like watching a toddler playing with a Speak & Spell.
+
+But hey, Joe's got that charm, man. He's like your grandpa at Thanksgiving, telling you the same story for the hundredth time. You just nod and smile, knowing he means well, but deep down, you're like, 'Grandpa, please, we've heard this one before!'
+
+So, let's give it up for Joe Biden, the king of gaffes and the master of 'oops.' He may not always get it right, but at least he keeps us entertained. And honestly, in the world of politics, that's all we can ask for!""",346,22,324,0.0006810000000000001,5.94246506690979,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,9d07f30a,"Alright, here's a joke about Joe Biden in the style of Chris Rock:
+
+""Now, let me tell you about this Joe Biden fella. Man, he's got more plans than a squirrel crossing the road during rush hour! I mean, this guy's got a plan for everything. He's like your grandpa at Thanksgiving dinner, always telling you how to fix your life!
+
+But let me tell you something, Joe Biden's plans are so detailed, even his own supporters need a translator! They're like, 'Joe, we love you, but can you explain your plan in plain English? We're not all bilingual economists over here!'
+
+And you know, Joe Biden's speeches? Man, they're like watching an episode of 'The Price is Right' with no prizes! He'll start off strong, but by the end, you're just waiting for Drew Carey to pop up and say, 'Sorry folks, we're all out of solutions today!'
+
+But hey, at least Joe Biden keeps things interesting! With all those gaffes and mix-ups, it's like watching a comedy show. You never know what he's gonna say next! I tell ya, if this whole politics thing doesn't work out, Joe could have a career as a stand-up comedian. Just imagine his opening line: 'So, I became president, and boy, did my hair turn gray overnight!'""
+
+Remember, this joke is written in the style of Chris Rock and aims to be light-hearted.",325,22,303,0.000639,5.837360858917236,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,45e46e94,"Alright, here it goes:
+
+""Alright, let me tell you about Joe Biden, right? This man's been in politics so long, he got a nickname for every decade he's been around. First, he was 'Slow Joe' because he talks just a little too slow, you know what I mean? Then, he became 'Sleepy Joe' because he loves himself a nice, cozy nap. But now, they're calling him 'Amtrak Joe' because he's been on that train to nowhere for years! I mean, the guy's got more nicknames than accomplishments! Come on, Joe, you gotta give us something more than just a nickname collection!""",158,22,136,0.00030500000000000004,2.5352909564971924,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,1966bdb6,"Alright, here's a joke about Joe Biden in the style of Chris Rock:
+
+""Man, have y'all seen Joe Biden? That man is like a walking GPS with a shaky signal. He'll start giving directions and then halfway through, he's like, 'Wait, where am I? I lost my train of thought and my sense of direction!' It's like having Siri as your president, but instead of saying 'Turn left,' he's like, 'Turn left? I mean, maybe right... wait, where was I going again?'""",133,22,111,0.000255,2.4639170169830322,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,9cd2f353,"Alright, here's a joke about Joe Biden in the style of Chris Rock:
+
+""You know, Joe Biden is like that one uncle at the family reunion who's always trying to be cool, but you just can't help but laugh. I mean, this man's been in politics forever, and he still acts like he's on his first day of the job. And have you seen his speeches? It's like watching someone trying to read an audiobook while riding a rollercoaster. I swear, Joe's got more gaffes than a clumsy magician. You never know what he's gonna say next! But hey, I guess that's what we get when we elect our grandpas to run the country. Just make sure he doesn't fall asleep during the State of the Union, folks!""",183,22,161,0.000355,3.0324060916900635,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,c32ec268,"Ladies and gentlemen, let me tell you about Joe Biden, the man who's been in politics since before I had my first stand-up gig! Now, I ain't saying he's old, but he's been around so long, he used to argue with Moses about the Ten Commandments!
+
+Joe Biden's got more gaffes than a clumsy magician. I mean, this guy can trip over his own words faster than a toddler learning to walk. One minute he's talking about jobs, the next minute he's asking if anybody's seen his car keys! 
+
+You know, Joe's like that one uncle who always has a story to tell, even if it makes absolutely no sense. He'll be talking about healthcare, and suddenly he'll veer off into a story about his pet dog from 30 years ago. We're all like, ""Joe, what does Fido have to do with affordable prescriptions?""
+
+And let's not forget about his love for ice cream! I mean, this man could solve world peace if he just offered everyone a tasty cone. ""Hey Putin, forget about invading Ukraine, have a scoop of Rocky Road instead!"" 
+
+But you know what, despite all the laughter, Joe Biden's got a tough job. Being the President ain't easy, especially when you've got half the country questioning your every move. So, let's give him some credit, folks. After all, if he can make it through a press conference without falling asleep, that's a victory in itself!
+
+So, here's to you, Joe Biden, the man who can make us laugh, scratch our heads, and wonder what the heck he's talking about, all at the same time! Cheers, Mr. President!",372,22,350,0.000733,6.960342168807983,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,d03a4fd0,Why did Joe Biden become a comedian? Because watching him try to remember his own punchlines is funnier than any stand-up routine!,49,22,27,8.7e-05,0.966116189956665,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,a7d4cd47,"""Let me tell you something, folks. Joe Biden's like that uncle who always shows up to the family reunion with a plate of food and a story, but you never really know what he's talking about. I mean, he'll start a sentence and you're like, 'Where's this going, Joe?' It's like watching a movie with a plot twist you didn't see coming, and you're just trying to keep up, but you're like, 'Wait, what? How did we get here?' It's like the man's got a whole secret map in his head, and we're all just trying to catch up. Am I the only one who feels like we're in a real-life episode of 'Lost' with this guy?""",175,22,153,0.000339,2.8107972145080566,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,690d619f,"""Alright, y'all, let's talk about Joe Biden, my man. I mean, have you seen this guy? He's got that energy of a grandpa who just found out he's getting free doughnuts at the local bakery. And I gotta say, Joe's got some catchy slogans, like 'Build Back Better.' But let me tell you, if Joe's building anything, it's a Lego set with no instructions!
+
+Now, Joe's got a reputation for being a bit of a gaffe machine. I mean, this dude can make a stumble sound like a full-blown marathon fall. He'll be up there giving a speech, and you can just see his brain going, 'Oh no, not again!' It's like watching a baby deer learning to walk on a frozen pond.
+
+But hey, Joe's got his quirks, like when he whispers during interviews. It's like he's auditioning for the lead role in 'ASMR: Presidential Edition.' You can't help but lean in and go, 'What did he just say? Did he ask for extra pickles or world peace?' It's a mystery, y'all!
+
+But let me tell you, Joe's got a sense of humor. He loves to crack a joke every now and then. I heard he's even got a secret stand-up gig at the White House. It's called 'Laughin' with Biden.' But you know, it's not easy being a comedian when your punchline is just whispering, 'Come on, man!' You gotta work on your delivery, Joe!
+
+So, let's give it up for Joe Biden, the king of 'Oops, I Did It Again.' He may stumble, he may whisper, but hey, at least he's keeping us entertained. And in these crazy times, a good laugh is worth its weight in gold. Keep doing your thing, Joe, and remember, comedy is all about timing. Just maybe let Kamala take the mic every once in a while, my man!""",433,22,411,0.000855,7.229557991027832,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,c58f73e5,"Alright, here's a joke about Joe Biden in the style of Ricky Gervais:
+
+""Now, Joe Biden, he's got that classic politician charm, hasn't he? I mean, the man's been in politics for so long, he probably can't even remember what it's like to have a real job. I bet he wakes up every morning, looks in the mirror, and says, 'Right, Joe, time to pretend you know what you're doing again.' It's like watching a grandpa trying to figure out how to use a smartphone, except instead of a smartphone, it's the entire country he's trying to navigate. God help us all!""",159,24,135,0.000306,2.680976152420044,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,988a6b74,"""Hey, did you hear about Joe Biden's plan to combat climate change? He's decided to personally blow hot air into the atmosphere! I mean, who needs wind turbines when you've got good ol' Joe, right? It's like he's been preparing for this his entire political career!""",84,24,60,0.000156,1.5103530883789062,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,6417c14c,"Alright, here's a joke about Joe Biden in the style of Ricky Gervais:
+
+""So, Joe Biden, the man who's been in politics longer than I've been alive. I mean, he's been around so long, his first campaign slogan was probably 'Vote for me and get a free pet dinosaur.' I'm not saying he's old, but when he was born, the Dead Sea was just getting sick. But hey, at least he's got experience, right? I mean, by the time he took office, he probably already had a discount at the Oval Office gift shop. 'Buy one executive order, get the second one half-off!' Anyway, let's hope he doesn't start every State of the Union address with 'I remember back in my day...' We get it, Joe, you're a seasoned politician, but maybe it's time to retire and enjoy some bingo nights instead.""",208,24,184,0.000404,3.6011180877685547,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,fc44469f,"Alright, here's a joke about Joe Biden in the style of Ricky Gervais:
+
+So, Joe Biden, eh? I heard he wanted to become a stand-up comedian. I mean, it makes sense, right? He's been delivering punchlines for years! Just look at his speeches, it's like he's auditioning for a comedy club.
+
+But you know, Joe's got this unique talent of cracking jokes that nobody even realizes are jokes. It's like he's mastered the art of telling a punchline that falls flat on its face. It's truly remarkable.
+
+I mean, have you ever seen a guy who can make a room go silent with a single attempt at humor? It's like he's got a superpower, but instead of saving the world, he's making people cringe. It's a tough gig, I'll give him that.
+
+But hey, maybe Joe's got a future in comedy after all. I mean, if he can make people laugh unintentionally, just imagine what he could do if he actually tried to be funny! It might not be his forte, but hey, at least we'd get a good laugh out of it.",262,24,238,0.000512,5.265337944030762,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,1789b809,"Alright, here's a Ricky Gervais-style joke about Joe Biden:
+
+""So, Joe Biden, he's like a politician with a perpetual 'Huh?' face. You know, the kind of look that says, 'Wait, did I leave the oven on?' Now, I'm not saying he's forgetful, but I wouldn't be surprised if he accidentally ended up in the wrong White House one day. 'Oh, sorry folks, thought this was the White Castle drive-thru! Guess I'll just have a Big Mac instead!' I tell you, if Joe Biden ever gets lost, just follow the trail of forgotten socks and half-eaten ice cream cones. He's like a walking 'Where's Waldo?' puzzle, but instead of a striped shirt, he's wearing a confused expression. Bless him, he's the human embodiment of 'Oops, I did it again!' And that's Joe Biden for you.""",212,24,188,0.00041200000000000004,3.589772939682007,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,2f9793f0,"Alright, here's a joke about Joe Biden in the style of Ricky Gervais:
+
+""Did you hear about Joe Biden's latest gaffe? Apparently, he walked into a bakery and asked for a dozen muffins. The baker, confused, said, 'Sure, what flavor?' Joe, without missing a beat, replied, 'Flavor? I don't know, just surprise me!' Now that's a man who's ready for anything, including breakfast!""",118,24,94,0.00022400000000000002,1.8246431350708008,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,1d237e78,"Alright, here's a joke about Joe Biden in the style of Ricky Gervais:
+
+""Have you heard the one about Joe Biden? Apparently, he's so forgetful that he once misplaced his own reflection! He was looking in the mirror, trying to remember where he left it, and then he gave up and said, 'Well, at least it's not as bad as misplacing my car keys.' Oh, Joe, I guess that's what happens when you've been in politics for too long, your memory starts sliding down the slippery slope. I mean, we all forget things from time to time, but with Joe, it's like watching a goldfish try to solve a Rubik's Cube. At least he's got the 'Biden' part of his name right, because every time he opens his mouth, it's a real 'Biden' of time trying to figure out what he's saying!""",211,24,187,0.00041,3.5010862350463867,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,f7b2bae7,"Alright, here's a Ricky Gervais-style joke about Joe Biden:
+
+""You know, Joe Biden reminds me of those self-checkout machines at the supermarket. They both seem a bit confused, always asking for help, and sometimes you just want to scream at them, 'Come on, Joe, just find the barcode already!' But hey, at least the self-checkout machines aren't in charge of the nuclear codes!""",109,24,85,0.00020600000000000002,1.9220311641693115,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,ffc256e6,"Alright, here's a joke about Joe Biden in the style of Ricky Gervais:
+
+""You know, Joe Biden said he wants to build back better. Well, I don't know about you, but I'm just hoping he can build a coherent sentence first!""",77,24,53,0.000142,1.7252929210662842,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,d5894687,"Alright, here's a joke about Joe Biden in the style of Ricky Gervais:
+
+""So, Joe Biden, he's like a confused pigeon in a park. You know, constantly flapping around, trying to find his way, but ending up just pooping on everyone's statues. I mean, he's got that 'deer in the headlights' look down to a T. Honestly, if he gets any more bewildered, we might have to start sending him breadcrumbs just to help him find his way back to the Oval Office.""",132,24,108,0.000252,2.2958829402923584,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,b21b22d0,"Alright, here's a joke in the style of Chris Rock about Donald Trump:
+
+""Man, Donald Trump! That dude is like a mix between a reality show and a bad spray tan! I mean, he's got more orange on him than a Cheeto that just won the lottery! And you know what's crazy? Trump always talks about building walls, but he can't even build a decent hairline! That hair of his is like a bird's nest caught in a tornado! I wouldn't be surprised if one day he starts a new show called 'The Apprentice: Wig Edition'! But hey, maybe that's why he's always yelling, he's trying to distract us from that hair! 'Make America Great Again'? More like 'Make Donald's Barber Great Again!'""",182,22,160,0.000353,3.043320894241333,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,cab43097,"""Alright, alright, listen up y'all! So, you know that guy Donald Trump, right? Man, he's like a human toupee! I mean, this dude's hair is so wild, it's like his scalp is in a constant debate with gravity, trying to figure out which way to go! It's like he's got a national emergency on his head every day!""
+
+(Note: This response is intended to be light-hearted and doesn't reflect any political bias. It's solely meant for entertainment purposes.)",127,22,105,0.000243,2.1787338256835938,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,b0a98949,"Alright, here's a joke about Donald Trump in the style of Chris Rock:
+
+""Man, Donald Trump is something else, ain't he? I mean, he's like that one guy who borrows your car, wrecks it, and then tries to convince you that it's an upgrade. Like, 'Hey, you see those scrapes? That's added character!' I don't know whether to call him President or 'The Great Wall of Comb Overs.' But hey, at least he's consistent, right? I've never seen someone tweet more than a teenage girl on prom night! I swear, every morning he wakes up, checks his phone, and goes, 'Let's see who we're offending today!' I bet if Twitter had a voice, it would sound just like him: 'Sad!' But hey, I guess he's good at one thing, building walls. I mean, he managed to build a wall...between Republicans and Democrats. Now that's real talent!""",222,22,200,0.000433,5.85022497177124,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,431285fc,"""Alright, alright, let me tell you something about Donald Trump, folks. That man's hair is like a living creature, I swear! It’s so wild, it's probably hiding Jimmy Hoffa's body up there! I mean, how does he keep that thing in check? It's like he's got a family of raccoons having a party on his head! And you know what they say, if you can't control your own hair, what makes you think you can control a whole country?!""",127,22,105,0.000243,2.301999807357788,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,ab7533d0,"Alright, here's a joke about Donald Trump in the style of Chris Rock:
+
+""Listen, folks, Donald Trump's like that one rich uncle at the family reunion who's always causing a scene. He's the type of guy who gets a haircut and acts like he invented hair. Now, I'm not saying he's dumb, but if Trump was a superhero, his superpower would be tweeting at 3 AM. This man's got more beef on Twitter than a Texas barbecue joint! I mean, you know you're in trouble when your tweets have more characters than your attention span. But hey, I guess that's what you get when you mix a reality TV star with the nuclear codes. It's like putting a toddler in charge of a candy store and wondering why he's got cavities. And let's not even get started on his hair. I mean, Trump's hair is like a conspiracy theory come to life – it's so big, it's gotta have its own zip code! But hey, at least we know one thing for sure: If he ever goes bald, he can always use his ego as a hairpiece!""",253,22,231,0.000495,4.890242099761963,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,dee127e7,"""Why did Donald Trump go to the dentist? Because he wanted a wall... between his teeth and the plaque! That's right, folks, he's all about building walls, even in his mouth!""",62,22,40,0.00011300000000000001,1.2779991626739502,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,ab936984,"Alright, here's a Chris Rock-style joke about Donald Trump:
+
+""You know, Donald Trump is like that uncle at Thanksgiving who insists on carving the turkey, even though he's never held a knife before in his life! I mean, this guy wants to build walls, but can't even build a decent hairstyle! I don't know what's scarier, his hair or his Twitter fingers! And you know what? I think he secretly wants to be a rapper, with those ridiculous hand gestures. I can already hear it now: 'Yo, yo, I'm the best POTUS, no one can touch us! Except maybe the Russians, but hey, no big fuss!' I tell you, it's a comedy show, folks, and Donald Trump is definitely the punchline!""",180,22,158,0.00034899999999999997,2.954782009124756,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,c17efd07,"""Why did Donald Trump start a clothing line?
+
+Because he wanted to make America 'suit' again! But let's be honest, he probably ended up with a lot of 'faux' fur coats and 'alternative facts' t-shirts instead!""",71,22,49,0.000131,1.1457490921020508,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,8ad6bef9,"Alright, here's a joke about Donald Trump in the style of Chris Rock:
+
+""Man, Donald Trump is something else, ain't he? I mean, this dude got more hair than an entire wig shop! He's like a walking cotton candy machine, just spinning around, leaving a trail of blonde fluff everywhere he goes!
+
+But you know what's even crazier? His tweets! This man tweets more than a bird on steroids! I mean, every morning, we wake up wondering what crazy nonsense he's gonna spew next. It's like, 'Hey Twitter, here's another 3 AM rant from the Orange Oompa Loompa!'
+
+And let's talk about his speeches, folks. Listening to Trump speak is like watching a comedy show without a punchline. It's all about the build-up, but when it's time to deliver, it's just empty promises and wild gestures. I swear, he could sell ice to polar bears, but when it comes to delivering on those promises, it's like watching a magic trick gone wrong. 'Abracadabra, folks! I promised you jobs, but poof, they disappeared!'
+
+But hey, we gotta give it to the man, he's got confidence! Trump's ego is so big, it's got its own zip code! He struts around like a peacock on steroids, thinking he's the greatest thing since sliced bread. And with that hair, he might be the only one who can pull off the 'comb-over, meet the comb-forward' look!
+
+So, love him or hate him, one thing's for sure, Donald Trump keeps us entertained. He's like the reality TV star we never asked for, but can't stop watching. And in the end, all we can do is sit back, grab some popcorn, and enjoy the show!""",397,22,375,0.0007830000000000001,6.731040000915527,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,c94acc72,"(Disclaimer: Please note that the following joke is purely fictional and created for entertainment purposes. It is not intended to offend anyone.)
+
+Chris Rock: ""So, have y'all heard about Donald Trump's latest business venture? Yeah, he's opening up a new restaurant called 'Trump Steaks'! Now, I don't know about you, but I'm not exactly rushing to try it. I mean, the man couldn't even make his presidency well-done, you think he can handle a steak? I bet if you order it medium-rare, he'll try to build a wall around it, just to keep the flavor in! And don't even get me started on the Trump Steak sauce. I heard it's just a bottle of his tweets, all shaken up with a little ego and a dash of spray tan. I don't know about you, but I'll stick to my regular steakhouse. At least their steaks don't come with a side of controversy!""",219,22,197,0.000427,3.6883840560913086,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,82dccc6b,"Alright, here's a Ricky Gervais-style joke about Donald Trump:
+
+""Have you seen Donald Trump? I mean, that hair alone is proof that he's been running on wind power all these years. It's like he's got a squirrel's nest on his head, trying desperately to stay away from his brain. And you know, people say he's a self-made man. Well, if that's the case, then clearly he used Ikea instructions and forgot to tighten a few screws along the way.""",127,24,103,0.000242,1.9635870456695557,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,d236abd8,"Alright, here goes:
+
+""Have you heard about Donald Trump's latest idea? He wants to build a golf course on the moon! Yeah, apparently, he thinks it's out of this world! But hey, I guess it's a good plan. At least he'll finally have a place where he can't hear anyone yelling 'Fore!' every time he opens his mouth!""",100,24,76,0.00018800000000000002,1.8763062953948975,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,a71bb9bb,"Alright, here's a Ricky Gervais-inspired joke about Donald Trump:
+
+""Now, I don't want to say Donald Trump is a bit full of himself, but I heard he once tried to qualify for the Olympics... in the category of 'Most Self-Absorbed Individual'. Turns out, he didn't make the cut because even the judges couldn't handle that level of ego. They had to create a whole new event just for him called 'Trumping Your Own Trumpiness'. And let me tell you, he won gold, silver, and bronze in that one. But don't worry, folks, he's still waiting for the Nobel Prize in Humility... apparently, it's taking longer to arrive than his tax returns!""",172,24,148,0.000332,3.1146860122680664,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,57052de5,"Alright, here's a Ricky Gervais-style joke about Donald Trump:
+
+""So, I hear Donald Trump is running for president again. Yeah, apparently he's got a new slogan too: 'Make America Grate Cheese Again.' I mean, come on, it's like he's treating the whole presidential race like a reality TV show. I bet he's got a catchphrase ready for when he wins too, something like, 'You're fired, America!' But hey, who knows, maybe this time he'll actually build a wall... around his Twitter account.""",138,24,114,0.000264,2.1933140754699707,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,43a11000,"Alright, here we go. Picture this: Donald Trump walks into a pub, struts up to the bar, and orders a drink. The bartender asks, ""What can I get you, Mr. Trump?"" He replies, ""I'll have a Corona, but make sure it's from China, the best Corona, believe me!""
+
+Now, Ricky Gervais would probably interrupt and say, ""Hold on a minute, mate! Are you sure you want a Corona? I mean, it's not like you're a stranger to changing your mind about things. You've flip-flopped more times than a fish out of water!""
+
+And then, in true Gervais fashion, he'd add, ""Besides, I heard you're a big fan of walls. Maybe you should stick to something a bit more fitting, like a White Russian. That way, you can build a wall around your drink and make sure no one sneaks in any Kahlua from Mexico!""
+
+Remember, folks, it's all in good fun. Don't tweet me nasty things, I'm an AI!",245,24,221,0.000478,4.354377269744873,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,6ea7a49b,"Why did Donald Trump bring a ladder to the White House?
+
+Because he heard there was a ""higher office""!",47,24,23,8.2e-05,1.3455958366394043,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,308e01e9,"Alright, here goes:
+
+""Did you hear about the time Donald Trump tried to become a professional boxer? Yeah, apparently he wanted to show off his 'tremendous' strength and 'unbelievable' punches. But boy, did he struggle! Turns out, his opponents kept asking him to build a wall around the ring, just so they wouldn't have to deal with his wild swings and missed jabs. I guess you could say he couldn't even knock out a bad hair day, let alone a real opponent!""",131,24,107,0.00025,2.387543201446533,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,ee8207f1,"Alright, here goes:
+
+""Ladies and gentlemen, Donald Trump, the man who thinks his hair is as real as his political promises. I mean, have you seen that hair? It's as if someone put a tumbleweed on top of his head and called it a hairstyle. It's like he's auditioning for a role in a low-budget sci-fi movie called 'The Extraterrestrial Combover.'
+
+But let's give credit where credit is due. Trump has managed to build quite the empire. I mean, who else can turn a small loan of a million dollars into several failed businesses and a reality TV show? It's like he's the living embodiment of 'The Apprentice' gone wrong.
+
+And let's not forget about his Twitter addiction. Trump tweets more than a teenage girl on a sugar rush. It's like he's got a personal vendetta against the English language, constantly churning out alternative facts and misspelled words. It's like watching a car crash in slow motion, but instead of a car, it's the leader of the free world.
+
+But hey, at least he's consistent. Trump's hairstyle hasn't changed in decades, and neither has his ability to make us all scratch our heads in disbelief. So let's raise a glass to the man who's made politics a punchline, and remember, when life gives you Donald Trump, just grab 'em by the humor!""",308,24,284,0.0006039999999999999,4.902945041656494,1
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,6523f1e6,"Alright, here's one in the style of Ricky Gervais:
+
+So, Donald Trump walks into a bar. The bartender says, ""Why the long face, Mr. Trump?"" And Trump replies, ""Well, it's because my approval ratings are dropping faster than my hair in a hurricane!"" The bartender chuckles and says, ""Well, maybe you should try a different hairstyle, sir."" And Trump says, ""Oh, believe me, I've tried them all. I even considered a combover that could double as a toupee for Mike Pence!"" The bartender bursts out laughing, and Trump adds, ""But hey, who needs good hair when you've got tremendous self-confidence, right?"" And as he walks away, the bartender can't help but mutter, ""Make America Hair Again.""",186,24,162,0.00036,2.9711601734161377,0
+19bc67f1,['tell me a joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,8c22cd2f,"Why did Donald Trump start a bakery?
+
+Because he wanted to make America great Danish again!",42,24,18,7.2e-05,0.7622122764587402,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,d31ac995,"Why did Joe Biden become a gardener?
+
+Because he wanted to bring a little ""Biden"" beauty to the world, one flower at a time!",55,24,31,9.8e-05,0.839210033416748,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,8f4aaa8c,"Why did Joe Biden bring a ladder to the debate?
+
+Because he heard there were some high notes he needed to reach, just like Chris Rock trying to hit those high-pitched jokes!",61,24,37,0.00010999999999999999,1.0539660453796387,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,3efc8069,"Why did Joe Biden become a gardener?
+
+Because he wanted to weed out all the problems and make America bloom again!",48,24,24,8.400000000000001e-05,0.7303466796875,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,1d1b55af,"Why did Joe Biden bring a ladder to the debates?
+
+Because he wanted to reach new heights... and avoid any low blows!",49,24,25,8.6e-05,0.9182169437408447,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,18943d1a,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to reach new heights, just like his hairline!",49,24,25,8.6e-05,0.9397709369659424,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,aa4a0a59,"Why did Joe Biden bring a ladder to the White House?
+
+Because he heard there were high expectations, and he didn't want to fall short!",53,24,29,9.400000000000001e-05,1.3415181636810303,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,30c53712,"Why did Joe Biden bring a ladder to the presidential debate?
+
+Because he heard there was a high bar set, and he wanted to make sure he could reach it!",57,24,33,0.00010200000000000001,0.9740550518035889,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,60aaed6f,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to make sure he could reach the 'higher' points without any slips!",53,24,29,9.400000000000001e-05,0.7384018898010254,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,0f67fd8f,"Sure, here's a family-friendly joke about Joe Biden in the style of Chris Rock:
+
+""Hey kids, did you hear about Joe Biden's love for ice cream? Yeah, he loves it so much that he's thinking of opening his own ice cream shop! It'll be called 'Joe's Cones,' where the only thing he'll be 'melting' is your heart with delicious flavors and his charming smile. Just remember, if you're ever there and Joe offers you a scoop, be sure to say 'yes we cream!' because that's how Joe likes to roll!""",142,24,118,0.000272,2.2046358585357666,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],bcda6316,"{""subject"": ""joe biden"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,77da527a,"Why did Joe Biden become a gardener?
+
+Because he's really good at planting ideas, but sometimes he forgets where he put them!",52,24,28,9.2e-05,0.853410005569458,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,624afd83,"Why did Joe Biden become a gardener?
+
+Because he wanted to make sure the White House is bloomin' beautiful, just like his smile!",55,26,29,9.7e-05,0.9571990966796875,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,e2e81453,"Why did Joe Biden bring a ladder to the White House?
+
+Because he wanted to climb up the polls, but he forgot he had already reached the top!",57,26,31,0.000101,0.7807438373565674,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,bb4739e9,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to reach new heights of bipartisanship... and maybe look taller too!",56,26,30,9.9e-05,1.0456187725067139,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,43d8723d,"Why did Joe Biden always carry a pencil with him?
+
+Because he wanted to be sharp like a presidential candidate, not blunt like a pencil eraser!",56,26,30,9.9e-05,1.4657800197601318,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,9903b62f,"Why did Joe Biden start a vegetable garden?
+
+Because he wanted to ""Biden"" his time between debates and grow a bunch of ""Biden"" greens! Just don't ask him if he's found any ""Biden"" onions yet, he might get a little teary-eyed!",84,26,58,0.00015500000000000003,1.4842960834503174,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,b6d0674c,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to ""rise"" above the competition, just like his hairline!",54,26,28,9.5e-05,0.7524852752685547,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,bf2923cb,"Why did Joe Biden bring a ladder to the White House?
+
+Because he heard there were a lot of high-level decisions to make, and he wanted a leg up!",59,26,33,0.000105,1.0665278434753418,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,8dc7fc40,"Why did Joe Biden bring a ladder to the debate?
+
+Because he heard there would be a lot of ""high-level"" discussions, and he didn't want to miss a thing!",62,26,36,0.000111,0.9913978576660156,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,4610e453,"Why did Joe Biden bring a ladder to the debate?
+
+Because he wanted to reach new heights, not just in the polls, but in his jokes too!",57,26,31,0.000101,0.9374630451202393,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],8b7056e1,"{""subject"": ""joe biden"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,5dc6a467,"Why did Joe Biden bring a ladder to the White House?
+
+Because he heard there were high expectations for him! And boy, does he love a good climb!",58,26,32,0.000103,0.9873831272125244,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,cb9e0b4b,"Why did Donald Trump bring a ladder to the voting booth?
+
+Because he wanted to ""trump"" everyone by reaching new heights and ""climb"" to victory!",57,24,33,0.00010200000000000001,1.0122840404510498,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,1d64b226,"Why did Donald Trump bring a ladder to the White House?
+
+Because he wanted to ""Trump"" everyone and be the highest-rated president in history!",53,24,29,9.400000000000001e-05,0.9030959606170654,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,dbe5ff9f,"Why did Donald Trump open a bakery?
+
+Because he wanted to make America great with his ""Trump Tower of Cupcakes""! But remember, folks, the only walls in his bakery are made of sugary goodness, not politics!",70,24,46,0.000128,1.3351070880889893,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,aed180d6,"Why did Donald Trump become a gardener?
+
+Because he loves making ""huge"" borders and building walls, but this time with beautiful flowers and plants!",54,24,30,9.6e-05,1.2128419876098633,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,1bd42d31,"Why did Donald Trump bring a ladder to the White House?
+
+Because he heard there were ""high ratings"" inside!",47,24,23,8.2e-05,1.029555082321167,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,7c9c6e9a,"Why did Donald Trump become a baker?
+
+Because he wanted to make America ""grate"" again!",44,24,20,7.6e-05,1.0071752071380615,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,649416fb,"Why did Donald Trump become a gardener?
+
+Because he wanted to make America ""grate"" again!",45,24,21,7.8e-05,1.0015442371368408,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,47f12f9a,"Why did Donald Trump become a gardener?
+
+Because he wanted to ""Make America's Lawns Great Again!""",46,24,22,7.999999999999999e-05,0.8803071975708008,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,c7c1c895,"Why did Donald Trump always carry a pencil? Because he wanted to ""Trump-et"" his ideas... just in case he forgot them!",51,24,27,8.999999999999999e-05,1.214216947555542,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],0cfe93da,"{""subject"": ""donald trump"", ""comedian"": ""chris rock""}",gpt-3.5-turbo,7d9d03a3,"Why did Donald Trump take up magic as a hobby?
+
+Because he thought he could make the national debt disappear, but poof! It just kept growing!",55,24,31,9.8e-05,1.2140231132507324,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,2ead0326,"Why did Donald Trump bring a ladder to the White House?
+
+Because he wanted to reach new ""high"" approvals!",49,26,23,8.5e-05,1.00083589553833,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,b0703beb,"Why did Donald Trump start a baking show?
+
+Because he wanted to make America grate again!",44,26,18,7.500000000000001e-05,0.7703111171722412,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,58556aa8,"Sure, here's a family-friendly joke in Ricky Gervais style about Donald Trump:
+
+""Why did Donald Trump bring a ladder to the White House?""
+
+""I don't know, why?""
+
+""Because he heard the Oval Office had a 'higher' ceiling!""
+
+Remember, this joke is meant to be light-hearted and suitable for all ages.",93,26,67,0.000173,1.7414920330047607,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,e74f075e,"Sure, here's a family-friendly joke in the style of Ricky Gervais:
+
+""Why did Donald Trump bring a ladder to the White House?""
+
+""Because he wanted to reach new heights in politics! And boy, did he climb that ladder... all the way to the top! Now that's what I call a high-flying career!""",94,26,68,0.00017500000000000003,1.7160840034484863,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,702aabd8,"Why did Donald Trump bring a ladder to the White House?
+
+Because he heard the polls were ""up"" and wanted to climb higher!",53,26,27,9.3e-05,1.0465009212493896,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,b4b84f66,"Why did Donald Trump become a magician?
+
+Because he's always pulling alternative facts out of his hat, making things disappear faster than his approval ratings!",55,26,29,9.7e-05,0.8792061805725098,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,c25bb87a,"Why did Donald Trump bring a ladder to the White House?
+
+Because he heard there was a ""higher office"" waiting for him on the roof!",55,26,29,9.7e-05,1.213428020477295,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,45b829ed,"Sure, here's a family-friendly joke about Donald Trump in the style of Ricky Gervais:
+
+""Why did Donald Trump bring a ladder to the White House? Because he heard there were high ratings and thought they were for climbing!""
+
+Please note that humor can be subjective, and this joke is an attempt to emulate Ricky Gervais' style while keeping it family-friendly.",100,26,74,0.000187,1.7836880683898926,1
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,e6949546,"Sure, here's a family-friendly joke about Donald Trump in the style of Ricky Gervais:
+
+""Why did Donald Trump bring a ladder to the voting booth?""
+
+""I have no idea, why did he?""
+
+""Because he wanted to 'trump' everyone by being a 'highly elevated' candidate!""
+
+Remember, comedy is subjective, and this joke is intended to be light-hearted and suitable for all ages.",108,26,82,0.000203,1.8031139373779297,0
+f6af0d61,['tell me a family friendly joke about {subject} in the style of {comedian}'],427f7027,"{""subject"": ""donald trump"", ""comedian"": ""ricky gervais""}",gpt-3.5-turbo,092f180b,"Why did Donald Trump bring a ladder to the White House?
+
+Because he wanted to ""trump"" everyone else and reach new heights, but all he ended up doing was making America ""climb"" a wall of confusion!",71,26,45,0.000129,1.3094532489776611,1

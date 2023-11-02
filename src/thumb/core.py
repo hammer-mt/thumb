@@ -199,7 +199,7 @@ class ThumbTest:
         for i in range(0, len(required_runs), batch_size):
             batch = required_runs[i:i+batch_size]
             
-            batch_responses = await async_get_responses(batch)
+            batch_responses = await async_get_responses(batch, verbose=self.verbose)
 
             for idx, response in enumerate(batch_responses):
                 pid, cid, model = batch[idx]['pid'], batch[idx]['cid'], batch[idx]['model']
@@ -585,8 +585,8 @@ class ThumbTest:
 
                 # if there are cases, add them to the stats
                 if len(self.cases) > 1:
+                    stats += f"<br><b>Cases</b>:<br>"
                     for cid, case in self.cases.items():
-                        stats += f"<br><b>Cases</b>:<br>"
                         stats += f"{cid}: {case}<br>"
 
                 response_box.value = f"Evaluation complete! 🎉<br><b>Results</b>: <br>{stats}<br>"

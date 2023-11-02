@@ -71,4 +71,6 @@
 - types and errors when the format is wrong
 - image model testing as well as LLMs
 - implement poor man's RLHF (insert thumbs up examples into prompt + optimize prompt)
+- add output parser functions, for example to extract a value from a JSON response
+- add the ability to use chains of prompts rather than just one prompt
 
