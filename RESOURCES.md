@@ -24,6 +24,7 @@ Here is a list of helpful resources and tools we found while building `thumb`, o
 - [Prompt engineering for Claude's long context window](https://www.anthropic.com/index/prompting-long-context) - how to test RAG architecture and retrieval with long context windwows.
 - [Exploring zephyr-7b-alpha Through the Lens of Evaluation Driven Development](https://levelup.gitconnected.com/exploring-zephyr-7b-alpha-through-the-lens-of-evaluation-driven-development-faf69e9d9ec7) – a good example of how to use evaluation driven development to test a new model.
 - [Evaluation Driven Development, the Swiss Army Knife for RAG Pipelines](https://levelup.gitconnected.com/evaluation-driven-development-the-swiss-army-knife-for-rag-pipelines-dba24218d47e) – a big push in the general movement towards Eval-Driven Development.
+- [“Optimization by Prompting” for RAG](https://docs.llamaindex.ai/en/latest/examples/prompts/prompt_optimization.html) – cool way of optimizing your RAG prompts automatically.
 
 ## Prompt Testing & Optimization Tools
 - [Prompts Royale](https://promptsroyale.com/) - a browser-based interface for generating prompts and testing them head-to-head.
