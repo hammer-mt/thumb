@@ -13,8 +13,9 @@ import nest_asyncio
 import pandas as pd
 import datetime
 
-from .llm import get_responses, async_get_responses
+from .llm import get_responses, async_get_responses, call
 from .utils import hash_id
+from .ape import 
 
 DIR_PATH = "thumb-tests/.cache"
 
@@ -55,6 +56,9 @@ class ThumbTest:
         self.cases = {"base-case": None}
         self.models = []
         self.runs = 0
+
+        self.criteria = []
+        self.task_description = None
 
         if tid:
             # get just the tid from the file path if its a filepath
@@ -680,5 +684,48 @@ class ThumbTest:
             writer.writerows(flattened_data)
         
         return filename
+
+        def generate_prompt(self):
+            # there's no task description and no prompts, throw error
+            if not self.task_description and not len(self.prompts) > 0:
+                raise ValueError("Please provide a task description or prompt template.")
+
+            # there is a task description but no prompts, use task description
+            elif self.task_description and not len(self.prompts) > 0:
+                prompt_candidate = build_candidate_prompt(self.task_description, prompt_template=None, 
+                    test_cases=self.cases, criteria=self.criteria)
+
+            # there is a prompt, use prompt
+            elif len(self.prompts) > 0:
+                # choose a prompt template at random
+                prompt_template = random.choice(list(self.prompts.values()))
+                prompt_candidate = build_candidate_prompt(self.task_description, prompt_template=prompt_template, 
+                    test_cases=self.cases, criteria=self.criteria)
+
+            new_prompt_template = call(prompt_candidate)
+            # add the new prompt to the list of prompts
+            self.prompts.append(new_prompt_template)
+            if self.verbose: print(f"Added prompt: {new_prompt_template}")
+
+        def generate_case(self):
+            # if base case is in the keys, none
+            if "base-case" in self.cases.keys():
+                test_cases = None
+            else:
+                test_cases = self.cases
+
+            prompt_template = build_case_prompt(prompt_template, test_cases=test_cases)
+            new_case = call(prompt_template)
+
+            # add the new case to the list of cases
+            self.cases.append(new_case)
+            if self.verbose: print(f"Added case: {new_case}")
+
+        def generate_ratings(self):
+            # TODO
+            pass
+
+
+    
 
 
