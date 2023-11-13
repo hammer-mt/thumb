@@ -72,3 +72,4 @@ Here is a list of helpful resources and tools we found while building `thumb`, o
 - [Awesome ChatGPT Prompts](https://github.com/f/awesome-chatgpt-prompts) - role-based prompts for ChatGPT for various use cases.
 - [Langchain Hub](https://smith.langchain.com/hub?page=1) - a home for uploading, browsing, pulling, and managing your prompts.
 - [McKay's Prompts](https://github.com/mckaywrigley/prompts/tree/main) - McKay Wrigley's prompts for software development workflows.
+- [AIPRM](https://www.aiprm.com/prompts/) – a chrome extension with a built in prompt library.

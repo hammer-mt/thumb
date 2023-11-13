@@ -52,27 +52,6 @@ def estimate_openai_cost(prompt_tokens, completion_tokens, model_name):
         total_cost += prompt_cost + completion_cost
     return total_cost
 
-def get_responses(prompt, test_case, model, runs, pid, cid):
-    chat = ChatOpenAI(model=model)
-    formatted_prompt = format_chat_prompt(prompt, test_case)
-
-    responses = []
-    for _ in tqdm(range(runs)):
-        try:
-            start_time = time.time()
-            resp = chat.generate([formatted_prompt], tags=[f"pid_{pid}", f"cid_{cid}"])
-            end_time = time.time()
-            response_data = parse_generate_response(resp)
-            response_data["latency"] = end_time - start_time or 0
-            if temperature is not None:
-                response_data["temperature"] = temperature
-        except Exception as e:
-            response_data = {"content": str(e)}
-        finally:                
-            responses.append(response_data)
-
-    return responses
-
 def parse_generate_response(resp):
     response_content = resp.generations[0][0].text
     token_usage = resp.llm_output["token_usage"]
@@ -90,6 +69,35 @@ def parse_generate_response(resp):
         "completion_tokens": completion_tokens or 0,
     }
     return response_data
+
+def get_responses(prompt, test_case, model, runs, pid, cid):
+
+    if isinstance(model, dict):
+        model = model["name"]
+        temperature = model["temperature"]
+        chat = ChatOpenAI(model=model, temperature=temperature)
+    else:
+        chat = ChatOpenAI(model=model)
+        temperature = None
+    
+    formatted_prompt = format_chat_prompt(prompt, test_case)
+
+    responses = []
+    for _ in tqdm(range(runs)):
+        try:
+            start_time = time.time()
+            resp = chat.generate([formatted_prompt], tags=[f"pid_{pid}", f"cid_{cid}"])
+            end_time = time.time()
+            response_data = parse_generate_response(resp)
+            response_data["latency"] = end_time - start_time or 0
+            if temperature is not None:
+                response_data["temperature"] = temperature
+        except Exception as e:
+            response_data = {"content": str(e), "error": True}
+        finally:                
+            responses.append(response_data)
+
+    return responses
 
 async def async_generate(chat, formatted_prompt, temperature=None, tags=[]):
     response_data = {}
@@ -143,4 +151,59 @@ async def async_get_responses(batch, verbose=False):
     responses = await asyncio.gather(*tasks)
     if verbose: print(f"Finished gathering batch responses")
     return responses
+
+def call(formatted_prompt, model=None, tags=None, verbose=False):
+    if model is None:
+        model = {"model": "gpt-4"}
+    chat = ChatOpenAI(**model)
+    if verbose: print(f"Calling – model: {model}")
+    temperature = model.get('temperature', None)
+    try:
+        start_time = time.time()
+        if tags:
+            resp = chat.generate([formatted_prompt], tags=tags)
+        else:
+            resp = chat.generate([formatted_prompt])
+        end_time = time.time()
+        response_data = parse_generate_response(resp)
+        response_data["latency"] = end_time - start_time or 0
+    except Exception as e:
+        response_data = {"content": str(e), "error": True}
+    finally:
+        response_data = {**response_data, **model}
+        return response_data
+
+async def acall(formatted_prompt, model=None, tags=None, verbose=False):
+    if model is None:
+        model = {"model": "gpt-4"}
+    chat = ChatOpenAI(**model)
+    if verbose: print(f"Calling – model: {model}")
+    try:
+        start_time = time.time()
+        if tags:
+            resp = await chat.agenerate([formatted_prompt], tags=tags)
+        else:
+            resp = await chat.agenerate([formatted_prompt])
+        end_time = time.time()
+        response_data = parse_generate_response(resp)
+        response_data["latency"] = end_time - start_time or 0
+    except Exception as e:
+        response_data = {"content": str(e), "error": True}
+    finally:
+        response_data = {**response_data, **model}                
+        return response_data
+
+async def abatch(formatted_prompts, model=None, tags=None, verbose=False):
+    tasks = []
+    for formatted_prompt in formatted_prompts:
+        if tags:
+            task = acall(formatted_prompt, model=model, tags=tags, verbose=verbose)
+        else:
+            task = acall(formatted_prompt, model=model, verbose=verbose)
+        tasks.append(task)
+    responses = await asyncio.gather(*tasks)
+    if verbose: print(f"Finished gathering batch responses")
+    return responses
+    
+    
 
