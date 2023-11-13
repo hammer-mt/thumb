@@ -22,9 +22,13 @@ DIR_PATH = "thumb-tests/.cache"
 # solves a problem with event loop in asyncio in jupyter notebooks
 nest_asyncio.apply()
 
-def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], async_generate=True, show_cases=False, verbose=False):
-    thumb = ThumbTest(show_cases=show_cases, verbose=verbose)
+def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], task_description=None, async_generate=True, show_cases=False, verbose=False):
+    if not task_description:
+        task_description = prompts[0]
+    thumb = ThumbTest(task_description, show_cases=show_cases, verbose=verbose)
     thumb.add_prompts(prompts)
+
+
     thumb.add_cases(cases)
     thumb.add_models(models)
     thumb.add_runs(runs)
@@ -46,7 +50,7 @@ def load(tid):
 
 class ThumbTest:
     
-    def __init__(self, tid=None, file_path=None, show_cases=False, verbose=False):
+    def __init__(self, task_description, tid=None, file_path=None, task_description=None, show_cases=False, verbose=False):
 
         self.verbose = verbose
 
@@ -58,7 +62,7 @@ class ThumbTest:
         self.runs = 0
 
         self.criteria = []
-        self.task_description = None
+        self.task_description = task_description
 
         if tid:
             # get just the tid from the file path if its a filepath
@@ -130,6 +134,25 @@ class ThumbTest:
 
         self.runs += runs
         if self.verbose: print(f"Added {runs} runs. Total runs: {self.runs}")
+
+    def add_criteria(self, criteria):
+        if isinstance(criteria, str):
+            criteria = [criteria]
+        self.criteria += criteria
+        self.criteria = list(set(self.criteria))
+        if self.verbose: print(f"Added criteria: {criteria}")
+
+    def remove_criteria(self, criteria):
+        if isinstance(criteria, str):
+            criteria = [criteria]
+        for criterion in criteria:
+            if criterion in self.criteria:
+                self.criteria.remove(criterion)
+        if self.verbose: print(f"Removed criteria: {criteria}")
+
+    def set_task_description(self, task_description):
+        self.task_description = task_description
+        if self.verbose: print(f"Set task description: {task_description}")
 
     def generate(self):
         combinations = len(self.prompts) * len(self.cases) * len(self.models) * self.runs
@@ -721,9 +744,39 @@ class ThumbTest:
             self.cases.append(new_case)
             if self.verbose: print(f"Added case: {new_case}")
 
-        def generate_ratings(self):
-            # TODO
-            pass
+        def generate_ratings(self, is_async=True):
+            # run through the self.data and give a rating for each response
+            # Dictionary to hold tasks with their corresponding identifiers
+            tasks_with_identifiers = {}
+
+            for pid in self.data.keys():
+                for cid in self.data[pid].keys():
+                    for model in self.data[pid][cid].keys():
+                        for rid, response in self.data[pid][cid][model].items():
+                            for criterion in self.criteria:
+                                # if the criterion has not been rated yet, rate it
+                                # could be none, or key might not be there
+                                if criterion not in response.keys() or response[criterion] is None:
+                                    prompt_template = build_rating_prompt(self.task_description, response, criteria=criterion)
+                                    if is_async:
+                                        # Create a coroutine for the async call
+                                        task = asyncio.create_task(acall(prompt_template))
+                                        # Map the task to its identifiers
+                                        tasks_with_identifiers[task] = (pid, cid, model, rid, criterion)
+                                    else:
+                                        new_rating = call(prompt_template)
+                                        self.data[pid][cid][model][rid][criterion] = new_rating
+
+            # If there are async tasks, gather and await them
+            if is_async and tasks_with_identifiers:
+                completed_tasks = await asyncio.gather(*tasks_with_identifiers.keys())
+
+                # Update self.data with the results from the completed tasks
+                for task in completed_tasks:
+                    new_rating = task.result()
+                    pid, cid, model, rid, criterion = tasks_with_identifiers[task]
+                    self.data[pid][cid][model][rid][criterion] = new_rating
+                                        
 
 
     
