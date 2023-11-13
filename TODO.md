@@ -3,10 +3,8 @@
 ## Active tasks
 
 ### on deck
-- generate new prompt variations for an existing test
-- generate new test cases for an existing test
-- set custom evaluation criteria for ratings (multiply against prompts, cases, models)
-- automatic rating model with GPT-4 based on criteria
+- set criteria to multiply against prompts, cases, models in eval interface
+- test new auto ratings, prompts, cases and add auto mode
 - spin up gradio user interface
 
 ### bugs / feedback
