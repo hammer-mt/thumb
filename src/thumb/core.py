@@ -305,11 +305,11 @@ class ThumbTest:
                     raise TypeError(f"File must be a JSON or CSV file.")
         else:
             # Check if the JSON file exists
-            if os.path.exists(file_path):
+            if file_path is not None and os.path.exists(file_path):
                 self._read_from_json(file_path)
             
             # Check if the CSV file exists
-            elif os.path.exists(csv_file_path):
+            elif csv_file_path is not None and os.path.exists(csv_file_path):
                 self._read_from_csv(csv_file_path)
 
             else:
