@@ -13,9 +13,9 @@ import nest_asyncio
 import pandas as pd
 import datetime
 
-from .llm import get_responses, async_get_responses, call
+from .llm import get_responses, async_get_responses, call, acall
 from .utils import hash_id
-from .ape import 
+from .ape import build_candidate_prompt, build_case_prompt, build_rating_prompt
 
 DIR_PATH = "thumb-tests/.cache"
 
@@ -50,7 +50,7 @@ def load(tid):
 
 class ThumbTest:
     
-    def __init__(self, task_description, tid=None, file_path=None, task_description=None, show_cases=False, verbose=False):
+    def __init__(self, tid=None, file_path=None, task_description=None, show_cases=False, verbose=False):
 
         self.verbose = verbose
 
@@ -708,74 +708,74 @@ class ThumbTest:
         
         return filename
 
-        def generate_prompt(self):
-            # there's no task description and no prompts, throw error
-            if not self.task_description and not len(self.prompts) > 0:
-                raise ValueError("Please provide a task description or prompt template.")
+    def generate_prompt(self):
+        # there's no task description and no prompts, throw error
+        if not self.task_description and not len(self.prompts) > 0:
+            raise ValueError("Please provide a task description or prompt template.")
 
-            # there is a task description but no prompts, use task description
-            elif self.task_description and not len(self.prompts) > 0:
-                prompt_candidate = build_candidate_prompt(self.task_description, prompt_template=None, 
-                    test_cases=self.cases, criteria=self.criteria)
+        # there is a task description but no prompts, use task description
+        elif self.task_description and not len(self.prompts) > 0:
+            prompt_candidate = build_candidate_prompt(self.task_description, prompt_template=None, 
+                test_cases=self.cases, criteria=self.criteria)
 
-            # there is a prompt, use prompt
-            elif len(self.prompts) > 0:
-                # choose a prompt template at random
-                prompt_template = random.choice(list(self.prompts.values()))
-                prompt_candidate = build_candidate_prompt(self.task_description, prompt_template=prompt_template, 
-                    test_cases=self.cases, criteria=self.criteria)
+        # there is a prompt, use prompt
+        elif len(self.prompts) > 0:
+            # choose a prompt template at random
+            prompt_template = random.choice(list(self.prompts.values()))
+            prompt_candidate = build_candidate_prompt(self.task_description, prompt_template=prompt_template, 
+                test_cases=self.cases, criteria=self.criteria)
 
-            new_prompt_template = call(prompt_candidate)
-            # add the new prompt to the list of prompts
-            self.prompts.append(new_prompt_template)
-            if self.verbose: print(f"Added prompt: {new_prompt_template}")
+        new_prompt_template = call(prompt_candidate)
+        # add the new prompt to the list of prompts
+        self.prompts.append(new_prompt_template)
+        if self.verbose: print(f"Added prompt: {new_prompt_template}")
 
-        def generate_case(self):
-            # if base case is in the keys, none
-            if "base-case" in self.cases.keys():
-                test_cases = None
-            else:
-                test_cases = self.cases
+    def generate_case(self):
+        # if base case is in the keys, none
+        if "base-case" in self.cases.keys():
+            test_cases = None
+        else:
+            test_cases = self.cases
 
-            prompt_template = build_case_prompt(prompt_template, test_cases=test_cases)
-            new_case = call(prompt_template)
+        prompt_template = build_case_prompt(prompt_template, test_cases=test_cases)
+        new_case = call(prompt_template)
 
-            # add the new case to the list of cases
-            self.cases.append(new_case)
-            if self.verbose: print(f"Added case: {new_case}")
+        # add the new case to the list of cases
+        self.cases.append(new_case)
+        if self.verbose: print(f"Added case: {new_case}")
 
-        def generate_ratings(self, is_async=True):
-            # run through the self.data and give a rating for each response
-            # Dictionary to hold tasks with their corresponding identifiers
-            tasks_with_identifiers = {}
+    # def generate_ratings(self, is_async=True):
+    #     # run through the self.data and give a rating for each response
+    #     # Dictionary to hold tasks with their corresponding identifiers
+    #     tasks_with_identifiers = {}
 
-            for pid in self.data.keys():
-                for cid in self.data[pid].keys():
-                    for model in self.data[pid][cid].keys():
-                        for rid, response in self.data[pid][cid][model].items():
-                            for criterion in self.criteria:
-                                # if the criterion has not been rated yet, rate it
-                                # could be none, or key might not be there
-                                if criterion not in response.keys() or response[criterion] is None:
-                                    prompt_template = build_rating_prompt(self.task_description, response, criteria=criterion)
-                                    if is_async:
-                                        # Create a coroutine for the async call
-                                        task = asyncio.create_task(acall(prompt_template))
-                                        # Map the task to its identifiers
-                                        tasks_with_identifiers[task] = (pid, cid, model, rid, criterion)
-                                    else:
-                                        new_rating = call(prompt_template)
-                                        self.data[pid][cid][model][rid][criterion] = new_rating
+    #     for pid in self.data.keys():
+    #         for cid in self.data[pid].keys():
+    #             for model in self.data[pid][cid].keys():
+    #                 for rid, response in self.data[pid][cid][model].items():
+    #                     for criterion in self.criteria:
+    #                         # if the criterion has not been rated yet, rate it
+    #                         # could be none, or key might not be there
+    #                         if criterion not in response.keys() or response[criterion] is None:
+    #                             prompt_template = build_rating_prompt(self.task_description, response, criteria=criterion)
+    #                             if is_async:
+    #                                 # Create a coroutine for the async call
+    #                                 task = asyncio.create_task(acall(prompt_template))
+    #                                 # Map the task to its identifiers
+    #                                 tasks_with_identifiers[task] = (pid, cid, model, rid, criterion)
+    #                             else:
+    #                                 new_rating = call(prompt_template)
+    #                                 self.data[pid][cid][model][rid][criterion] = new_rating
 
-            # If there are async tasks, gather and await them
-            if is_async and tasks_with_identifiers:
-                completed_tasks = await asyncio.gather(*tasks_with_identifiers.keys())
+    #     # If there are async tasks, gather and await them
+    #     if is_async and tasks_with_identifiers:
+    #         completed_tasks = await asyncio.gather(*tasks_with_identifiers.keys())
 
-                # Update self.data with the results from the completed tasks
-                for task in completed_tasks:
-                    new_rating = task.result()
-                    pid, cid, model, rid, criterion = tasks_with_identifiers[task]
-                    self.data[pid][cid][model][rid][criterion] = new_rating
+    #         # Update self.data with the results from the completed tasks
+    #         for task in completed_tasks:
+    #             new_rating = task.result()
+    #             pid, cid, model, rid, criterion = tasks_with_identifiers[task]
+    #             self.data[pid][cid][model][rid][criterion] = new_rating
                                         
 
 
