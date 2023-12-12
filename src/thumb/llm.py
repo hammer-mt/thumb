@@ -190,7 +190,7 @@ async def acall(formatted_prompt, model=None, tags=None, verbose=False):
     except Exception as e:
         response_data = {"content": str(e), "error": True}
     finally:
-        response_data = {**response_data, **model}                
+        response_data = {**response_data, **model, "tags": tags}                
         return response_data
 
 async def abatch(formatted_prompts, model=None, tags=None, verbose=False):
@@ -205,5 +205,24 @@ async def abatch(formatted_prompts, model=None, tags=None, verbose=False):
     if verbose: print(f"Finished gathering batch responses")
     return responses
     
-    
+def is_invalid_api_key(response):
+    print("is_invalid_api_key")
+    """
+    Checks if the given response indicates an invalid API key error.
 
+    Parameters:
+    response (dict): The response object or dictionary containing the error message.
+
+    Returns:
+    bool: True if the response indicates an invalid API key, False otherwise.
+    """
+
+    # Check if response is a dictionary and contains the expected keys
+    if isinstance(response, dict) and 'error' in response:
+        error_info = response.get('error', {})
+        
+        # Check for the specific error code and error type
+        if error_info.get('code') == 'invalid_api_key':
+            return True
+
+    return False

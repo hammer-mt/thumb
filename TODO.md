@@ -32,6 +32,7 @@
 - add a test case name
 - add the ability to change filepath for caching
 - switch caching on/off or set batch size
+- handle errors in the responses
 
 ### evals
 - automatic ranking model with GPT-4 based on criteria

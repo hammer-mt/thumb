@@ -25,7 +25,7 @@ nest_asyncio.apply()
 def test(prompts, cases=None, runs=10, models=["gpt-3.5-turbo"], task_description=None, async_generate=True, show_cases=False, verbose=False):
     if not task_description:
         task_description = prompts[0]
-    thumb = ThumbTest(task_description, show_cases=show_cases, verbose=verbose)
+    thumb = ThumbTest(task_description=task_description, show_cases=show_cases, verbose=verbose)
     thumb.add_prompts(prompts)
 
 
@@ -283,39 +283,29 @@ class ThumbTest:
 
     def _load_data(self, file_path=None):
         """
-        Load responses, prompts, cases, and models from a json file.
+        Load responses, prompts, cases, and models from a json or csv file.
         """
-        if file_path:
-            # check the file exists
+        if file_path is None:
+            # Default to a JSON file path using self.tid if no file_path is provided
+            file_path = os.path.join(DIR_PATH, f"{self.tid}.json")
             if not os.path.exists(file_path):
-                raise FileNotFoundError(f"No file found at {file_path}")
-            else:
-                 # Define the path for the file using the tid value
-                json_file_path = os.path.join(DIR_PATH, f"{self.tid}.json")
-                csv_file_path = f"{self.tid}.csv"
+                # Fallback to CSV if JSON does not exist
+                file_path = os.path.join(DIR_PATH, f"{self.tid}.csv")
+                if not os.path.exists(file_path):
+                    raise FileNotFoundError(f"No data found for tid: {self.tid}")
 
-                # check whether the file is a json file
-                if file_path.split(".")[-1] == "json":
-                    self._read_from_json(json_file_path)
+        elif not os.path.exists(file_path):
+            # If a specific file_path is provided but does not exist
+            raise FileNotFoundError(f"No file found at {file_path}")
 
-                # check whether the file is a csv file
-                elif file_path.split(".")[-1] == "csv":
-                    self._read_from_csv(csv_file_path)
-                else:
-                    raise TypeError(f"File must be a JSON or CSV file.")
+        # Determine file type and read data
+        if file_path.endswith(".json"):
+            self._read_from_json(file_path)
+        elif file_path.endswith(".csv"):
+            self._read_from_csv(file_path)
         else:
-            csv_file_path = f"{self.tid}.csv"
-            # Check if the JSON file exists
-            if file_path is not None and os.path.exists(file_path):
-                self._read_from_json(file_path)
-            
-            # Check if the CSV file exists
-            
-            elif csv_file_path is not None and os.path.exists(csv_file_path):
-                self._read_from_csv(csv_file_path)
+            raise TypeError(f"Unsupported file format. File must be JSON or CSV.")
 
-            else:
-                raise FileNotFoundError(f"No data found for tid: {self.tid}")
         
     def _read_from_csv(self, csv_file_path):
         # Load the CSV file into a DataFrame
